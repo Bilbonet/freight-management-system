@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<odoo noupdate="1">
+    <record id="fms_freight_sequence" model="ir.sequence">
+        <field name="name">Freight Sequence</field>
+        <field name="code">fms.freight</field>
+        <field name="padding" eval="4" />
+        <field name="prefix">F%(y)s</field>
+    </record>
+</odoo>

@@ -1,0 +1,719 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* fms
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-10-19 17:10+0000\n"
+"PO-Revision-Date: 2019-10-19 17:10+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "% commission"
+msgstr ""
+
+#. module: fms
+#: code:addons/fms/models/fms_freight.py:113
+#, python-format
+msgid "<h5><strong>Cancel to Draft</strong></h5>"
+msgstr ""
+
+#. module: fms
+#: code:addons/fms/models/fms_freight.py:107
+#, python-format
+msgid "<h5><strong>Cancelled</strong></h5>"
+msgstr ""
+
+#. module: fms
+#: code:addons/fms/models/fms_freight.py:139
+#, python-format
+msgid "<h5><strong>Closed</strong></h5>"
+msgstr ""
+
+#. module: fms
+#: code:addons/fms/models/fms_freight.py:133
+#, python-format
+msgid "<h5><strong>Confirmed</strong></h5>"
+msgstr ""
+
+#. module: fms
+#: code:addons/fms/models/fms_freight.py:121
+#, python-format
+msgid "<h5><strong>Receive Partial</strong></h5>"
+msgstr ""
+
+#. module: fms
+#: code:addons/fms/models/fms_freight.py:127
+#, python-format
+msgid "<h5><strong>Received</strong></h5>"
+msgstr ""
+
+#. module: fms
+#: code:addons/fms/models/fms_freight.py:146
+#, python-format
+msgid "<h5><strong>Reopen: Closed to received</strong></h5>"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Address"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__user_id
+msgid "Administrator"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__amount
+msgid "Amount Commission"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Cancel"
+msgstr ""
+
+#. module: fms
+#: selection:fms.freight,state:0
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+msgid "Cancelled"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__partner_center
+msgid "Center code"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__city
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "City"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__city_id
+msgid "City of Address"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Close"
+msgstr ""
+
+#. module: fms
+#: selection:fms.freight,state:0
+msgid "Closed"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__commission_line_ids
+msgid "Commission"
+msgstr ""
+
+#. module: fms
+#: code:addons/fms/models/fms_freight.py:89
+#, python-format
+msgid "Commission percent should be less or equal to 100!"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Commissions"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__company_id
+msgid "Company"
+msgstr ""
+
+#. module: fms
+#: model:ir.ui.menu,name:fms.fms_config_menu
+msgid "Configuration"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Confirm"
+msgstr ""
+
+#. module: fms
+#: selection:fms.freight,state:0
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+msgid "Confirmed"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__delivery_name
+msgid "Contact Name"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__country_id
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Country"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.actions.act_window,help:fms.fms_freight_action_from_menu
+msgid "Create a new freight"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__create_uid
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__create_date
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__partner_id
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+msgid "Customer"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Customer Data"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__date_order
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__date
+msgid "Date"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,help:fms.field_fms_freight__date_planned
+msgid "Date at which the freight should be delivered"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Delivery Data"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__partner_delivery_note
+msgid "Delivery note"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__partner_department
+msgid "Department code"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__display_name
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__email
+msgid "Email"
+msgstr ""
+
+#. module: fms
+#: model:ir.module.category,name:fms.module_fms
+#: model:ir.ui.menu,name:fms.fms_main_menu
+msgid "F.M.S"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__message_channel_ids
+msgid "Followers (Channels)"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: fms
+#: model:ir.actions.act_window,name:fms.fms_freight_action_from_menu
+#: model:ir.ui.menu,name:fms.fms_freight_menu
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Freight"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Freight -"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_product_template_view
+msgid "Freight Commission"
+msgstr ""
+
+#. module: fms
+#: model:ir.model,name:fms.model_fms_freight_commission_line
+msgid "Freight Commission Line"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Freight Delivery"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__fr_desc
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Freight Description"
+msgstr ""
+
+#. module: fms
+#: model:ir.model,name:fms.model_fms_freight
+msgid "Freight Management"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.actions.act_window,help:fms.fms_freight_action_from_menu
+msgid "Freight Management System allows you to manage the pipeline of your freight delivery efficiently.\n"
+"                You can track progress, discuss, attach documents, etc."
+msgstr ""
+
+#. module: fms
+#: model:ir.module.category,description:fms.module_fms
+msgid "Freight Management System helps you manage your freight delivery"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__state
+msgid "Freight State"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+msgid "Freight date"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__fr_value
+msgid "Freight value"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_tree_view
+msgid "Freights"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+msgid "From this month"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,help:fms.field_fms_freight_commission_line__sequence
+msgid "Gives the sequence order when displaying a list of commission order lines."
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,help:fms.field_fms_freight__state
+msgid "Gives the state of the Freight."
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__id
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__id
+msgid "ID"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,help:fms.field_fms_freight__message_unread
+msgid "If checked new messages require your attention."
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,help:fms.field_fms_freight__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,help:fms.field_fms_freight__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,help:fms.field_product_product__fms_commission
+#: model:ir.model.fields,help:fms.field_product_template__fms_commission
+msgid "If set true, it will allow you to use it in commissions of the freight"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight____last_update
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__write_uid
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__write_date
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Location completion"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: fms
+#: model:res.groups,name:fms.group_fms_manager
+msgid "Manager"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__mobile
+msgid "Mobile"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+msgid "My Freights"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__name
+msgid "Name"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+msgid "Not Cancelled"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__message_has_error_counter
+msgid "Number of error"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,help:fms.field_fms_freight__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,help:fms.field_fms_freight__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,help:fms.field_fms_freight__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__fr_packages
+msgid "Nº Packages"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+msgid "Order Date"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__partner_order_doc
+msgid "Order doc."
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Other Information"
+msgstr ""
+
+#. module: fms
+#: selection:fms.freight,activity_state:0
+msgid "Overdue"
+msgstr ""
+
+#. module: fms
+#: selection:fms.freight,state:0
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Partial"
+msgstr ""
+
+#. module: fms
+#: selection:fms.freight,state:0
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+msgid "Pending"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__fr_commission_percent
+msgid "Percent of commission"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__phone
+msgid "Phone"
+msgstr ""
+
+#. module: fms
+#: selection:fms.freight,activity_state:0
+msgid "Planned"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__product_id
+msgid "Product"
+msgstr ""
+
+#. module: fms
+#: model:ir.model,name:fms.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Re-Open"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Receive"
+msgstr ""
+
+#. module: fms
+#: selection:fms.freight,state:0
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+msgid "Received"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__responsible_id
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+msgid "Responsible"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__partner_sale_doc
+msgid "Sale doc."
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__date_planned
+msgid "Scheduled Date"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+msgid "Search Freights"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Set to Draft"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__state_id
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "State"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,help:fms.field_fms_freight__activity_state
+msgid "Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__street
+msgid "Street"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Street 2..."
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Street..."
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__street2
+msgid "Street2"
+msgstr ""
+
+#. module: fms
+#: code:addons/fms/models/fms_freight.py:199
+#, python-format
+msgid "The country of the delivery %s differs from that in location %s"
+msgstr ""
+
+#. module: fms
+#: code:addons/fms/models/fms_freight.py:195
+#, python-format
+msgid "The state of the delivery %s differs from that in location %s"
+msgstr ""
+
+#. module: fms
+#: code:addons/fms/models/fms_freight.py:86
+#, python-format
+msgid "The value of the freight must greater than 0"
+msgstr ""
+
+#. module: fms
+#: selection:fms.freight,activity_state:0
+msgid "Today"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Total Amount"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_product_product__fms_commission
+#: model:ir.model.fields,field_description:fms.field_product_template__fms_commission
+msgid "Use in freights commissios"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__user_id
+#: model:res.groups,name:fms.group_fms_user
+msgid "User"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__fr_commission
+msgid "Value of commission"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "ZIP"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__zip_id
+msgid "ZIP Location"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__zip
+msgid "Zip"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__freight_id
+msgid "freight"
+msgstr ""
+
