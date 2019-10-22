@@ -12,6 +12,9 @@ class FmsFreight(models.Model):
     _order = 'name desc'
 
     name = fields.Char()
+    active = fields.Boolean(default=True,
+        help="If the active field is set to False, it will allow you to hide"
+             " the freight without removing it.")
     state = fields.Selection([
         ('draft', 'Pending'),
         ('partial', 'Partial'),
@@ -29,8 +32,10 @@ class FmsFreight(models.Model):
         'res.company', string='Company', required=True,
         default=lambda self: self.env.user.company_id)
     user_id = fields.Many2one(
-        'res.users', 'Administrator',
-        default=(lambda self: self.env.user))
+        'res.users', 'Administrator', required=True,
+        default=(lambda self: self.env.user),
+        domain=lambda self: [
+            ("groups_id", "=", self.env.ref("fms.group_fms_manager").id)])
     partner_id = fields.Many2one(
         'res.partner',
         'Customer', required=True, change_default=True)
@@ -47,6 +52,17 @@ class FmsFreight(models.Model):
     date_order = fields.Datetime(
         'Date', required=True,
         default=fields.Datetime.now)
+    privacy_visibility = fields.Selection([
+        ('followers', 'On invitation only'),
+        ('employees', 'Visible by all employees'),
+    ],
+        string='Privacy', required=True,
+        default='followers',
+        help="Holds visibility of the freight:\n "
+             "- On invitation only: Employees may only "
+             "see the followed freights.\n"
+             "- Visible by all employees: Employees "
+             "may see all freights.")
     # Delivery addres and contact
     delivery_name = fields.Char(string='Contact Name')
     street = fields.Char()
@@ -70,20 +86,20 @@ class FmsFreight(models.Model):
     fr_packages = fields.Integer(string='Nº Packages')
     fr_value = fields.Monetary(string='Freight value')
     fr_commission = fields.Monetary(string='Value of commission')
-    fr_commission_percent = fields.Integer(string='Percent of commission')
+    fr_commission_percent = fields.Float(string='Percent of commission')
     # Freight Delivery
     date_planned = fields.Datetime('Scheduled Date',
         help='Date at which the freight should be delivered')
-    responsible_id = fields.Many2one('hr.employee', string='Responsible')
+    responsible_id = fields.Many2one('res.users', string='Responsible')
     # Commission Lines
     commission_line_ids = fields.One2many(
         'fms.freight.commission.line', 'freight_id', string="Commission")
 
     @api.onchange('fr_commission_percent')
     def _calculate_fr_commission_percent(self):
-        if self.fr_value == 0:
+        if self.fr_value == 0 and self.fr_commission_percent != 0:
             raise ValidationError(
-                _("The value of the freight must greater than 0"))
+                _("The value of the freight should be different to 0"))
         elif self.fr_commission_percent > 100:
             raise ValidationError(
                 _("Commission percent should be less or equal to 100!"))
@@ -141,9 +157,9 @@ class FmsFreight(models.Model):
     @api.multi
     def action_reopen(self):
         for freight in self:
-            freight.state = 'received'
+            freight.state = 'confirmed'
             self.message_post(
-                body=_("<h5><strong>Reopen: Closed to received</strong></h5>"))
+                body=_("<h5><strong>Reopen: Closed to confirmed</strong></h5>"))
 
     # ------------------------------------------------
     # Delivery Address
@@ -227,6 +243,9 @@ class FmsFreightCommissionLine(models.Model):
     _description = 'Freight Commission Line'
     _order = 'sequence, id desc'
 
+    freight_id = fields.Many2one(
+        'fms.freight', 'freight',
+        ondelete='cascade', required=True)
     sequence = fields.Integer(
         help="Gives the sequence order when displaying a list of"
         " commission order lines.", default=10)
@@ -237,7 +256,7 @@ class FmsFreightCommissionLine(models.Model):
         'res.users', 'User', required=True)
     product_id = fields.Many2one(
         'product.product', 'Product', required=True)
-    amount = fields.Float(string='Amount Commission', default=0.0)
-    freight_id = fields.Many2one(
-        'fms.freight', 'freight', required=False, ondelete='cascade',
-        index=True, readonly=True)
+    currency_id = fields.Many2one(
+        'res.currency', 'Currency', required=True,
+        default=lambda self: self.env.user.company_id.currency_id)
+    amount = fields.Monetary(string='Amount Commission')

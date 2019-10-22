@@ -22,6 +22,7 @@
         <field name="arch" type="xml">
             <tree string="Freights" decoration-warning="state == 'partial'" decoration-info="state == 'received'" decoration-success="state == 'confirmed'"
                   decoration-muted="state=='cancel'">
+                <field name="user_id"/>
                 <field name="name"/>
                 <field name="date_order" widget='date'/>
                 <field name="partner_id"/>
@@ -35,7 +36,8 @@
         <field name="arch" type="xml">
             <form string="Freight">
                 <header>
-                    <button icon="fa-times" name="action_cancel" states="draft,partial,received,confirmed" string="Cancel" type="object"/>
+                    <button icon="fa-times" name="action_cancel" states="draft,partial,received,confirmed"
+                            string="Cancel" type="object" groups="fms.group_fms_manager"/>
                     <button icon="fa-reply" name="action_cancel_draft" states="cancel" string="Set to Draft" type="object"/>
                     <button class="oe_highlight" icon="fa-frown-o" name="action_partial" states="draft,received" string="Partial" type="object"/>
                     <button class="oe_highlight" icon="fa-thumbs-up" name="action_receive" states="draft,partial" string="Receive" type="object"/>
@@ -49,11 +51,21 @@
                         <label for="name" attrs="{'invisible':[('name','=', False)]}" class="oe_inline" string="Freight - " style="font-size:30px;"/>
                         <field class="oe_inline" name="name" readonly="1"/>
                     </h1>
+                    <group>
+                        <group>
+                            <field name="user_id" string="Freight Admin"
+                                   options='{"no_open": True, "no_create": True}'
+                                   attrs="{'readonly':[('state','in',('cancel'))]}"
+                                   groups="fms.group_fms_manager"/>
+                        </group>
+                        <group>
+                            <field attrs="{'readonly':[('state','in',('confirmed','closed','cancel'))]}" groups="base.group_multi_currency" name="currency_id"/>
+                        </group>
+                    </group>
                     <group string="Customer Data">
                         <group>
                             <field attrs="{'readonly':[('state','in',('confirmed','closed','cancel'))]}" domain="[('customer','=',True), ('is_company', '=', True)]" name="partner_id"/>
                             <field attrs="{'readonly':[('state','in',('confirmed','closed','cancel'))]}" name="date_order"/>
-                            <field attrs="{'readonly':[('state','in',('confirmed','closed','cancel'))]}" groups="base.group_multi_currency" name="currency_id"/>
                         </group>
                         <group>
                             <group>
@@ -113,19 +125,19 @@
                             </group>
                         </group>
                     </group>
-                    <group string="Freight Delivery" attrs="{'invisible':[('state','in',('draft','partial','cancel'))]}">
+                    <group string="Freight Delivery" attrs="{'invisible':[('state','in',('draft','partial'))]}">
                         <group>
                              <field name="date_planned" attrs="{'required':[('state', 'in',('received','confirmed','closed'))],
                                                                 'readonly':[('state','in',('confirmed','closed','cancel'))]}"/>
                         </group>
                         <group>
                              <field name="responsible_id" options='{"no_open": True, "no_create": True}'
-                                    attrs="{'required': [('state', 'in',('received','confirmed','closed'))],
+                                    attrs="{'required':[('state','in',('received','confirmed','closed'))],
                                             'readonly':[('state','in',('confirmed','closed','cancel'))]}"/>
                         </group>
                     </group>
                     <notebook>
-                        <page name="commissions" string="Commissions" attrs="{'invisible':[('state','!=','closed')]}">
+                        <page name="commissions" string="Commissions" attrs="{'invisible':[('state','in',('draft','partial','received'))]}">
                             <field name="commission_line_ids">
                                 <tree string="Commissions" editable="bottom">
                                     <field name="sequence" widget="handle"/>
@@ -134,12 +146,15 @@
                                     <field name="product_id"
                                            domain="[('fms_commission', '=', True)]"
                                            options='{"no_open": True, "no_create": True}'/>
-                                    <field name="amount" sum="Total Amount" widget="monetary"/>
-                                </tree>
+                                    <field name="amount" sum="Total Amount" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                                    <field name="currency_id" invisible="1"/>
+                               </tree>
                             </field>
                         </page>
                         <page name="information" string="Other Information">
-
+                            <group>
+                                <field name="privacy_visibility" widget="radio"/>
+                            </group>
                         </page>
                     </notebook>
                 </sheet>

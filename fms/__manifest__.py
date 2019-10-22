@@ -13,6 +13,7 @@
         'base_address_city',
         'contacts',
         'hr',
+        'product',
     ],
     'data': [
         'security/fms_security.xml',
@@ -20,6 +21,7 @@
         'data/ir_sequence_data.xml',
         'views/fms_views.xml',
         'views/product_template_view.xml',
+        'report/fms_freight_report.xml',
     ],
     'installable': True,
 }
