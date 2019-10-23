@@ -19,6 +19,7 @@
         'security/fms_security.xml',
         'security/ir.model.access.csv',
         'data/ir_sequence_data.xml',
+        'data/fms_freight_email_template.xml',
         'views/fms_views.xml',
         'views/product_template_view.xml',
         'report/fms_freight_report.xml',

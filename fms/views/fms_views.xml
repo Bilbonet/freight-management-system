@@ -44,6 +44,7 @@
                     <button class="oe_highlight" icon="fa-check-square-o" name="action_confirm" states="received" string="Confirm" type="object"/>
                     <button class="oe_highlight" icon="fa-lock" name="action_close" states="confirmed" string="Close" type="object"/>
                     <button class="oe_highlight" icon="fa-unlock" name="action_reopen" states="closed" string="Re-Open" type="object"/>
+                    <button icon="fa-send-o" name="action_send_email" type="object" string="Send Email" groups="fms.group_fms_manager"/>
                     <field name="state" statusbar_visible="draft,partial,received,confirmed,closed" widget="statusbar"/>
                 </header>
                 <sheet>

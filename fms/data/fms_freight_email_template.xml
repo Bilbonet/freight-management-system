@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="fms_freight_email_template" model="mail.template">
+        <field name="name">FMS Freight - Send by Email</field>
+        <field name="email_from">${(object.user_id.email and '%s &lt;%s&gt;' % (object.user_id.name, object.user_id.email) or '')|safe}</field>
+        <field name="subject">${object.company_id.name} Freight (${object.name})</field>
+        <field name="partner_to">${object.partner_id.id}</field>
+        <field name="model_id" ref="fms.model_fms_freight"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="report_template" ref="fms.fms_freight_report_action"/>
+        <field name="report_name">${object.name}</field>
+        <field name="lang">${object.partner_id.lang}</field>
+        <field name="body_html"><![CDATA[
+<div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+    <p>Hello ${object.partner_id.name or ''},</p>
+    <p>We inform you about the following Freight: </p>
+
+    <p style="border-left: 1px solid #8e0000; margin-left: 30px;">
+       &nbsp;&nbsp;Name: <strong>${object.name}</strong><br />
+       &nbsp;&nbsp;Date: <strong>${object.format_date(object.date_order)}</strong><br />
+
+       % if object.user_id:
+       &nbsp;&nbsp;Your contact: <a href="mailto:${object.user_id.email or ''}?subject=Freight%20${object.name}"><strong>${object.user_id.name}</strong></a>
+       % endif
+    </p>
+
+
+    <br/>
+
+    <table style="padding:0px;width:800px;background-color:#f9f9f9;border:solid 1px #f0f0f0;">
+        <tr>
+            <td colspan="2" style="text-align:center;"><h2>FREIGHT SUMMARY</h2></td>
+        </tr>
+        <tr>
+            <td style="width:50%">
+                <table style="width:100%;background:inherit;color:inherit;">
+                    <tbody>
+                        <tr style="color:#875A7B;">
+                            <td style="width:120px;padding:5px">State:</td>
+                            <td>
+                                <strong>${dict(object.fields_get(allfields=['state'])['state']['selection'])[object.state]}</strong>
+                            </td>
+                        </tr>
+                        <tr style="color:#875A7B;">
+                            <td style="width:120px;padding:5px">Delivery Name:</td>
+                            <td>
+                                <strong>${(object.delivery_name)}</strong>
+                            </td>
+                        </tr>
+                        % if object.street:
+                        <tr>
+                            <td style="width:120px;padding:5px">Address:</td>
+                            <td>
+                                <strong>${(object.street)}</strong>
+                                % if object.street2:
+                                <strong> ${(object.street2)}</strong>
+                                % endif
+                                <br/>
+                                ${(object.city)}
+                            </td>
+                        </tr>
+                        % endif
+                    </tbody>
+                </table>
+            </td>
+            <td>
+                <table style="margin-left:30px;">
+                    <tbody>
+                        <tr style="color:#875A7B;">
+                            <td style="width:140px;padding:5px">Center Code:</td>
+                            <td>
+                                % if object.partner_center:
+                                <strong>${(object.partner_center)}</strong>
+                                % endif
+                            </td>
+                        </tr>
+                        <tr style="color:#875A7B;">
+                            <td style="width:140px;padding:5px">Department Code:</td>
+                            <td>
+                                % if object.partner_department:
+                                <strong>${(object.partner_department)}</strong>
+                                % endif
+                            </td>
+                        </tr>
+                        <tr style="color:#875A7B;">
+                            <td style="width:140px;padding:5px">Delibery Note:</td>
+                            <td>
+                                % if object.partner_delivery_note:
+                                <strong>${(object.partner_delivery_note)}</strong>
+                                % endif
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <br/>
+    <p>If you have any question, do not hesitate to contact us.</p>
+    <p>Thank you for trusting in  ${object.company_id.name or 'us'}!</p>
+    % if object.user_id.signature:
+       ${object.user_id.signature | safe}
+    % else
+        <div style="padding:0px;margin:auto;">
+            <table cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <td style="padding:10px 10px 10px 0px;font-size: 12px" width="200">
+                            <img src="/logo.png" style="padding: 0px; margin: 0px; height: auto; width: 100px;" alt="${user.company_id.name}">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    % endif
+    <br/>
+</div>
+        ]]></field>
+    </record>
+
+</odoo>

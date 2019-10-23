@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-19 17:11+0000\n"
-"PO-Revision-Date: 2019-10-19 17:11+0000\n"
+"POT-Creation-Date: 2019-10-23 16:39+0000\n"
+"PO-Revision-Date: 2019-10-23 16:39+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,56 +16,350 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: fms
+#: model:mail.template,body_html:fms.fms_freight_email_template
+msgid "\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"    <p>Hello ${object.partner_id.name or ''},</p>\n"
+"    <p>We inform you about the following Freight: </p>\n"
+"\n"
+"    <p style=\"border-left: 1px solid #8e0000; margin-left: 30px;\">\n"
+"       &nbsp;&nbsp;Name: <strong>${object.name}</strong><br />\n"
+"       &nbsp;&nbsp;Date: <strong>${object.format_date(object.date_order)}</strong><br />\n"
+"\n"
+"       % if object.user_id:\n"
+"       &nbsp;&nbsp;Your contact: <a href=\"mailto:${object.user_id.email or ''}?subject=Freight%20${object.name}\"><strong>${object.user_id.name}</strong></a>\n"
+"       % endif\n"
+"    </p>\n"
+"\n"
+"\n"
+"    <br/>\n"
+"\n"
+"    <table style=\"padding:0px;width:800px;background-color:#f9f9f9;border:solid 1px #f0f0f0;\">\n"
+"        <tr>\n"
+"            <td colspan=\"2\" style=\"text-align:center;\"><h2>FREIGHT SUMMARY</h2></td>\n"
+"        </tr>\n"
+"        <tr>\n"
+"            <td style=\"width:50%\">\n"
+"                <table style=\"width:100%;background:inherit;color:inherit;\">\n"
+"                    <tbody>\n"
+"                        <tr style=\"color:#875A7B;\">\n"
+"                            <td style=\"width:120px;padding:5px\">State:</td>\n"
+"                            <td>\n"
+"                                <strong>${(object.state)}</strong>\n"
+"                            </td>\n"
+"                        </tr>\n"
+"                        <tr style=\"color:#875A7B;\">\n"
+"                            <td style=\"width:120px;padding:5px\">Delivery Name:</td>\n"
+"                            <td>\n"
+"                                <strong>${(object.delivery_name)}</strong>\n"
+"                            </td>\n"
+"                        </tr>\n"
+"                        % if object.street:\n"
+"                        <tr>\n"
+"                            <td style=\"width:120px;padding:5px\">Address:</td>\n"
+"                            <td>\n"
+"                                <strong>${(object.street)}</strong>\n"
+"                                % if object.street2:\n"
+"                                <strong> ${(object.street2)}</strong>\n"
+"                                % endif\n"
+"                                <br/>\n"
+"                                ${(object.city)}\n"
+"                            </td>\n"
+"                        </tr>\n"
+"                        % endif\n"
+"                    </tbody>\n"
+"                </table>\n"
+"            </td>\n"
+"            <td>\n"
+"                <table style=\"margin-left:30px;\">\n"
+"                    <tbody>\n"
+"                        <tr style=\"color:#875A7B;\">\n"
+"                            <td style=\"width:120px;padding:5px\">Center Code:</td>\n"
+"                            <td>\n"
+"                                % if object.partner_center:\n"
+"                                <strong>${(object.partner_center)}</strong>\n"
+"                                % endif\n"
+"                            </td>\n"
+"                        </tr>\n"
+"                        <tr style=\"color:#875A7B;\">\n"
+"                            <td style=\"width:120px;padding:5px\">Department Code:</td>\n"
+"                            <td>\n"
+"                                % if object.partner_department:\n"
+"                                <strong>${(object.partner_department)}</strong>\n"
+"                                % endif\n"
+"                            </td>\n"
+"                        </tr>\n"
+"                        <tr style=\"color:#875A7B;\">\n"
+"                            <td style=\"width:120px;padding:5px\">Delibery Note:</td>\n"
+"                            <td>\n"
+"                                % if object.partner_delivery_note:\n"
+"                                <strong>${(object.partner_delivery_note)}</strong>\n"
+"                                % endif\n"
+"                            </td>\n"
+"                        </tr>\n"
+"                    </tbody>\n"
+"                </table>\n"
+"            </td>\n"
+"        </tr>\n"
+"    </table>\n"
+"\n"
+"    <br/>\n"
+"    <p>If you have any question, do not hesitate to contact us.</p>\n"
+"    <p>Thank you for trusting in  ${object.company_id.name or 'us'}!</p>\n"
+"    % if object.user_id.signature:\n"
+"       ${object.user_id.signature | safe}\n"
+"    % else\n"
+"        <div style=\"padding:0px;margin:auto;\">\n"
+"            <table cellspacing=\"0\" cellpadding=\"0\">\n"
+"                <tbody>\n"
+"                    <tr>\n"
+"                        <td style=\"padding:10px 10px 10px 0px;font-size: 12px\" width=\"200\">\n"
+"                            <img src=\"/logo.png\" style=\"padding: 0px; margin: 0px; height: auto; width: 100px;\" alt=\"${user.company_id.name}\">\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                </tbody>\n"
+"            </table>\n"
+"        </div>\n"
+"    % endif\n"
+"    <br/>\n"
+"</div>\n"
+"        "
+msgstr "\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"    <p>Hola ${object.partner_id.name or ''},</p>\n"
+"    <p>Le informamos sobre el siguiente Flete: </p>\n"
+"\n"
+"    <p style=\"border-left: 1px solid #8e0000; margin-left: 30px;\">\n"
+"       &nbsp;&nbsp;Nombre: <strong>${object.name}</strong><br />\n"
+"       &nbsp;&nbsp;Fecha: <strong>${object.format_date(object.date_order)}</strong><br />\n"
+"\n"
+"       % if object.user_id:\n"
+"       &nbsp;&nbsp;Su Contacto: <a href=\"mailto:${object.user_id.email or ''}?subject=Freight%20${object.name}\"><strong>${object.user_id.name}</strong></a>\n"
+"       % endif\n"
+"    </p>\n"
+"\n"
+"\n"
+"    <br/>\n"
+"\n"
+"    <table style=\"padding:0px;width:800px;background-color:#f9f9f9;border:solid 1px #f0f0f0;\">\n"
+"        <tr>\n"
+"            <td colspan=\"2\" style=\"text-align:center;\"><h2>RESUMEN DEL FLETE</h2></td>\n"
+"        </tr>\n"
+"        <tr>\n"
+"            <td style=\"width:50%\">\n"
+"                <table style=\"width:100%;background:inherit;color:inherit;\">\n"
+"                    <tbody>\n"
+"                        <tr style=\"color:#875A7B;\">\n"
+"                            <td style=\"width:120px;padding:5px\">ESTADO:</td>\n"
+"                            <td>\n"
+"                                <strong>${dict(object.fields_get(allfields=['state'])['state']['selection'])[object.state]}</strong>\n"
+"                            </td>\n"
+"                        </tr>\n"
+"                        <tr style=\"color:#875A7B;\">\n"
+"                            <td style=\"width:120px;padding:5px\">Nombre Entrega:</td>\n"
+"                            <td>\n"
+"                                <strong>${(object.delivery_name)}</strong>\n"
+"                            </td>\n"
+"                        </tr>\n"
+"                        % if object.street:\n"
+"                        <tr>\n"
+"                            <td style=\"width:120px;padding:5px\">Dirección:</td>\n"
+"                            <td>\n"
+"                                <strong>${(object.street)}</strong>\n"
+"                                % if object.street2:\n"
+"                                <strong> ${(object.street2)}</strong>\n"
+"                                % endif\n"
+"                                <br/>\n"
+"                                ${(object.city)}\n"
+"                            </td>\n"
+"                        </tr>\n"
+"                        % endif\n"
+"                    </tbody>\n"
+"                </table>\n"
+"            </td>\n"
+"            <td>\n"
+"                <table style=\"margin-left:30px;\">\n"
+"                    <tbody>\n"
+"                        <tr style=\"color:#875A7B;\">\n"
+"                            <td style=\"width:140px;padding:5px\">Código Centro:</td>\n"
+"                            <td>\n"
+"                                % if object.partner_center:\n"
+"                                <strong>${(object.partner_center)}</strong>\n"
+"                                % endif\n"
+"                            </td>\n"
+"                        </tr>\n"
+"                        <tr style=\"color:#875A7B;\">\n"
+"                            <td style=\"width:140px;padding:5px\">Código Departamento:</td>\n"
+"                            <td>\n"
+"                                % if object.partner_department:\n"
+"                                <strong>${(object.partner_department)}</strong>\n"
+"                                % endif\n"
+"                            </td>\n"
+"                        </tr>\n"
+"                        <tr style=\"color:#875A7B;\">\n"
+"                            <td style=\"width:140px;padding:5px\">Albarán:</td>\n"
+"                            <td>\n"
+"                                % if object.partner_delivery_note:\n"
+"                                <strong>${(object.partner_delivery_note)}</strong>\n"
+"                                % endif\n"
+"                            </td>\n"
+"                        </tr>\n"
+"                    </tbody>\n"
+"                </table>\n"
+"            </td>\n"
+"        </tr>\n"
+"    </table>\n"
+"\n"
+"    <br/>\n"
+"    <p>Si tiene alguna pregunta, no duce en contactarnos.</p>\n"
+"    <p>Gracias por confiar en  ${object.company_id.name or 'us'}!</p>\n"
+"    % if object.user_id.signature:\n"
+"       ${object.user_id.signature | safe}\n"
+"    % else\n"
+"        <div style=\"padding:0px;margin:auto;\">\n"
+"            <table cellspacing=\"0\" cellpadding=\"0\">\n"
+"                <tbody>\n"
+"                    <tr>\n"
+"                        <td style=\"padding:10px 10px 10px 0px;font-size: 12px\" width=\"200\">\n"
+"                            <img src=\"/logo.png\" style=\"padding: 0px; margin: 0px; height: auto; width: 100px;\" alt=\"${user.company_id.name}\">\n"
+"                        </td>\n"
+"                    </tr>\n"
+"                </tbody>\n"
+"            </table>\n"
+"        </div>\n"
+"    % endif\n"
+"    <br/>\n"
+"</div>\n"
+"        "
+
+#. module: fms
+#: model:mail.template,subject:fms.fms_freight_email_template
+msgid "${object.company_id.name} Freight (${object.name})"
+msgstr "${object.company_id.name} Flete (${object.name})"
+
+#. module: fms
+#: model:mail.template,report_name:fms.fms_freight_email_template
+msgid "${object.name}"
+msgstr ""
+
+#. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
 msgid "% commission"
 msgstr "% comisión"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:113
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
+msgid "<br/>\n"
+"                            <strong>Date Planned: </strong>"
+msgstr "<br/>\n"
+"                            <strong>Date Planificado: </strong>"
+
+#. module: fms
+#: code:addons/fms/models/fms_freight.py:165
 #, python-format
 msgid "<h5><strong>Cancel to Draft</strong></h5>"
 msgstr "<h5><strong>Cancelado a Pendiente</strong></h5>"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:107
+#: code:addons/fms/models/fms_freight.py:159
 #, python-format
 msgid "<h5><strong>Cancelled</strong></h5>"
 msgstr "<h5><strong>Cancelado</strong></h5>"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:139
+#: code:addons/fms/models/fms_freight.py:191
 #, python-format
 msgid "<h5><strong>Closed</strong></h5>"
 msgstr "<h5><strong>Cerrado</strong></h5>"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:133
+#: code:addons/fms/models/fms_freight.py:185
 #, python-format
 msgid "<h5><strong>Confirmed</strong></h5>"
 msgstr "<h5><strong>Confirmado</strong></h5>"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:121
+#: code:addons/fms/models/fms_freight.py:173
 #, python-format
 msgid "<h5><strong>Receive Partial</strong></h5>"
-msgstr "<h5><strong>Recibido Parcial</strong>"
+msgstr "<h5><strong>Recibido Parcial</strong></h5>"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:127
+#: code:addons/fms/models/fms_freight.py:179
 #, python-format
 msgid "<h5><strong>Received</strong></h5>"
 msgstr "<h5><strong>Recibido</strong></h5>"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:146
+#: code:addons/fms/models/fms_freight.py:198
 #, python-format
-msgid "<h5><strong>Reopen: Closed to received</strong></h5>"
-msgstr "<h5><strong>Reabierto: Cerrado a Recibido</strong></h5>"
+msgid "<h5><strong>Reopen: Closed to confirmed</strong></h5>"
+msgstr "<h5><strong>Reabierto: Cerrado a Confirmado</strong></h5>"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
+msgid "<span>Our Ref.:</span>"
+msgstr "<span>Nuestra Ref.:</span>"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
+msgid "<strong>Center Code:</strong>"
+msgstr "<strong>Código Centro:</strong>"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
+msgid "<strong>Date Order: </strong>"
+msgstr "<strong>Fecha Orden: </strong>"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
+msgid "<strong>Delivery Note:</strong>"
+msgstr "<strong>Albarán:</strong>"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
+msgid "<strong>Department Code:</strong>"
+msgstr "<strong>Código Departamento:</strong>"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
+msgid "<strong>Email: </strong>"
+msgstr "<strong>Email: </strong>"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
+msgid "<strong>Mobile: </strong>"
+msgstr "<strong>Móvil: </strong>"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
+msgid "<strong>Order Doc.:</strong>"
+msgstr "<strong>Orden Doc.:</strong>"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
+msgid "<strong>Phone: </strong>"
+msgstr "<strong>Teléfono: </strong>"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
+msgid "<strong>Sale Doc.:</strong>"
+msgstr "<strong>Venta Doc.:</strong>"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
+msgid "<strong>Subtotal</strong>"
+msgstr "<strong>Subtotal</strong>"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_needaction
 msgid "Action Needed"
 msgstr "Acción requerida"
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__active
+msgid "Active"
+msgstr "Activo"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__activity_ids
@@ -90,7 +384,7 @@ msgstr "Administrador"
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__amount
 msgid "Amount Commission"
-msgstr "Valor comisión"
+msgstr "Valor Comisión"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_attachment_count
@@ -111,7 +405,7 @@ msgstr "Cancelado"
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__partner_center
 msgid "Center code"
-msgstr "Centro Cod."
+msgstr "Código centro"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__city
@@ -140,10 +434,10 @@ msgid "Commission"
 msgstr "Comisión"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:89
+#: code:addons/fms/models/fms_freight.py:106
 #, python-format
 msgid "Commission percent should be less or equal to 100!"
-msgstr "% de la comisión debe ser menor o igual a 100"
+msgstr "El % de la comisión debe ser menor o igual a 100"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
@@ -154,6 +448,12 @@ msgstr "Comisiones"
 #: model:ir.model.fields,field_description:fms.field_fms_freight__company_id
 msgid "Company"
 msgstr "Compañía"
+
+#. module: fms
+#: code:addons/fms/models/fms_freight.py:141
+#, python-format
+msgid "Compose Email"
+msgstr "Componer Email"
 
 #. module: fms
 #: model:ir.ui.menu,name:fms.fms_config_menu
@@ -201,6 +501,7 @@ msgstr "Creado el"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__currency_id
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__currency_id
 msgid "Currency"
 msgstr "Moneda"
 
@@ -213,7 +514,12 @@ msgstr "Cliente"
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
 msgid "Customer Data"
-msgstr "Datos Cliente"
+msgstr "Datos de cliente"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
+msgid "DELIVERY DATA"
+msgstr "DATOS ENTREGA"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__date_order
@@ -229,7 +535,7 @@ msgstr "Fecha en la que el flete debe ser entregado"
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
 msgid "Delivery Data"
-msgstr "Datos de entrega"
+msgstr "Datos Entrega"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__partner_delivery_note
@@ -239,7 +545,7 @@ msgstr "Albarán"
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__partner_department
 msgid "Department code"
-msgstr "Departemento Cod."
+msgstr "Código departamento"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__display_name
@@ -250,13 +556,18 @@ msgstr "Nombre mostrado"
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__email
 msgid "Email"
-msgstr "Correo electrónico"
+msgstr "Email"
 
 #. module: fms
 #: model:ir.module.category,name:fms.module_fms
 #: model:ir.ui.menu,name:fms.fms_main_menu
 msgid "F.M.S"
 msgstr "F.M.S"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
+msgid "FREIGHT DESCRIPTION"
+msgstr "DESCRIPCIÓN FLETE"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_follower_ids
@@ -286,57 +597,62 @@ msgid "Freight -"
 msgstr "Flete -"
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Freight Admin"
+msgstr "Admin Flete"
+
+#. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_product_template_view
 msgid "Freight Commission"
-msgstr "Flete comisión"
+msgstr "Comisión flete"
 
 #. module: fms
 #: model:ir.model,name:fms.model_fms_freight_commission_line
 msgid "Freight Commission Line"
-msgstr "Flete linea comisión"
+msgstr "Línea comisión flete"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
 msgid "Freight Delivery"
-msgstr "Entrega Flete"
+msgstr "Flete entrega"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__fr_desc
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
 msgid "Freight Description"
-msgstr "Flete Descripción"
+msgstr "Descripción flete"
 
 #. module: fms
 #: model:ir.model,name:fms.model_fms_freight
 msgid "Freight Management"
-msgstr "Flete Administración"
+msgstr "Administración flete"
 
 #. module: fms
 #: model_terms:ir.actions.act_window,help:fms.fms_freight_action_from_menu
 msgid "Freight Management System allows you to manage the pipeline of your freight delivery efficiently.\n"
 "                You can track progress, discuss, attach documents, etc."
-msgstr "Sistema Administración Flete le permite el manejo del proceso de entrega del flete eficientemente.\n"
-"                Tu puedes seguir el progreso, comentar, adjuntar documentos, etc."
+msgstr "El sistema de administración del flete le permite manejar la entrega eficientemente.\n"
+"                Usted puede seguir el progreso, comentar, adjuntar documentos, etc."
 
 #. module: fms
 #: model:ir.module.category,description:fms.module_fms
 msgid "Freight Management System helps you manage your freight delivery"
-msgstr "Sistema Administración Flete le ayuda en el manejo de la entrega del flete"
+msgstr "El sistema de administración del flete le ayuda en la entrega del flete"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__state
 msgid "Freight State"
-msgstr "Estado Flete"
+msgstr "Estado del Flete"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
 msgid "Freight date"
-msgstr "Flete fecha"
+msgstr "Fecha flete"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__fr_value
 msgid "Freight value"
-msgstr "Flete valor"
+msgstr "Valor flete"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_tree_view
@@ -351,18 +667,27 @@ msgstr "De este mes"
 #. module: fms
 #: model:ir.model.fields,help:fms.field_fms_freight_commission_line__sequence
 msgid "Gives the sequence order when displaying a list of commission order lines."
-msgstr "Asigna el orden cuando se muestra una lista de lineas de comisiones."
+msgstr "Asigna la secuencia de orden al mostrar una lista de comisiones"
 
 #. module: fms
 #: model:ir.model.fields,help:fms.field_fms_freight__state
 msgid "Gives the state of the Freight."
-msgstr "Indica el estado del flete"
+msgstr "Asigna el estado del flete"
+
+#. module: fms
+#: model:ir.model.fields,help:fms.field_fms_freight__privacy_visibility
+msgid "Holds visibility of the freight:\n"
+" - On invitation only: Employees may only see the followed freights.\n"
+"- Visible by all employees: Employees may see all freights."
+msgstr "Asigna la visivilidad del flete:\n"
+" - Solo con invitación: Los empleados solo pueden ver si son seguidores.\n"
+"- Visible para todos: Todso los empleados pueden ver el flete."
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__id
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: fms
 #: model:ir.model.fields,help:fms.field_fms_freight__message_unread
@@ -383,7 +708,12 @@ msgstr "Si se encuentra marcado, algunos mensajes tienen error de envío."
 #: model:ir.model.fields,help:fms.field_product_product__fms_commission
 #: model:ir.model.fields,help:fms.field_product_template__fms_commission
 msgid "If set true, it will allow you to use it in commissions of the freight"
-msgstr "Si se marca, le permitirá su uso en comisiones del flete"
+msgstr "Si es marcado, le permitira utilizarlo en las comisiones de fletes"
+
+#. module: fms
+#: model:ir.model.fields,help:fms.field_fms_freight__active
+msgid "If the active field is set to False, it will allow you to hide the freight without removing it."
+msgstr "Si el campo activo es falso, le permitirá ocultar el flete sin eliminarlo."
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_is_follower
@@ -499,6 +829,11 @@ msgid "Nº Packages"
 msgstr "Nº Bultos"
 
 #. module: fms
+#: selection:fms.freight,privacy_visibility:0
+msgid "On invitation only"
+msgstr "Solo con invitación"
+
+#. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
 msgid "Order Date"
 msgstr "Fecha de pedido"
@@ -506,7 +841,7 @@ msgstr "Fecha de pedido"
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__partner_order_doc
 msgid "Order doc."
-msgstr "Pedido Doc."
+msgstr "Orden doc."
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
@@ -545,6 +880,16 @@ msgstr "Teléfono"
 #: selection:fms.freight,activity_state:0
 msgid "Planned"
 msgstr "Planificado"
+
+#. module: fms
+#: model:ir.actions.report,name:fms.fms_freight_report_action
+msgid "Print Freight"
+msgstr "Imprimir Flete"
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__privacy_visibility
+msgid "Privacy"
+msgstr "Privacidad"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__product_id
@@ -586,7 +931,7 @@ msgstr "Usuario responsable"
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__partner_sale_doc
 msgid "Sale doc."
-msgstr "Vebta Doc."
+msgstr "Venta doc."
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__date_planned
@@ -597,6 +942,11 @@ msgstr "Fecha prevista"
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
 msgid "Search Freights"
 msgstr "Buscar Fletes"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Send Email"
+msgstr "Enviar Email"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__sequence
@@ -647,22 +997,22 @@ msgid "Street2"
 msgstr "Calle2"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:199
+#: code:addons/fms/models/fms_freight.py:251
 #, python-format
 msgid "The country of the delivery %s differs from that in location %s"
-msgstr "El país de la entrega %s difiere de esta en las localidades %s"
+msgstr "El pais de la entrega %s difiere de este an la localización"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:195
+#: code:addons/fms/models/fms_freight.py:247
 #, python-format
 msgid "The state of the delivery %s differs from that in location %s"
-msgstr ""
+msgstr "La provincia de la entrega %s difiere de esta en la localización "
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:86
+#: code:addons/fms/models/fms_freight.py:103
 #, python-format
-msgid "The value of the freight must greater than 0"
-msgstr "El valor del flete debe ser mayor de 0"
+msgid "The value of the freight should be different to 0"
+msgstr "El valor del flete debe ser diferente de 0"
 
 #. module: fms
 #: selection:fms.freight,activity_state:0
@@ -687,8 +1037,8 @@ msgstr "Contador de mensajes sin leer"
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_product_product__fms_commission
 #: model:ir.model.fields,field_description:fms.field_product_template__fms_commission
-msgid "Use in freights commissios"
-msgstr "Utilizado en comisiones de flete"
+msgid "Use in freights commissions"
+msgstr "Usado en comisiones del flete"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__user_id
@@ -699,7 +1049,12 @@ msgstr "Usuario"
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__fr_commission
 msgid "Value of commission"
-msgstr "Valor Comisión"
+msgstr "Valor comisión"
+
+#. module: fms
+#: selection:fms.freight,privacy_visibility:0
+msgid "Visible by all employees"
+msgstr "Visible por todos los trabajadores"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view

@@ -3,6 +3,7 @@
 
 from odoo import api, fields, models, SUPERUSER_ID, _
 from odoo.exceptions import ValidationError
+from datetime import datetime
 
 
 class FmsFreight(models.Model):
@@ -112,6 +113,41 @@ class FmsFreight(models.Model):
         if self.fr_commission_percent != 0:
             self.fr_commission = self.fr_value * (
                                 self.fr_commission_percent / 100)
+
+    def format_date(self, date):
+        # format date following user language
+        lang_model = self.env['res.lang']
+        lang = lang_model._lang_get(self.env.user.lang)
+        date_format = lang.date_format
+        return datetime.strftime(
+            fields.Date.from_string(date), date_format)
+
+    def action_send_email(self):
+        self.ensure_one()
+        template = self.env.ref(
+            'fms.fms_freight_email_template',
+            False,
+        )
+        compose_form = self.env.ref('mail.email_compose_message_wizard_form',
+                                    False)
+        ctx = {
+            'default_model': 'fms.freight',
+            'default_res_id': self.id,
+            'default_use_template': bool(template),
+            'default_template_id': template and template.id or False,
+            'default_composition_mode': 'comment',
+        }
+        return {
+            'name': _('Compose Email'),
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'mail.compose.message',
+            'views': [(compose_form.id, 'form')],
+            'view_id': compose_form.id,
+            'target': 'new',
+            'context': ctx,
+        }
 
     # ------------------------------------------------
     # Buttons Actions
