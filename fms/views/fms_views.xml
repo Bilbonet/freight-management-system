@@ -1,32 +1,34 @@
 <?xml version="1.0"?>
 <odoo>
     <!-- Menus -->
-    <menuitem id="fms_main_menu" name="F.M.S"
-              web_icon="fms,static/description/icon.png"/>
+
 
     <!--<menuitem id="menu_tsm_search" name="Search"-->
               <!--parent="tsm_main_menu"-->
               <!--groups="base.group_no_one,tsm_base.group_tsm_user"-->
               <!--sequence="4"/>-->
 
-    <menuitem id="fms_config_menu" name="Configuration"
-              parent="fms_main_menu"
-              groups="fms.group_fms_manager"
-              sequence="100"/>
-
-    <!-- Freight Views -->
+    <!-- ========
+    Freight Views
+    ========= -->
     <record id="fms_freight_tree_view" model="ir.ui.view">
         <field name="name">fms.freight.tree</field>
         <field name="model">fms.freight</field>
         <field name="priority">2</field>
         <field name="arch" type="xml">
-            <tree string="Freights" decoration-warning="state == 'partial'" decoration-info="state == 'received'" decoration-success="state == 'confirmed'"
+            <tree string="Expedition" decoration-warning="state == 'partial'" decoration-info="state == 'received'" decoration-success="state == 'confirmed'"
                   decoration-muted="state=='cancel'">
-                <field name="user_id"/>
                 <field name="name"/>
                 <field name="date_order" widget='date'/>
                 <field name="partner_id"/>
                 <field name="state"/>
+                <field name="date_planned"/>
+                <field name="message_needaction_counter" invisible="1"/>
+                <button string="Unread Messages"
+                        icon="fa-comments"
+                        attrs="{'invisible': [('message_needaction_counter', '=', 0)]}"
+                        class='oe_kanban_mail_new'
+                />
             </tree>
         </field>
     </record>
@@ -34,7 +36,7 @@
         <field name="name">fms.freight.form</field>
         <field name="model">fms.freight</field>
         <field name="arch" type="xml">
-            <form string="Freight">
+            <form string="Expedition">
                 <header>
                     <button icon="fa-times" name="action_cancel" states="draft,partial,received,confirmed"
                             string="Cancel" type="object" groups="fms.group_fms_manager"/>
@@ -54,10 +56,9 @@
                     </h1>
                     <group>
                         <group>
-                            <field name="user_id" string="Freight Admin"
+                            <field name="user_id" string="Freight Admin" readonly="1"
                                    options='{"no_open": True, "no_create": True}'
-                                   attrs="{'readonly':[('state','in',('cancel'))]}"
-                                   groups="fms.group_fms_manager"/>
+                                   attrs="{'readonly':[('state','in',('cancel'))]}"/>
                         </group>
                         <group>
                             <field attrs="{'readonly':[('state','in',('confirmed','closed','cancel'))]}" groups="base.group_multi_currency" name="currency_id"/>
@@ -128,13 +129,14 @@
                     </group>
                     <group string="Freight Delivery" attrs="{'invisible':[('state','in',('draft','partial'))]}">
                         <group>
-                             <field name="date_planned" attrs="{'required':[('state', 'in',('received','confirmed','closed'))],
-                                                                'readonly':[('state','in',('confirmed','closed','cancel'))]}"/>
+                             <field name="date_planned" readonly="1"
+                                    attrs="{'required':[('state', 'in',('confirmed','closed'))],
+                                            'readonly':[('state','in',('closed','cancel'))]}"/>
                         </group>
                         <group>
-                             <field name="responsible_id" options='{"no_open": True, "no_create": True}'
-                                    attrs="{'required':[('state','in',('received','confirmed','closed'))],
-                                            'readonly':[('state','in',('confirmed','closed','cancel'))]}"/>
+                             <field name="responsible_id" readonly="1" options='{"no_open": True, "no_create": True}'
+                                    attrs="{'required':[('state','in',('confirmed','closed'))],
+                                            'readonly':[('state','in',('closed','cancel'))]}"/>
                         </group>
                     </group>
                     <notebook>
@@ -167,12 +169,11 @@
             </form>
         </field>
     </record>
-
     <record id="fms_freight_filter_view" model="ir.ui.view">
         <field name="name">fms.freight.filter</field>
         <field name="model">fms.freight</field>
         <field name="arch" type="xml">
-            <search string="Search Freights">
+            <search string="Search Expeditions">
                 <field name="name"/>
                 <field name="partner_id"/>
                 <field name="date_order" string="Freight date"/>
@@ -194,7 +195,30 @@
         </field>
     </record>
 
-    <!-- Freight Actions -->
+    <!-- SECURITY VIEWS
+         Change attribute readonly based on Security Group -->
+    <record id="fms_freight_form_view_security" model="ir.ui.view">
+        <field name="name">fms.freight.form Security</field>
+        <field name="model">fms.freight</field>
+        <field name="groups_id" eval="[(6,0,[ref('fms.group_fms_manager')])]"/>
+        <field name="inherit_id" ref="fms.fms_freight_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="readonly">False</attribute>
+            </xpath>
+            <xpath expr="//field[@name='date_planned']" position="attributes">
+                <attribute name="readonly">False</attribute>
+            </xpath>
+            <xpath expr="//field[@name='responsible_id']" position="attributes">
+                <attribute name="readonly">False</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- ==
+    ACTIONS
+    === -->
     <record id="fms_freight_action_from_menu" model="ir.actions.act_window">
         <field name="name">Freight</field>
         <field name="res_model">fms.freight</field>
@@ -213,9 +237,27 @@
             </p>
         </field>
     </record>
-    <!-- Freight Menus -->
-    <menuitem id="fms_freight_menu" action="fms_freight_action_from_menu"
-        name="Freight"
-        parent="fms.fms_main_menu"
-        sequence="1"/>
+
+
+    <!-- ====
+    MENUS
+    ===== -->
+    <menuitem id="fms_main_menu"
+              name="F.M.S"
+              web_icon="fms,static/description/icon.png"/>
+    <menuitem id="fms_freight_menu"
+              name="Expedition"
+              parent="fms.fms_main_menu"
+              action="fms_freight_action_from_menu"
+              sequence="1"/>
+    <menuitem id="fmsboard_menu_activities"
+              name="Activities"
+              parent="fms.fms_main_menu"
+              action="mail_activity_board.open_boards_activities"
+              sequence="2"/>
+    <menuitem id="fms_config_menu"
+              name="Configuration"
+              parent="fms_main_menu"
+              groups="fms.group_fms_manager"
+              sequence="100"/>
 </odoo>

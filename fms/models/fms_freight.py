@@ -15,7 +15,7 @@ class FmsFreight(models.Model):
     name = fields.Char()
     active = fields.Boolean(default=True,
         help="If the active field is set to False, it will allow you to hide"
-             " the freight without removing it.")
+             " the expedition without removing it.")
     state = fields.Selection([
         ('draft', 'Pending'),
         ('partial', 'Partial'),
@@ -23,8 +23,8 @@ class FmsFreight(models.Model):
         ('confirmed', 'Confirmed'),
         ('closed', 'Closed'),
         ('cancel', 'Cancelled')],
-        string = 'Freight State', readonly=True,
-        help="Gives the state of the Freight.",
+        string = 'Expedition State', readonly=True,
+        help="Gives the state of the Expedition.",
         default='draft')
     currency_id = fields.Many2one(
         'res.currency', 'Currency', required=True,
@@ -51,7 +51,7 @@ class FmsFreight(models.Model):
     partner_sale_doc = fields.Char(
         'Sale doc.', size=32, index=True)
     date_order = fields.Datetime(
-        'Date', required=True,
+        'Date Order', required=True,
         default=fields.Datetime.now)
     privacy_visibility = fields.Selection([
         ('followers', 'On invitation only'),
@@ -59,11 +59,11 @@ class FmsFreight(models.Model):
     ],
         string='Privacy', required=True,
         default='followers',
-        help="Holds visibility of the freight:\n "
+        help="Holds visibility of the expedition:\n "
              "- On invitation only: Employees may only "
-             "see the followed freights.\n"
+             "see the followed expeditions.\n"
              "- Visible by all employees: Employees "
-             "may see all freights.")
+             "may see all expeditions.")
     # Delivery addres and contact
     delivery_name = fields.Char(string='Contact Name')
     street = fields.Char()
@@ -90,8 +90,11 @@ class FmsFreight(models.Model):
     fr_commission_percent = fields.Float(string='Percent of commission')
     # Freight Delivery
     date_planned = fields.Datetime('Scheduled Date',
-        help='Date at which the freight should be delivered')
-    responsible_id = fields.Many2one('res.users', string='Responsible')
+        track_visibility="onchange",
+        help='Date at which the expedition should be delivered')
+    responsible_id = fields.Many2one('res.users', string='Responsible',
+        track_visibility="onchange",
+        help="User which is responsible to do the expedition.")
     # Commission Lines
     commission_line_ids = fields.One2many(
         'fms.freight.commission.line', 'freight_id', string="Commission")

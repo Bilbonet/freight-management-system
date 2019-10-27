@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-23 16:40+0000\n"
-"PO-Revision-Date: 2019-10-23 16:40+0000\n"
+"POT-Creation-Date: 2019-10-27 19:52+0000\n"
+"PO-Revision-Date: 2019-10-27 19:52+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -45,7 +45,7 @@ msgid "\n"
 "                        <tr style=\"color:#875A7B;\">\n"
 "                            <td style=\"width:120px;padding:5px\">State:</td>\n"
 "                            <td>\n"
-"                                <strong>${(object.state)}</strong>\n"
+"                                <strong>${dict(object.fields_get(allfields=['state'])['state']['selection'])[object.state]}</strong>\n"
 "                            </td>\n"
 "                        </tr>\n"
 "                        <tr style=\"color:#875A7B;\">\n"
@@ -74,7 +74,7 @@ msgid "\n"
 "                <table style=\"margin-left:30px;\">\n"
 "                    <tbody>\n"
 "                        <tr style=\"color:#875A7B;\">\n"
-"                            <td style=\"width:120px;padding:5px\">Center Code:</td>\n"
+"                            <td style=\"width:140px;padding:5px\">Center Code:</td>\n"
 "                            <td>\n"
 "                                % if object.partner_center:\n"
 "                                <strong>${(object.partner_center)}</strong>\n"
@@ -82,7 +82,7 @@ msgid "\n"
 "                            </td>\n"
 "                        </tr>\n"
 "                        <tr style=\"color:#875A7B;\">\n"
-"                            <td style=\"width:120px;padding:5px\">Department Code:</td>\n"
+"                            <td style=\"width:140px;padding:5px\">Department Code:</td>\n"
 "                            <td>\n"
 "                                % if object.partner_department:\n"
 "                                <strong>${(object.partner_department)}</strong>\n"
@@ -90,7 +90,7 @@ msgid "\n"
 "                            </td>\n"
 "                        </tr>\n"
 "                        <tr style=\"color:#875A7B;\">\n"
-"                            <td style=\"width:120px;padding:5px\">Delibery Note:</td>\n"
+"                            <td style=\"width:140px;padding:5px\">Delibery Note:</td>\n"
 "                            <td>\n"
 "                                % if object.partner_delivery_note:\n"
 "                                <strong>${(object.partner_delivery_note)}</strong>\n"
@@ -148,43 +148,43 @@ msgid "<br/>\n"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:165
+#: code:addons/fms/models/fms_freight.py:168
 #, python-format
 msgid "<h5><strong>Cancel to Draft</strong></h5>"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:159
+#: code:addons/fms/models/fms_freight.py:162
 #, python-format
 msgid "<h5><strong>Cancelled</strong></h5>"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:191
+#: code:addons/fms/models/fms_freight.py:194
 #, python-format
 msgid "<h5><strong>Closed</strong></h5>"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:185
+#: code:addons/fms/models/fms_freight.py:188
 #, python-format
 msgid "<h5><strong>Confirmed</strong></h5>"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:173
+#: code:addons/fms/models/fms_freight.py:176
 #, python-format
 msgid "<h5><strong>Receive Partial</strong></h5>"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:179
+#: code:addons/fms/models/fms_freight.py:182
 #, python-format
 msgid "<h5><strong>Received</strong></h5>"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:198
+#: code:addons/fms/models/fms_freight.py:201
 #, python-format
 msgid "<h5><strong>Reopen: Closed to confirmed</strong></h5>"
 msgstr ""
@@ -256,6 +256,7 @@ msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__activity_ids
+#: model:ir.ui.menu,name:fms.fmsboard_menu_activities
 msgid "Activities"
 msgstr ""
 
@@ -327,7 +328,7 @@ msgid "Commission"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:106
+#: code:addons/fms/models/fms_freight.py:109
 #, python-format
 msgid "Commission percent should be less or equal to 100!"
 msgstr ""
@@ -343,7 +344,7 @@ msgid "Company"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:141
+#: code:addons/fms/models/fms_freight.py:144
 #, python-format
 msgid "Compose Email"
 msgstr ""
@@ -415,14 +416,18 @@ msgid "DELIVERY DATA"
 msgstr ""
 
 #. module: fms
-#: model:ir.model.fields,field_description:fms.field_fms_freight__date_order
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__date
 msgid "Date"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__date_order
+msgid "Date Order"
+msgstr ""
+
+#. module: fms
 #: model:ir.model.fields,help:fms.field_fms_freight__date_planned
-msgid "Date at which the freight should be delivered"
+msgid "Date at which the expedition should be delivered"
 msgstr ""
 
 #. module: fms
@@ -449,6 +454,18 @@ msgstr ""
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__email
 msgid "Email"
+msgstr ""
+
+#. module: fms
+#: model:ir.ui.menu,name:fms.fms_freight_menu
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_tree_view
+msgid "Expedition"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__state
+msgid "Expedition State"
 msgstr ""
 
 #. module: fms
@@ -479,8 +496,6 @@ msgstr ""
 
 #. module: fms
 #: model:ir.actions.act_window,name:fms.fms_freight_action_from_menu
-#: model:ir.ui.menu,name:fms.fms_freight_menu
-#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
 msgid "Freight"
 msgstr ""
 
@@ -532,11 +547,6 @@ msgid "Freight Management System helps you manage your freight delivery"
 msgstr ""
 
 #. module: fms
-#: model:ir.model.fields,field_description:fms.field_fms_freight__state
-msgid "Freight State"
-msgstr ""
-
-#. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
 msgid "Freight date"
 msgstr ""
@@ -544,11 +554,6 @@ msgstr ""
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__fr_value
 msgid "Freight value"
-msgstr ""
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.fms_freight_tree_view
-msgid "Freights"
 msgstr ""
 
 #. module: fms
@@ -563,14 +568,14 @@ msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,help:fms.field_fms_freight__state
-msgid "Gives the state of the Freight."
+msgid "Gives the state of the Expedition."
 msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,help:fms.field_fms_freight__privacy_visibility
-msgid "Holds visibility of the freight:\n"
-" - On invitation only: Employees may only see the followed freights.\n"
-"- Visible by all employees: Employees may see all freights."
+msgid "Holds visibility of the expedition:\n"
+" - On invitation only: Employees may only see the followed expeditions.\n"
+"- Visible by all employees: Employees may see all expeditions."
 msgstr ""
 
 #. module: fms
@@ -602,7 +607,7 @@ msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,help:fms.field_fms_freight__active
-msgid "If the active field is set to False, it will allow you to hide the freight without removing it."
+msgid "If the active field is set to False, it will allow you to hide the expedition without removing it."
 msgstr ""
 
 #. module: fms
@@ -830,7 +835,7 @@ msgstr ""
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
-msgid "Search Freights"
+msgid "Search Expeditions"
 msgstr ""
 
 #. module: fms
@@ -884,19 +889,19 @@ msgid "Street2"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:251
+#: code:addons/fms/models/fms_freight.py:254
 #, python-format
 msgid "The country of the delivery %s differs from that in location %s"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:247
+#: code:addons/fms/models/fms_freight.py:250
 #, python-format
 msgid "The state of the delivery %s differs from that in location %s"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:103
+#: code:addons/fms/models/fms_freight.py:106
 #, python-format
 msgid "The value of the freight should be different to 0"
 msgstr ""
@@ -913,6 +918,7 @@ msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_unread
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_tree_view
 msgid "Unread Messages"
 msgstr ""
 
@@ -934,6 +940,11 @@ msgid "User"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,help:fms.field_fms_freight__responsible_id
+msgid "User which is responsible to do the expedition."
+msgstr ""
+
+#. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__fr_commission
 msgid "Value of commission"
 msgstr ""
@@ -941,6 +952,16 @@ msgstr ""
 #. module: fms
 #: selection:fms.freight,privacy_visibility:0
 msgid "Visible by all employees"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,help:fms.field_fms_freight__website_message_ids
+msgid "Website communication history"
 msgstr ""
 
 #. module: fms

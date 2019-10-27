@@ -14,6 +14,7 @@
         'contacts',
         'hr',
         'product',
+        'mail_activity_board',
     ],
     'data': [
         'security/fms_security.xml',
