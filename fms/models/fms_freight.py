@@ -13,7 +13,7 @@ class FmsFreight(models.Model):
     _order = 'name desc'
 
     name = fields.Char()
-    active = fields.Boolean(default=True,
+    active = fields.Boolean(default=True, track_visibility="onchange",
         help="If the active field is set to False, it will allow you to hide"
              " the expedition without removing it.")
     state = fields.Selection([
@@ -53,6 +53,7 @@ class FmsFreight(models.Model):
     date_order = fields.Datetime(
         'Date Order', required=True,
         default=fields.Datetime.now)
+    tag_ids = fields.Many2many('fms.freight.tags', string='Tags')
     privacy_visibility = fields.Selection([
         ('followers', 'On invitation only'),
         ('employees', 'Visible by all employees'),
@@ -81,9 +82,9 @@ class FmsFreight(models.Model):
     mobile = fields.Char()
     # Freight Information
     fr_desc = fields.Html(string='Freight Description',
-                               sanitize_attributes=True,
-                               strip_classes=False,
-                               sanitize_style=True)
+                          anitize_attributes=True,
+                          strip_classes=False,
+                          sanitize_style=True)
     fr_packages = fields.Integer(string='Nº Packages')
     fr_value = fields.Monetary(string='Freight value')
     fr_commission = fields.Monetary(string='Value of commission')
@@ -299,3 +300,15 @@ class FmsFreightCommissionLine(models.Model):
         'res.currency', 'Currency', required=True,
         default=lambda self: self.env.user.company_id.currency_id)
     amount = fields.Monetary(string='Amount Commission')
+
+class FmsFreightTags(models.Model):
+    """ Tags of freights """
+    _name = "fms.freight.tags"
+    _description = "Tags in expeditions"
+
+    name = fields.Char(required=True)
+    color = fields.Integer(string='Color Index', default=10)
+
+    _sql_constraints = [
+        ('name_uniq', 'unique (name)', "Tag name already exists !"),
+    ]

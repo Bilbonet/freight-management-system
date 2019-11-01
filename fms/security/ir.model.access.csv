@@ -3,3 +3,5 @@ access_fms_freight_manager,fms.fright.manager,model_fms_freight,fms.group_fms_ma
 access_fms_freight_user,fms.fright.user,model_fms_freight,fms.group_fms_user,1,1,0,0
 access_fms_freight_commission_line_manager,freight.commission.manager,model_fms_freight_commission_line,fms.group_fms_manager,1,1,1,1
 access_fms_freight_commission_line_user,freight.commission.user,model_fms_freight_commission_line,fms.group_fms_user,1,0,0,0
+access_fms_freight_tags_manager,fms.freight.tags.manager,model_fms_freight_tags,fms.group_fms_manager,1,1,1,1
+access_fms_freight_tags_user,fms.freight.tags.user,model_fms_freight_tags,fms.group_fms_user,1,0,0,0

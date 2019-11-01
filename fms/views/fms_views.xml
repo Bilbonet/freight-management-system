@@ -8,9 +8,10 @@
               <!--groups="base.group_no_one,tsm_base.group_tsm_user"-->
               <!--sequence="4"/>-->
 
-    <!-- ========
-    Freight Views
-    ========= -->
+    <!-- ===================
+         FREIGHT EXPEDITIONS
+    ==================== -->
+    <!-- ==== EXPEDITIONS VIEWS ==== -->
     <record id="fms_freight_tree_view" model="ir.ui.view">
         <field name="name">fms.freight.tree</field>
         <field name="model">fms.freight</field>
@@ -21,8 +22,11 @@
                 <field name="name"/>
                 <field name="date_order" widget='date'/>
                 <field name="partner_id"/>
+                <field name="zip"/>
+                <field name="city"/>
                 <field name="state"/>
                 <field name="date_planned"/>
+                 <field name="tag_ids" widget="many2many_tags"/>
                 <field name="message_needaction_counter" invisible="1"/>
                 <button string="Unread Messages"
                         icon="fa-comments"
@@ -49,7 +53,14 @@
                     <button icon="fa-send-o" name="action_send_email" type="object" string="Send Email" groups="fms.group_fms_manager"/>
                     <field name="state" statusbar_visible="draft,partial,received,confirmed,closed" widget="statusbar"/>
                 </header>
-                <sheet>
+                <sheet string="Expedition">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" groups="fms.group_fms_manager"
+                                class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button"
+                                options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
                     <h1>
                         <label for="name" attrs="{'invisible':[('name','=', False)]}" class="oe_inline" string="Freight - " style="font-size:30px;"/>
                         <field class="oe_inline" name="name" readonly="1"/>
@@ -118,11 +129,13 @@
                         <group>
                             <group>
                                 <field name="fr_packages" attrs="{'readonly':[('state','in',('confirmed','closed','cancel'))]}"/>
-                                <label string="% commission" for="fr_commission_percent"/>
-                                <field name="fr_commission_percent" nolabel="1" attrs="{'readonly':[('state','in',('confirmed','closed','cancel'))]}"/>
+                                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"
+                                       attrs="{'readonly':[('state','in',('closed','cancel'))]}"/>
                             </group>
                             <group>
                                 <field name="fr_value" attrs="{'readonly':[('state','in',('confirmed','closed','cancel'))]}"/>
+                                <label string="% commission" for="fr_commission_percent"/>
+                                <field name="fr_commission_percent" nolabel="1" attrs="{'readonly':[('state','in',('confirmed','closed','cancel'))]}"/>
                                 <field name="fr_commission" attrs="{'readonly':[('state','in',('confirmed','closed','cancel'))]}"/>
                             </group>
                         </group>
@@ -176,19 +189,37 @@
             <search string="Search Expeditions">
                 <field name="name"/>
                 <field name="partner_id"/>
-                <field name="date_order" string="Freight date"/>
+                <field name="partner_delivery_note"/>
+                <field name="partner_order_doc"/>
+                <field name="partner_sale_doc"/>
+                <field name="date_order"/>
+                <field name="delivery_name"/>
+                <field name="zip"/>
+                <field name="city"/>
                 <field name="responsible_id"/>
                 <filter string="Pending" name="pending" domain="[('state','=','draft')]"/>
                 <filter string="Partial" name="partial" domain="[('state','=','partial')]"/>
                 <filter string="Received" name="received" domain="[('state','=','received')]"/>
                 <filter string="Confirmed" name="confirmed" domain="[('state','=','confirmed')]"/>
-                <filter string="Cancelled" name="cancelled" domain="[('state','!=','cancel')]"/>
-                <filter string="Not Cancelled" name="not_cancelled" domain="[('state','!=','cancel')]"/>
+                <filter string="Closed" name="closed" domain="[('state','=','closed')]"/>
+                <filter string="Cancelled" name="cancelled" domain="[('state','=','cancel')]"/>
+                <filter string="Not Closed/Canceled" name="not_closed_canceled" domain="[('state','not in',('closed', 'canceled'))]"/>
                 <separator/>
-                <filter string="From this month" name="this_month" domain="[('date_order','&gt;=', time.strftime('%Y-%m-01'))]"/>
-                <filter string="My Freights" name="my_freights" domain="[('user_id','=',uid)]"/>
+                <filter string="For Today" name="today"
+                        domain="[('date_planned','&lt;', time.strftime('%Y-%m-%d 23:59:59')),
+                                ('date_planned','&gt;=', time.strftime('%Y-%m-%d 00:00:00'))]"/>
+                <filter name="week" string="For This Week"
+                        domain="[
+                                '&amp;',
+                                ('date_planned', '>=', (context_today() + relativedelta(weeks=-1,days=1,weekday=0)).strftime('%Y-%m-%d')),
+                                ('date_planned', '&lt;=', (context_today() + relativedelta(weekday=6)).strftime('%Y-%m-%d')),]"/>
+                <filter string="For This Month" name="this_month" domain="[('date_planned','&gt;=', time.strftime('%Y-%m-01'))]"/>
+                <separator/>
+                <filter string="My Expeditions" name="my_expeditions" domain="[('user_id','=',uid)]"/>
+                <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
                 <filter string="Customer" name="customer" context="{'group_by':'partner_id'}"/>
                 <filter string="State" name="state" context="{'group_by':'state'}"/>
+                <filter string="Planned Date" name="date_planned" context="{'group_by':'date_planned'}"/>
                 <filter string="Order Date" name="order_date" context="{'group_by':'date_order'}"/>
                 <filter string="Responsible" name="responsible" context="{'group_by':'responsible_id'}"/>
             </search>
@@ -215,21 +246,18 @@
         </field>
     </record>
 
-
-    <!-- ==
-    ACTIONS
-    === -->
+    <!-- ==== EXPEDITIONS ACTIONS ==== -->
     <record id="fms_freight_action_from_menu" model="ir.actions.act_window">
         <field name="name">Freight</field>
         <field name="res_model">fms.freight</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
-        <field name="context">{'search_default_this_month': 1}</field>
+        <field name="context">{'search_default_not_closed_canceled': 1}</field>
         <field name="search_view_id" ref="fms_freight_filter_view"/>
         <!--<field name="view_id" ref="tsm_task_kanban_view"/>-->
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                Create a new freight
+                Create a new freight expedition
             </p>
             <p>
                 Freight Management System allows you to manage the pipeline of your freight delivery efficiently.
@@ -237,11 +265,7 @@
             </p>
         </field>
     </record>
-
-
-    <!-- ====
-    MENUS
-    ===== -->
+    <!-- ==== EXPEDITIONS MENUS ===== -->
     <menuitem id="fms_main_menu"
               name="F.M.S"
               web_icon="fms,static/description/icon.png"/>
@@ -260,4 +284,47 @@
               parent="fms_main_menu"
               groups="fms.group_fms_manager"
               sequence="100"/>
+
+    <!-- ================
+         EXPEDITIONS TAGS
+    ================= -->
+    <!-- Freight Expeditions Tags Views -->
+    <record id="fms_freight_tags_search_view" model="ir.ui.view">
+        <field name="name">FMS Freight Expedition Tags Seacrh</field>
+        <field name="model">fms.freight.tags</field>
+        <field name="arch" type="xml">
+            <search string="Tags">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+    <record id="fms_freight_tags_form_view" model="ir.ui.view">
+        <field name="name">FMS Freight Expedition Tags Form</field>
+        <field name="model">fms.freight.tags</field>
+        <field name="arch" type="xml">
+            <form string="Expedition Tags">
+                <group>
+                    <field name="name"/>
+                </group>
+            </form>
+        </field>
+    </record>
+    <record id="fms_freight_tags_action" model="ir.actions.act_window">
+        <field name="name">FMS Freight Expedition Tags</field>
+        <field name="res_model">fms.freight.tags</field>
+        <field name="view_type">form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new freigth expedition tag
+            </p>
+            <p>
+                Click to add a new freight expedition tag.
+            </p>
+        </field>
+    </record>
+    <menuitem id="fms_config_freight_tags_menu" action="fms_freight_tags_action"
+              name="Expedition Tags"
+              parent="fms_config_menu"
+              sequence="3"
+              groups="base.group_no_one"/>
 </odoo>

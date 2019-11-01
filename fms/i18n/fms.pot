@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-27 19:52+0000\n"
-"PO-Revision-Date: 2019-10-27 19:52+0000\n"
+"POT-Creation-Date: 2019-11-01 10:52+0000\n"
+"PO-Revision-Date: 2019-11-01 10:52+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -148,43 +148,43 @@ msgid "<br/>\n"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:168
+#: code:addons/fms/models/fms_freight.py:169
 #, python-format
 msgid "<h5><strong>Cancel to Draft</strong></h5>"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:162
+#: code:addons/fms/models/fms_freight.py:163
 #, python-format
 msgid "<h5><strong>Cancelled</strong></h5>"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:194
+#: code:addons/fms/models/fms_freight.py:195
 #, python-format
 msgid "<h5><strong>Closed</strong></h5>"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:188
+#: code:addons/fms/models/fms_freight.py:189
 #, python-format
 msgid "<h5><strong>Confirmed</strong></h5>"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:176
+#: code:addons/fms/models/fms_freight.py:177
 #, python-format
 msgid "<h5><strong>Receive Partial</strong></h5>"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:182
+#: code:addons/fms/models/fms_freight.py:183
 #, python-format
 msgid "<h5><strong>Received</strong></h5>"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:201
+#: code:addons/fms/models/fms_freight.py:202
 #, python-format
 msgid "<h5><strong>Reopen: Closed to confirmed</strong></h5>"
 msgstr ""
@@ -281,6 +281,11 @@ msgid "Amount Commission"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+msgid "Archived"
+msgstr ""
+
+#. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_attachment_count
 msgid "Attachment Count"
 msgstr ""
@@ -313,13 +318,24 @@ msgid "City of Address"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.actions.act_window,help:fms.fms_freight_tags_action
+msgid "Click to add a new freight expedition tag."
+msgstr ""
+
+#. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
 msgid "Close"
 msgstr ""
 
 #. module: fms
 #: selection:fms.freight,state:0
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
 msgid "Closed"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight_tags__color
+msgid "Color Index"
 msgstr ""
 
 #. module: fms
@@ -328,7 +344,7 @@ msgid "Commission"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:109
+#: code:addons/fms/models/fms_freight.py:110
 #, python-format
 msgid "Commission percent should be less or equal to 100!"
 msgstr ""
@@ -344,7 +360,7 @@ msgid "Company"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:144
+#: code:addons/fms/models/fms_freight.py:145
 #, python-format
 msgid "Compose Email"
 msgstr ""
@@ -378,18 +394,21 @@ msgstr ""
 
 #. module: fms
 #: model_terms:ir.actions.act_window,help:fms.fms_freight_action_from_menu
+#: model_terms:ir.actions.act_window,help:fms.fms_freight_tags_action
 msgid "Create a new freight"
 msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__create_uid
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__create_uid
+#: model:ir.model.fields,field_description:fms.field_fms_freight_tags__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__create_date
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__create_date
+#: model:ir.model.fields,field_description:fms.field_fms_freight_tags__create_date
 msgid "Created on"
 msgstr ""
 
@@ -448,6 +467,7 @@ msgstr ""
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__display_name
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__display_name
+#: model:ir.model.fields,field_description:fms.field_fms_freight_tags__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -469,9 +489,20 @@ msgid "Expedition State"
 msgstr ""
 
 #. module: fms
+#: model:ir.ui.menu,name:fms.fms_config_freight_tags_menu
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_tags_form_view
+msgid "Expedition Tags"
+msgstr ""
+
+#. module: fms
 #: model:ir.module.category,name:fms.module_fms
 #: model:ir.ui.menu,name:fms.fms_main_menu
 msgid "F.M.S"
+msgstr ""
+
+#. module: fms
+#: model:ir.actions.act_window,name:fms.fms_freight_tags_action
+msgid "FMS Freight Expedition Tags"
 msgstr ""
 
 #. module: fms
@@ -492,6 +523,21 @@ msgstr ""
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_partner_ids
 msgid "Followers (Partners)"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+msgid "For This Month"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+msgid "For This Week"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+msgid "For Today"
 msgstr ""
 
 #. module: fms
@@ -547,18 +593,8 @@ msgid "Freight Management System helps you manage your freight delivery"
 msgstr ""
 
 #. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
-msgid "Freight date"
-msgstr ""
-
-#. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__fr_value
 msgid "Freight value"
-msgstr ""
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
-msgid "From this month"
 msgstr ""
 
 #. module: fms
@@ -581,6 +617,7 @@ msgstr ""
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__id
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__id
+#: model:ir.model.fields,field_description:fms.field_fms_freight_tags__id
 msgid "ID"
 msgstr ""
 
@@ -618,18 +655,21 @@ msgstr ""
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight____last_update
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line____last_update
+#: model:ir.model.fields,field_description:fms.field_fms_freight_tags____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__write_uid
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__write_uid
+#: model:ir.model.fields,field_description:fms.field_fms_freight_tags__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__write_date
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__write_date
+#: model:ir.model.fields,field_description:fms.field_fms_freight_tags__write_date
 msgid "Last Updated on"
 msgstr ""
 
@@ -665,11 +705,12 @@ msgstr ""
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
-msgid "My Freights"
+msgid "My Expeditions"
 msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__name
+#: model:ir.model.fields,field_description:fms.field_fms_freight_tags__name
 msgid "Name"
 msgstr ""
 
@@ -690,7 +731,7 @@ msgstr ""
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
-msgid "Not Cancelled"
+msgid "Not Closed/Canceled"
 msgstr ""
 
 #. module: fms
@@ -774,6 +815,11 @@ msgstr ""
 #. module: fms
 #: selection:fms.freight,activity_state:0
 msgid "Planned"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+msgid "Planned Date"
 msgstr ""
 
 #. module: fms
@@ -889,19 +935,35 @@ msgid "Street2"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:254
+#: sql_constraint:fms.freight.tags:0
+msgid "Tag name already exists !"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__tag_ids
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_tags_search_view
+msgid "Tags"
+msgstr ""
+
+#. module: fms
+#: model:ir.model,name:fms.model_fms_freight_tags
+msgid "Tags in expeditions"
+msgstr ""
+
+#. module: fms
+#: code:addons/fms/models/fms_freight.py:255
 #, python-format
 msgid "The country of the delivery %s differs from that in location %s"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:250
+#: code:addons/fms/models/fms_freight.py:251
 #, python-format
 msgid "The state of the delivery %s differs from that in location %s"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:106
+#: code:addons/fms/models/fms_freight.py:107
 #, python-format
 msgid "The value of the freight should be different to 0"
 msgstr ""
