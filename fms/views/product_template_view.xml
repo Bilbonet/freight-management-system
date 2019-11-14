@@ -6,7 +6,8 @@
         <field name="inherit_id" ref="product.product_template_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//group[@name='group_general']" position="inside">
-                <field name="fms_commission" string="Freight Commission" attrs="{'invisible': [('type','!=','service')]}"/>
+                <field name="fms_invoicing" attrs="{'invisible': [('type','!=','service')]}"/>
+                <field name="fms_commission" attrs="{'invisible': [('type','!=','service')]}"/>
             </xpath>
         </field>
     </record>

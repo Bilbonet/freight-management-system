@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models, SUPERUSER_ID, _
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 from datetime import datetime
 
 
@@ -22,7 +22,8 @@ class FmsFreight(models.Model):
         ('received', 'Received'),
         ('confirmed', 'Confirmed'),
         ('closed', 'Closed'),
-        ('cancel', 'Cancelled')],
+        ('cancel', 'Cancelled'),
+        ('invoiced', 'Invoiced')],
         string = 'Expedition State', readonly=True,
         help="Gives the state of the Expedition.",
         default='draft')
@@ -54,6 +55,8 @@ class FmsFreight(models.Model):
         'Date Order', required=True,
         default=fields.Datetime.now)
     tag_ids = fields.Many2many('fms.freight.tags', string='Tags')
+    product_id = fields.Many2one(
+        'product.product', 'Product')
     privacy_visibility = fields.Selection([
         ('followers', 'On invitation only'),
         ('employees', 'Visible by all employees'),
@@ -86,8 +89,10 @@ class FmsFreight(models.Model):
                           strip_classes=False,
                           sanitize_style=True)
     fr_packages = fields.Integer(string='Nº Packages')
-    fr_value = fields.Monetary(string='Freight value')
-    fr_commission = fields.Monetary(string='Value of commission')
+    fr_value = fields.Monetary(
+        string='Freight value', currency_field='currency_id')
+    fr_commission = fields.Monetary(
+        string='Value of commission', currency_field='currency_id')
     fr_commission_percent = fields.Float(string='Percent of commission')
     # Freight Delivery
     date_planned = fields.Datetime('Scheduled Date',
@@ -99,6 +104,8 @@ class FmsFreight(models.Model):
     # Commission Lines
     commission_line_ids = fields.One2many(
         'fms.freight.commission.line', 'freight_id', string="Commission")
+    invoice_id = fields.Many2one(
+        comodel_name='account.invoice', string='Invoice', copy=False)
 
     @api.onchange('fr_commission_percent')
     def _calculate_fr_commission_percent(self):
@@ -153,57 +160,57 @@ class FmsFreight(models.Model):
             'context': ctx,
         }
 
-    # ------------------------------------------------
+    # ---------------------------
     # Buttons Actions
-    # ------------------------------------------------
+    # ---------------------------
     @api.multi
     def action_cancel(self):
         for freight in self:
             freight.state = 'cancel'
             freight.message_post(body=_("<h5><strong>Cancelled</strong></h5>"))
-
     @api.multi
     def action_cancel_draft(self):
         for freight in self:
             freight.message_post(
                 body=_("<h5><strong>Cancel to Draft</strong></h5>"))
             freight.state = 'draft'
-
     @api.multi
     def action_partial(self):
         for freight in self:
             freight.state = 'partial'
             self.message_post(
                 body=_("<h5><strong>Receive Partial</strong></h5>"))
-
     @api.multi
     def action_receive(self):
         for freight in self:
             freight.state = 'received'
             self.message_post(body=_("<h5><strong>Received</strong></h5>"))
-
     @api.multi
     def action_confirm(self):
         for freight in self:
             freight.state = 'confirmed'
             self.message_post(body=_("<h5><strong>Confirmed</strong></h5>"))
-
     @api.multi
     def action_close(self):
         for freight in self:
             freight.state = 'closed'
             self.message_post(body=_("<h5><strong>Closed</strong></h5>"))
-
     @api.multi
     def action_reopen(self):
         for freight in self:
             freight.state = 'confirmed'
             self.message_post(
                 body=_("<h5><strong>Reopen: Closed to confirmed</strong></h5>"))
-
-    # ------------------------------------------------
+    def action_show_invoice(self):
+        action = self.env.ref('account.action_invoice_tree1')
+        result = action.read()[0]
+        form_view = self.env.ref('account.invoice_form')
+        result['views'] = [(form_view.id, 'form')]
+        result['res_id'] = self.invoice_id.id
+        return result
+    # ---------------------------
     # Delivery Address
-    # ------------------------------------------------
+    # ---------------------------
     @api.onchange('city_id')
     def _onchange_city_id(self):
         if not self.zip_id:
@@ -268,15 +275,43 @@ class FmsFreight(models.Model):
             })
         self.update(vals)
 
-    # ------------------------------------------------
+    # ---------------------------
     # CRUD overrides
-    # ------------------------------------------------
+    # ---------------------------
     @api.model
     def create(self, vals=None):
         # Assign name by sequence
         vals['name'] = self.env['ir.sequence'].next_by_code('fms.freight')
 
         return super(FmsFreight, self).create(vals)
+    @api.multi
+    def unlink(self):
+        for expedition in self:
+            if expedition.state != 'cancel':
+                raise UserError(_(
+                    "You can only delete expeditions in state invoiced."))
+        return super(FmsFreight, self).unlink()
+    # ---------------------------
+    # Invoicing
+    # ---------------------------
+    @api.multi
+    def _prepare_order_line_vals(self, invoicing_order):
+        self.ensure_one()
+        assert invoicing_order, 'Missing invoicing order'
+        vals = {
+            'order_id': invoicing_order.id,
+            'partner_id': self.partner_id.id,
+            'freight_id': self.id,
+            }
+        return vals
+
+    @api.multi
+    def create_invoicing_order_line_from_expedition(self, invoicing_order):
+        vals_list = []
+        for iline in self:
+            vals_list.append(iline._prepare_order_line_vals(invoicing_order))
+        return self.env['fms.invoicing.order.line'].create(vals_list)
+
 
 class FmsFreightCommissionLine(models.Model):
     _name = 'fms.freight.commission.line'
@@ -299,7 +334,9 @@ class FmsFreightCommissionLine(models.Model):
     currency_id = fields.Many2one(
         'res.currency', 'Currency', required=True,
         default=lambda self: self.env.user.company_id.currency_id)
-    amount = fields.Monetary(string='Amount Commission')
+    amount = fields.Monetary(
+        string='Amount Commission', currency_field='currency_id')
+
 
 class FmsFreightTags(models.Model):
     """ Tags of freights """

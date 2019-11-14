@@ -1,9 +1,29 @@
 <?xml version="1.0"?>
+
 <odoo noupdate="1">
+
     <record id="fms_freight_sequence" model="ir.sequence">
-        <field name="name">Freight Sequence</field>
+        <field name="name">FMS Expedition</field>
         <field name="code">fms.freight</field>
-        <field name="padding" eval="4" />
-        <field name="prefix">F%(y)s</field>
+        <field name="prefix">E%(y)s</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
     </record>
+
+    <record id="fms_invoicing_order_seq" model="ir.sequence">
+        <field name="name">FMS Invoice Order</field>
+        <field name="code">fms.invoicing.order</field>
+        <field name="prefix">EF%(y)s</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <record id="fms_invoicing_order_line_seq" model="ir.sequence">
+        <field name="name">FMS Invoice Order Line</field>
+        <field name="code">fms.invoicing.order.line</field>
+        <field name="prefix">EFL%(y)s</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
 </odoo>

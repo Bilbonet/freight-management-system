@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<odoo>
+
+<record id="fms_invoicing_line_create_form" model="ir.ui.view">
+    <field name="name">fms.invoicing.order.line.create form</field>
+    <field name="model">fms.invoicing.order.line.create</field>
+    <field name="arch" type="xml">
+        <form string="Choose Expeditions Filter Options">
+            <group name="main">
+                <field name="order_id" invisible="1"/>
+                <field name="date_planned" required="1"/>
+                <field name="partner_center"/>
+                <field name="partner_department"/>
+                <field name="product_id" domain="[('fms_invoicing', '=', True)]"/>
+                <label for="populate" string="Click on Add All Expeditions to auto-select the expeditions matching the above criteria
+                or click on Add an item to manually select the expeditions filtered by the above criteria." colspan="2"/>
+                <button name="populate" type="object" string="Add All Expeditions"/>
+            </group>
+            <group name="expeditions" string="Selected Expeditions to Create Invoice">
+                <field name="freight_ids" nolabel="1">
+                    <tree>
+                        <field name="name"/>
+                        <field name="partner_id"/>
+                        <field name="partner_center"/>
+                        <field name="partner_department"/>
+                        <field name="partner_delivery_note"/>
+                        <field name="partner_order_doc"/>
+                        <field name="partner_sale_doc"/>
+                        <field name="date_planned"/>
+                        <field name="fr_commission"/>
+                        <field name="currency_id" invisible="1"/>
+                    </tree>
+                </field>
+            </group>
+            <footer>
+                <button name="create_order_lines" type="object"
+                    string="Create Lines" class="oe_highlight"/>
+                <button string="Cancel" special="cancel" class="oe_link"/>
+            </footer>
+        </form>
+    </field>
+</record>
+
+<record id="fms_invoicing_line_create_action" model="ir.actions.act_window">
+    <field name="name">Create Transactions from Expeditions</field>
+    <field name="res_model">fms.invoicing.order.line.create</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+</record>
+
+</odoo>

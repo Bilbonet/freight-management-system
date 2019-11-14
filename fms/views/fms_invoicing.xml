@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<odoo>
+    <!--Main FORM view-->
+    <record id="fms_invoicing_form_view" model="ir.ui.view">
+        <field name="name">fms.invoicing.order form view</field>
+        <field name="model">fms.invoicing.order</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="%(fms_invoicing_line_create_action)d" type="action"
+                        string="Import Expeditions"
+                        states="draft" class="oe_highlight" />
+                    <button name="create_invoice" type="object"
+                            string="Create invoice"
+                            states="draft" groups="account.group_account_manager"/>
+                    <button name="action_cancel" type="object"
+                            string="Cancel Order"
+                            states="done"/>
+                    <button name="cancel2draft" type="object"
+                            string="Back to Draft"
+                            states="cancel"/>
+                    <field name="state" widget="statusbar"/>
+
+                </header>
+                <sheet string="Invoice Orders">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_show_invoice"
+                                type="object" icon="fa-pencil-square-o"
+                                attrs="{'invisible': [('invoice_id', '=', False)]}"
+                                class="oe_stat_button">
+                            <field string="View Invoice"
+                                   name="invoice_id" widget="statinfo"/>
+                        </button>
+                        <!--<button class="oe_stat_button" type="object"-->
+                                <!--name="toggle_active" icon="fa-archive">-->
+                            <!--<field name="active" widget="boolean_button"-->
+                                   <!--options="{&quot;terminology&quot;: &quot;archive&quot;}"/>-->
+                        <!--</button>-->
+                    </div>
+
+                    <h1>
+                        <label for="name" string="Order Name: " attrs="{'invisible':[('name','=', False)]}" class="oe_inline"/>
+                        <field name="name" class="oe_inline" readonly="1"/>
+                    </h1>
+                    <group name="main">
+                        <group>
+                            <field name="partner_id"/>
+                        </group>
+                        <group>
+                            <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                            <field name="date_invoice"/>
+                            <field name="journal_id" domain="[('type', '=', 'sale'),('company_id', '=', company_id)]"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="order-lines" string="Expeditions">
+                            <field name="order_line_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+
+        </field>
+    </record>
+
+    <!--TREE view-->
+    <record id="fms_invoicing_tree_view" model="ir.ui.view">
+        <field name="name">fms.invoicing.order tree view</field>
+        <field name="model">fms.invoicing.order</field>
+        <field name="arch" type="xml">
+            <tree string="Expeditions Invoice Orders" decoration-success="state == 'done'" decoration-muted="state=='cancel'"
+                  decoration-danger="state == 'done' and invoice_id==False">
+                <field name="invoice_id" invisible="1"/>
+                <field name="name" string="Name"/>
+                <field name="partner_id"/>
+                <field name="date_invoice"/>
+                <field name="journal_id" groups="account.group_account_user"/>
+                <field name="amount_total" sum="Total Amount"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--SEARCH view-->
+    <record id="fms_invoicing_search_view" model="ir.ui.view">
+        <field name="name">fms.invoicing.order search view</field>
+        <field name="model">fms.invoicing.order</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <separator/>
+                <field name="journal_id"/>
+                <group expand="0" string="Group By...">
+                    <filter string="Associated Partner"
+                            name="group_by_partner"
+                            domain="[]"
+                            context="{'group_by':'partner_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!--ACTION Invoicing Orders-->
+    <record id="fms_invoicing_action" model="ir.actions.act_window">
+        <field name="name">Partner Invoice Orders</field>
+        <field name="res_model">fms.invoicing.order</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <!--<field name="domain">[('contract_type', '=', 'sale')]</field>-->
+        <!--<field name="context">{'is_contract':1,-->
+                               <!--'search_default_not_finished':1,-->
+                               <!--'default_contract_type': 'sale'}-->
+        <!--</field>-->
+        <field name="search_view_id" ref="fms_invoicing_search_view"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new invoice order.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="fms_invoicing_main_menu"
+              name="Invoicing"
+              parent="fms_main_menu"
+              groups="account.group_account_manager"
+              sequence="50"/>
+    <menuitem id="fms_invoicing_order_menu"
+              name="Partner Invoice Orders"
+              parent="fms_invoicing_main_menu"
+              action="fms_invoicing_action"
+              sequence="1"/>
+</odoo>

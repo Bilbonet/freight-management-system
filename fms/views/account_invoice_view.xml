@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="fms_invoice_order_form_view" model="ir.ui.view">
+            <field name="name">FMS Invoicing account.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="before">
+                    <field name="fms_invoicing_order_id" readonly="1" attrs="{'invisible': [('fms_invoicing_order_id', '=', False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='price_total']" position="before">
+                    <field name="fms_freight_id" readonly="1"/>
+                </xpath>
+           </field>
+        </record>
+
+         <record id="fms_invoice_order_line_form_view" model="ir.ui.view">
+            <field name="name">FMS Invoicing account.invoice.line.form</field>
+            <field name="model">account.invoice.line</field>
+            <field name="inherit_id" ref="account.view_invoice_line_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_line_tax_ids']" position="after">
+                    <field name="fms_freight_id" readonly="1"/>
+                </xpath>
+           </field>
+        </record>
+
+    </data>
+</odoo>

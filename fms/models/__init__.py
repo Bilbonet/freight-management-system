@@ -3,3 +3,7 @@
 
 from . import fms_freight
 from . import product_template
+from . import fms_invoicing
+from . import fms_invoicing_line
+from . import account_invoice
+from . import res_config_settings
