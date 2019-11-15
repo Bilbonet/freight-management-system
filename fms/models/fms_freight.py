@@ -289,7 +289,7 @@ class FmsFreight(models.Model):
         for expedition in self:
             if expedition.state != 'cancel':
                 raise UserError(_(
-                    "You can only delete expeditions in state invoiced."))
+                    "You can only delete expeditions in state canceled."))
         return super(FmsFreight, self).unlink()
     # ---------------------------
     # Invoicing

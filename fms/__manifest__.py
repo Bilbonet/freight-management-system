@@ -27,6 +27,7 @@
         'views/fms_views.xml',
         'views/product_template_view.xml',
         'report/fms_freight_report.xml',
+        'report/account_invoice_report.xml',
         'views/fms_invoicing.xml',
         'views/fms_invoicing_line.xml',
         'views/account_invoice_view.xml',
