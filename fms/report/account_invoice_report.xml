@@ -170,40 +170,41 @@
                         </div>
                     </div>
 
-                    <!--Lineas de Pagos -->
+                    <!--Información de Pagos -->
                     <div class="clearfix">
                         <div t-if="len(o.move_id.line_ids) > 0">
-                            <div class="col-7">
-                                <div class="col-9">
-                                    <table class="table table-sm">
-                                        <thead>
-                                            <tr>
-                                                <th>Vencimiento(s)</th>
-                                                <th class="text-right">Importe</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr t-foreach="o.move_id.line_ids.sorted(key=lambda p: p.date_maturity)" t-as="p" t-if="p.payment_mode_id">
-                                                <td>
-                                                    <span t-field="p.date_maturity" />
-                                                </td>
-                                                <td class="text-right">
-                                                    <span t-field="p.debit" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div t-if="o.payment_term_id" class="col-12">
+                            <div class="col-5">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Vencimiento(s)</th>
+                                            <th class="text-right">Importe</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="o.move_id.line_ids.sorted(key=lambda p: p.date_maturity)" t-as="p" t-if="p.payment_mode_id">
+                                            <td>
+                                                <span t-field="p.date_maturity" />
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-field="p.debit" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="col-10">
+                                <div t-if="o.payment_term_id">
                                     <strong>Forma Pago: </strong><span t-field="o.payment_mode_id"/>
                                 </div>
                                 <!-- Cuenta Bancaria-->
-                                <div class="col-12">
+                                <div>
                                     <t t-if="o.payment_mode_id and o.payment_mode_id.show_bank_account != 'no'">
                                         <p>
                                             <strong>Cuenta Bancaria:</strong>
                                             <t t-if="o.payment_mode_id.show_bank_account == 'full'">
-                                                <t t-esc="partner_bank.bank_id.name + ('' if not partner_bank.bank_id.bic else ' (' + partner_bank.bank_id.bic + ')')"/>
+                                                <t t-esc="o.partner_bank_id.bank_id.name + ('' if not o.partner_bank_id.bank_id.bic else ' (' + o.partner_bank_id.bank_id.bic + ')')"/>
                                                 <span t-field="o.partner_bank_id.acc_number"/>
                                             </t>
                                             <t t-elif="o.payment_mode_id.show_bank_account == 'first'">
@@ -218,6 +219,7 @@
                             </div>
                         </div>
                     </div>
+
 
                     <p t-if="o.comment">
                         <strong>Commentario:</strong>

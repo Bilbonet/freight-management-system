@@ -57,6 +57,7 @@
                     <div class="oe_button_box" name="button_box">
                         <button name="action_show_invoice"
                                 type="object" icon="fa-pencil-square-o"
+                                groups="account.group_account_manager"
                                 attrs="{'invisible': [('invoice_id', '=', False)]}"
                                 class="oe_stat_button">
                             <field string="View Invoice"
@@ -139,6 +140,7 @@
                                 <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"
                                        attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
                                 <field name="product_id" options='{"no_open": True, "no_create": True}'
+                                       groups="account.group_account_manager"
                                        domain="[('fms_invoicing', '=', True)]"
                                        attrs="{'readonly':[('state','in',('invoiced','cancel'))],
                                                'invisible':[('state','in',('draft','partial','received'))],
@@ -179,7 +181,7 @@
                                </tree>
                             </field>
                         </page>
-                        <page name="information" string="Other Information">
+                        <page name="information" string="Other Information" groups="fms.group_fms_manager">
                             <group>
                                 <field name="privacy_visibility" widget="radio"/>
                             </group>
