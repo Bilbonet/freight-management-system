@@ -9,7 +9,7 @@
                 <header>
                     <button name="%(fms_invoicing_line_create_action)d" type="action"
                         string="Import Expeditions"
-                        states="draft" class="oe_highlight" />
+                        states="draft" class="oe_highlight"/>
                     <button name="create_invoice" type="object"
                             string="Create invoice"
                             states="draft" groups="account.group_account_manager"/>

@@ -14,7 +14,7 @@
                 <field name="product_id" domain="[('fms_invoicing', '=', True)]"/>
                 <label for="populate" string="Click on Add All Expeditions to auto-select the expeditions matching the above criteria
                 or click on Add an item to manually select the expeditions filtered by the above criteria." colspan="2"/>
-                <button name="populate" type="object" string="Add All Expeditions"/>
+                <button name="populate" type="object" string=" Add All Expeditions" icon="fa-gears" class="oe_highlight"/>
             </group>
             <group name="expeditions" string="Selected Expeditions to Create Invoice">
                 <field name="freight_ids" nolabel="1">

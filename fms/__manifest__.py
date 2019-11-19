@@ -22,6 +22,7 @@
         'security/fms_security.xml',
         'security/ir.model.access.csv',
         'wizard/fms_invoicing_line_create_view.xml',
+        'wizard/fms_add_follower_multi_view.xml',
         'data/ir_sequence_data.xml',
         'data/fms_freight_email_template.xml',
         'data/invoice_mail_template_data.xml',

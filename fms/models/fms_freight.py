@@ -1,7 +1,7 @@
 # Copyright 2019 Jesus Ramiro <jesus@bilbonet.net>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models, SUPERUSER_ID, _
+from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 from datetime import datetime
 
@@ -24,7 +24,7 @@ class FmsFreight(models.Model):
         ('closed', 'Closed'),
         ('cancel', 'Cancelled'),
         ('invoiced', 'Invoiced')],
-        string = 'Expedition State', readonly=True,
+        string = 'Expedition State',
         help="Gives the state of the Expedition.",
         default='draft')
     currency_id = fields.Many2one(
@@ -70,19 +70,19 @@ class FmsFreight(models.Model):
              "may see all expeditions.")
     # Delivery addres and contact
     delivery_name = fields.Char(string='Contact Name')
-    street = fields.Char()
-    street2 = fields.Char()
+    street = fields.Char(string='Delivery street')
+    street2 = fields.Char(string='Delivery street2')
     zip_id = fields.Many2one('res.city.zip', 'ZIP Location')
-    zip = fields.Char(change_default=True)
+    zip = fields.Char(string='Delivery zip', change_default=True)
     city_id = fields.Many2one('res.city', string='City of Address')
-    city = fields.Char()
+    city = fields.Char(string='Delivery city')
     state_id = fields.Many2one("res.country.state", string='State',
         ondelete='restrict', domain="[('country_id', '=?', country_id)]")
-    country_id = fields.Many2one('res.country', string='Country',
+    country_id = fields.Many2one('res.country', string='Delivery Country',
         ondelete='restrict')
-    email = fields.Char()
-    phone = fields.Char()
-    mobile = fields.Char()
+    email = fields.Char(string='Delivery email')
+    phone = fields.Char(string='Delivery phone')
+    mobile = fields.Char(string='Delivery mobile')
     # Freight Information
     fr_desc = fields.Html(string='Freight Description',
                           anitize_attributes=True,
@@ -124,6 +124,20 @@ class FmsFreight(models.Model):
         if self.fr_commission_percent != 0:
             self.fr_commission = self.fr_value * (
                                 self.fr_commission_percent / 100)
+
+    @api.onchange('date_planned')
+    def _onchange_date_planned(self):
+        if self.state == "received":
+            self.state = 'confirmed'
+            self._origin.message_post(
+                body=_("The state has been changed automatically to "
+                "<strong>confirmed</strong> because the date has been established"))
+
+    @api.onchange('user_id')
+    def _onchange_user_id(self):
+        if self.user_id.partner_id not in self.message_partner_ids:
+            self._origin.message_subscribe([self.user_id.partner_id.id])
+
 
     def format_date(self, date):
         # format date following user language
@@ -171,9 +185,9 @@ class FmsFreight(models.Model):
     @api.multi
     def action_cancel_draft(self):
         for freight in self:
+            freight.state = 'draft'
             freight.message_post(
                 body=_("<h5><strong>Cancel to Draft</strong></h5>"))
-            freight.state = 'draft'
     @api.multi
     def action_partial(self):
         for freight in self:
@@ -281,9 +295,14 @@ class FmsFreight(models.Model):
     @api.model
     def create(self, vals=None):
         # Assign name by sequence
-        vals['name'] = self.env['ir.sequence'].next_by_code('fms.freight')
+        # vals['name'] = self.env['ir.sequence'].next_by_code('fms.freight')
+        # return super(FmsFreight, self).create(vals)
 
-        return super(FmsFreight, self).create(vals)
+        result = super(FmsFreight, self).create(vals)
+        result.name = self.env['ir.sequence'].next_by_code('fms.freight')
+        result.message_subscribe(partner_ids=[result.user_id.partner_id.id])
+        return result
+
     @api.multi
     def unlink(self):
         for expedition in self:

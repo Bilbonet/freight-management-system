@@ -28,7 +28,7 @@ class FmsInvoicingOrder(models.Model):
         [
             ('draft', 'Draft'),
             ('done', 'Done'),
-            ('cancel', 'Cancel'),
+            ('cancel', 'Canceled'),
         ], string='Status', readonly=True, copy=False, default='draft',
         track_visibility='onchange')
     partner_id = fields.Many2one('res.partner',
@@ -85,7 +85,7 @@ class FmsInvoicingOrder(models.Model):
     @api.multi
     def unlink(self):
         for order in self:
-            if order.state != 'cancel':
+            if order.state == 'done':
                 raise UserError(_(
                     "You cannot delete an order invoiced. You can "
                     "delete de invoice and then cancel it in order to do so."))

@@ -210,6 +210,7 @@
                 <field name="delivery_name"/>
                 <field name="zip"/>
                 <field name="city"/>
+                <field name="phone"/>
                 <field name="responsible_id"/>
                 <filter string="Pending" name="pending" domain="[('state','=','draft')]"/>
                 <filter string="Partial" name="partial" domain="[('state','=','partial')]"/>
@@ -279,6 +280,15 @@
             </p>
         </field>
     </record>
+    <act_window id="fms_add_follower_multi_action"
+        multi="True"
+        key2="client_action_multi"
+        name="Add me as follower"
+        res_model="fms.add.follower.multi"
+        src_model="fms.freight"
+        view_mode="form"
+        target="new"/>
+
     <!-- ==== EXPEDITIONS MENUS ===== -->
     <menuitem id="fms_main_menu"
               name="F.M.S"
