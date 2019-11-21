@@ -34,6 +34,7 @@
         'views/fms_invoicing_line.xml',
         'views/account_invoice_view.xml',
         'views/res_config_settings_views.xml',
+        'views/hr_views.xml',
     ],
     'installable': True,
 }

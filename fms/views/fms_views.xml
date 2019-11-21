@@ -146,7 +146,7 @@
                                                'invisible':[('state','in',('draft','partial','received'))],
                                                'required':[('state','in',('closed',))]}"/>
                             </group>
-                            <group>
+                            <group groups="fms.group_fms_manager">
                                 <field name="fr_value" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
                                 <label string="% commission" for="fr_commission_percent"/>
                                 <field name="fr_commission_percent" nolabel="1" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
@@ -172,7 +172,7 @@
                                 <tree string="Commissions" editable="bottom">
                                     <field name="sequence" widget="handle"/>
                                     <field name="date"/>
-                                    <field name="user_id" options='{"no_open": True, "no_create": True}'/>
+                                    <field name="employee_id" options='{"no_open": True, "no_create": True}'/>
                                     <field name="product_id"
                                            domain="[('fms_commission', '=', True)]"
                                            options='{"no_open": True, "no_create": True}'/>
@@ -183,7 +183,13 @@
                         </page>
                         <page name="information" string="Other Information" groups="fms.group_fms_manager">
                             <group>
-                                <field name="privacy_visibility" widget="radio"/>
+                                <label for="notes" string="Internal Notes" style="font-weight:bold;color:#7C7BAD;"/>
+                                <div class="col-8">
+                                    <field name="notes" nolabel="1"/>
+                                </div>
+                                <group>
+                                    <field name="privacy_visibility" widget="radio"/>
+                                </group>
                             </group>
                         </page>
                     </notebook>
@@ -221,8 +227,8 @@
                 <filter string="To do" name="to_do" domain="[('state','not in',('closed', 'invoiced', 'canceled'))]"/>
                 <separator/>
                 <filter string="For Today" name="today"
-                        domain="[('date_planned','&lt;', time.strftime('%Y-%m-%d 23:59:59')),
-                                ('date_planned','&gt;=', time.strftime('%Y-%m-%d 00:00:00'))]"/>
+                        domain="[('date_planned','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))),
+                                ('date_planned','&lt;=', datetime.datetime.combine(context_today(), datetime.time(23,59,59)))]"/>
                 <filter name="week" string="For This Week"
                         domain="[
                                 '&amp;',

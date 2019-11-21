@@ -68,6 +68,7 @@ class FmsFreight(models.Model):
              "see the followed expeditions.\n"
              "- Visible by all employees: Employees "
              "may see all expeditions.")
+    notes = fields.Text(string='Internal Notes')
     # Delivery addres and contact
     delivery_name = fields.Char(string='Contact Name')
     street = fields.Char(string='Delivery street')
@@ -98,9 +99,9 @@ class FmsFreight(models.Model):
     date_planned = fields.Datetime('Scheduled Date',
         track_visibility="onchange",
         help='Date at which the expedition should be delivered')
-    responsible_id = fields.Many2one('res.users', string='Responsible',
+    responsible_id = fields.Many2one('hr.employee', string='Responsible',
         track_visibility="onchange",
-        help="User which is responsible to do the expedition.")
+        help="Employee which is responsible to do the expedition.")
     # Commission Lines
     commission_line_ids = fields.One2many(
         'fms.freight.commission.line', 'freight_id', string="Commission")
@@ -295,11 +296,9 @@ class FmsFreight(models.Model):
     @api.model
     def create(self, vals=None):
         # Assign name by sequence
-        # vals['name'] = self.env['ir.sequence'].next_by_code('fms.freight')
-        # return super(FmsFreight, self).create(vals)
-
         result = super(FmsFreight, self).create(vals)
         result.name = self.env['ir.sequence'].next_by_code('fms.freight')
+        # Add User as follower
         result.message_subscribe(partner_ids=[result.user_id.partner_id.id])
         return result
 
@@ -335,7 +334,7 @@ class FmsFreight(models.Model):
 class FmsFreightCommissionLine(models.Model):
     _name = 'fms.freight.commission.line'
     _description = 'Freight Commission Line'
-    _order = 'sequence, id desc'
+    _order = 'date, sequence, id desc'
 
     freight_id = fields.Many2one(
         'fms.freight', 'freight',
@@ -346,8 +345,11 @@ class FmsFreightCommissionLine(models.Model):
     date = fields.Date(
         'Date', required=True,
         default=fields.Date.context_today)
-    user_id = fields.Many2one(
-        'res.users', 'User', required=True)
+    employee_id = fields.Many2one(
+        'hr.employee', 'Employee', required=True)
+    emp_commission = fields.Float(string='Employee of commission',
+        related='employee_id.fms_commission', store=False, readonly=True,
+        compute_sudo=True)
     product_id = fields.Many2one(
         'product.product', 'Product', required=True)
     currency_id = fields.Many2one(
@@ -355,6 +357,20 @@ class FmsFreightCommissionLine(models.Model):
         default=lambda self: self.env.user.company_id.currency_id)
     amount = fields.Monetary(
         string='Amount Commission', currency_field='currency_id')
+
+    # ---------------------------
+    # CRUD overrides
+    # ---------------------------
+    @api.model
+    def create(self, vals=None):
+        result = super(FmsFreight, self).create(vals)
+        # if self.freight_id.
+        if self.freight_id.fr_commission != 0 and self.emp_commission != 0:
+            result.amount = self.freight_id.fr_commission * (self.emp_commission / 100)
+
+        # result.name = self.env['ir.sequence'].next_by_code('fms.freight')
+        # result.message_subscribe(partner_ids=[result.user_id.partner_id.id])
+        return result
 
 
 class FmsFreightTags(models.Model):
