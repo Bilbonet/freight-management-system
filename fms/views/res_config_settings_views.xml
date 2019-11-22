@@ -13,17 +13,40 @@
                         <div class="col-xs-12 col-md-6 o_setting_box" title="Default product Invoicing">
                             <div class="o_setting_left_pane"/>
                             <div class="o_setting_right_pane">
-                                <span class="o_form_label">Default Product</span>
+                                <span class="o_form_label">Expedition Default Product</span>
                                 <div class="text-muted">
                                     Set the dafault product for invoicing expeditions.
                                 </div>
                                 <div class="content-group">
                                     <field name="default_product_id" options='{"no_open": True, "no_create": True}'/>
-                                    <label string="" for="product_id"/>
+                                    <label string="" for="default_product_id"/>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <h2>FMS Employee Commisions Settings</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-xs-12 col-md-6 o_setting_box" title="Default product commission">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Commission Default Product</span>
+                                <div class="text-muted">
+                                    Set the dafault product for employee commissions.
+                                </div>
+                                <div class="content-group">
+                                    <field name="default_commission_product_id" options='{"no_open": True, "no_create": True}'/>
+                                    <label string="" for="default_commission_product_id"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
                 </div>
             </xpath>
         </field>

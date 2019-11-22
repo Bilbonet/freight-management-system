@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-19 18:56+0000\n"
-"PO-Revision-Date: 2019-11-19 18:56+0000\n"
+"POT-Creation-Date: 2019-11-22 21:23+0000\n"
+"PO-Revision-Date: 2019-11-22 21:23+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -249,6 +249,7 @@ msgstr ""
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+#: model_terms:ir.ui.view,arch_db:fms.fms_view_employee_form
 msgid "% commission"
 msgstr "% comisión"
 
@@ -317,7 +318,7 @@ msgstr ""
 #. module: fms
 #: code:addons/fms/models/fms_freight.py:190
 #, python-format
-msgid "<h5><strong>Cancel to Draft</strong></h5>"
+msgid "<h5><strong>Cancel to Pending</strong></h5>"
 msgstr "<h5><strong>Cancelado a Pendiente</strong></h5>"
 
 #. module: fms
@@ -327,39 +328,44 @@ msgid "<h5><strong>Cancelled</strong></h5>"
 msgstr "<h5><strong>Cancelado</strong></h5>"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:211
+#: code:addons/fms/models/fms_freight.py:216
 #, python-format
 msgid "<h5><strong>Closed</strong></h5>"
 msgstr "<h5><strong>Cerrado</strong></h5>"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:206
+#: code:addons/fms/models/fms_freight.py:211
 #, python-format
 msgid "<h5><strong>Confirmed</strong></h5>"
 msgstr "<h5><strong>Confirmado</strong></h5>"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:196
+#: code:addons/fms/models/fms_freight.py:201
 #, python-format
 msgid "<h5><strong>Receive Partial</strong></h5>"
 msgstr "<h5><strong>Recibido Parcial</strong></h5>"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:201
+#: code:addons/fms/models/fms_freight.py:206
 #, python-format
 msgid "<h5><strong>Received</strong></h5>"
 msgstr "<h5><strong>Recibido</strong></h5>"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:217
+#: code:addons/fms/models/fms_freight.py:239
 #, python-format
 msgid "<h5><strong>Reopen: Closed to confirmed</strong></h5>"
 msgstr "<h5><strong>Reabierto: Cerrado a Confirmado</strong></h5>"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.res_config_settings_view_form
-msgid "<span class=\"o_form_label\">Default Product</span>"
-msgstr "<span class=\"o_form_label\">Producto por defecto</span>"
+msgid "<span class=\"o_form_label\">Commission Default Product</span>"
+msgstr "Comisiones producot por defecto"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.res_config_settings_view_form
+msgid "<span class=\"o_form_label\">Expedition Default Product</span>"
+msgstr "<span class=\"o_form_label\">Expedición producto por defecto</span>"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
@@ -653,7 +659,12 @@ msgid "Commission"
 msgstr "Comisión"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:117
+#: model:ir.model.fields,field_description:fms.field_res_config_settings__default_commission_product_id
+msgid "Commission Default Product"
+msgstr "Cpmisión producto por defecto"
+
+#. module: fms
+#: code:addons/fms/models/fms_freight.py:118
 #, python-format
 msgid "Commission percent should be less or equal to 100!"
 msgstr "El % de la comisión debe ser menor o igual a 100"
@@ -803,39 +814,39 @@ msgid "Date at which the expedition should be delivered"
 msgstr "Fecha en la que la expedición deberia ser realizada"
 
 #. module: fms
-#: model:ir.model.fields,field_description:fms.field_res_config_settings__default_product_id
-msgid "Default Product"
-msgstr "Producto por defecto"
-
-#. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.res_config_settings_view_form
 msgid "Default product Invoicing"
 msgstr "Facturación: Producto por defecto"
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.res_config_settings_view_form
+msgid "Default product commission"
+msgstr "Comisión producto por defecto"
+
+#. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__country_id
 msgid "Delivery Country"
-msgstr "Pais entrega"
+msgstr "Pais Entrega"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
 msgid "Delivery Data"
-msgstr "Datos entrega"
+msgstr "Datos Entrega"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__city
 msgid "Delivery city"
-msgstr "Ciudad entrega"
+msgstr "Ciudad Entrega"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__email
 msgid "Delivery email"
-msgstr "Email entrega"
+msgstr "Mail Entrega"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__mobile
 msgid "Delivery mobile"
-msgstr "Móvil entraga"
+msgstr "Móvil Entrega"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__partner_delivery_note
@@ -845,22 +856,22 @@ msgstr "Albarán"
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__phone
 msgid "Delivery phone"
-msgstr ""
+msgstr "Teléfono Entrega"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__street
 msgid "Delivery street"
-msgstr "Calle entrega"
+msgstr "Calle Entrega"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__street2
 msgid "Delivery street2"
-msgstr "Calle2 entrega"
+msgstr "Calle2 Entrega"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__zip
 msgid "Delivery zip"
-msgstr "C.P. entrega"
+msgstr "C.P. Entrega"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__partner_department
@@ -890,10 +901,26 @@ msgid "Draft"
 msgstr "Borrador"
 
 #. module: fms
+#: model:ir.model,name:fms.model_hr_employee
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__employee_id
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: fms
 #: model:ir.model.fields,field_description:fms.field_product_product__fms_commission
 #: model:ir.model.fields,field_description:fms.field_product_template__fms_commission
 msgid "Employee commission"
 msgstr "Comisión Empleado"
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__emp_commission
+msgid "Employee of commission"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,help:fms.field_fms_freight__responsible_id
+msgid "Employee which is responsible to do the expedition."
+msgstr "Empleado responsable de la expedición"
 
 #. module: fms
 #: model:ir.ui.menu,name:fms.fms_freight_menu
@@ -905,6 +932,11 @@ msgstr "Expedición"
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
 msgid "Expedition Admin"
 msgstr "Expedición Admin"
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_res_config_settings__default_product_id
+msgid "Expedition Default Product"
+msgstr "Expedición producto por defecto "
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_account_invoice_line__fms_freight_id
@@ -966,6 +998,11 @@ msgstr ""
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
 msgid "FACTURA:"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.res_config_settings_view_form
+msgid "FMS Employee Commisions Settings"
 msgstr ""
 
 #. module: fms
@@ -1160,6 +1197,12 @@ msgstr "Importar Expediciones"
 #: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
 msgid "Importe"
 msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__notes
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Internal Notes"
+msgstr "Notas internas"
 
 #. module: fms
 #: code:addons/fms/models/account_invoice.py:30
@@ -1421,6 +1464,7 @@ msgstr "Pendiente"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__fr_commission_percent
+#: model:ir.model.fields,field_description:fms.field_hr_employee__fms_commission
 msgid "Percent of commission"
 msgstr "% de comisión"
 
@@ -1452,7 +1496,7 @@ msgstr "Privacidad"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__product_id
-#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__product_id
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__commission_product_id
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order_line__f_product_id
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order_line_create__product_id
 msgid "Product"
@@ -1536,13 +1580,18 @@ msgstr "Secuencia"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.res_config_settings_view_form
+msgid "Set the dafault product for employee commissions."
+msgstr "Seleccion el producto por defecto para la comisión del empleado."
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.res_config_settings_view_form
 msgid "Set the dafault product for invoicing expeditions."
 msgstr "Selecione el producto por defecto para la facturación de expediciones."
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
 msgid "Set to Draft"
-msgstr "Cambiar a borrador"
+msgstr "Volver a Pendiente"
 
 #. module: fms
 #: model:ir.actions.act_window,name:fms.fms_config_settings_action
@@ -1587,7 +1636,7 @@ msgstr "Calle..."
 #. module: fms
 #: sql_constraint:fms.freight.tags:0
 msgid "Tag name already exists !"
-msgstr "El nombre de la etiqueta ya existe!"
+msgstr "El nombre de la etqieuta ya existe!"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__tag_ids
@@ -1601,7 +1650,7 @@ msgid "Tags in expeditions"
 msgstr "Etiquetas en expdiciones"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:276
+#: code:addons/fms/models/fms_freight.py:298
 #, python-format
 msgid "The country of the delivery %s differs from that in location %s"
 msgstr "El pais de la entrega %s difiere de este an la localización"
@@ -1623,19 +1672,19 @@ msgstr "La línea '%s' no esta en el estodo Cerrada:\n"
 "Todas las expediciones deben estar en el estado Cerrado antes de facturar"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:133
+#: code:addons/fms/models/fms_freight.py:134
 #, python-format
 msgid "The state has been changed automatically to <strong>confirmed</strong> because the date has been established"
 msgstr "El estado ha cambiado automaticamente a <strong>confirmado</strong> porque la fecha se ha establecido o modificado."
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:272
+#: code:addons/fms/models/fms_freight.py:294
 #, python-format
 msgid "The state of the delivery %s differs from that in location %s"
 msgstr "La provincia de la entrega %s difiere de esta en la localización "
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:114
+#: code:addons/fms/models/fms_freight.py:115
 #, python-format
 msgid "The value of the freight should be different to 0"
 msgstr "El valor del flete debe ser diferente de 0"
@@ -1681,15 +1730,9 @@ msgid "Unread Messages Counter"
 msgstr "Contador de mensajes sin leer"
 
 #. module: fms
-#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__user_id
 #: model:res.groups,name:fms.group_fms_user
 msgid "User"
 msgstr "Usuario"
-
-#. module: fms
-#: model:ir.model.fields,help:fms.field_fms_freight__responsible_id
-msgid "User which is responsible to do the expedition."
-msgstr "Usuaior responsable de la expedición."
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__fr_commission
@@ -1743,7 +1786,7 @@ msgid "Wizard to create order lines"
 msgstr "Asistente para la creación de lineas"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:310
+#: code:addons/fms/models/fms_freight.py:330
 #, python-format
 msgid "You can only delete expeditions in state canceled."
 msgstr "Usted solo puede borrar expediciones en estado cancelado."

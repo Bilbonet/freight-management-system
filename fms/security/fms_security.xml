@@ -34,7 +34,8 @@
             <field name="domain_force">[(1, '=', 1)]</field>
             <field name="groups" eval="[(4, ref('fms.group_fms_manager'))]"/>
         </record>
-        <!-- Group Users: Can view (Public Freight or Freight Followers or Freight Responsible)
+        <!-- Group Users: Can view (Public Freight or Freight Followers)
+                          Can view if user employee is employee responsible.
                           Only in states 'confirmed, closed, invoiced'-->
         <record id="fms_freight_public_followers_rule" model="ir.rule">
             <field name="name">FMS Freight: Public Freight or Followers</field>
@@ -42,7 +43,7 @@
             <field name="domain_force">['|','|',
                 ('privacy_visibility', '!=', 'followers'),
                 ('message_partner_ids', 'in', [user.partner_id.id]),
-                ('responsible_id','=',user.id),
+                ('responsible_id.user_id.id','=',user.id),
                 ('state', 'in', ['confirmed','closed','invoiced'])]</field>
             <field name="groups" eval="[(4, ref('fms.group_fms_user'))]"/>
             <field name="perm_read" eval="True"/>
@@ -50,5 +51,45 @@
             <field name="perm_create" eval="True"/>
             <field name="perm_unlink" eval="True"/>
         </record>
+
+        <!-- ============= -->
+        <!-- Contact Rules -->
+        <!-- ============= -->
+        <!-- Users only view his contacts -->
+        <record id="user_only_view_his_contacts_rule" model="ir.rule">
+            <field name="name">User only view his contacts</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="domain_force">['|',('user_id','=',user.id),('parent_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Users view following contacts -->
+        <record id="user_view_following_contacts_rule" model="ir.rule">
+            <field name="name">User view following contacts</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="domain_force">[('message_partner_ids', 'in', [user.partner_id.id])]</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- FMS Manager see all contacts -->
+        <record id="sales_manager_see_all_contacts_rule" model="ir.rule">
+            <field name="name">FMS Manager See All Contacts</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('fms.group_fms_manager'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
     </data>
 </odoo>

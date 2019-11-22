@@ -139,7 +139,6 @@ class FmsFreight(models.Model):
         if self.user_id.partner_id not in self.message_partner_ids:
             self._origin.message_subscribe([self.user_id.partner_id.id])
 
-
     def format_date(self, date):
         # format date following user language
         lang_model = self.env['res.lang']
@@ -188,7 +187,12 @@ class FmsFreight(models.Model):
         for freight in self:
             freight.state = 'draft'
             freight.message_post(
-                body=_("<h5><strong>Cancel to Draft</strong></h5>"))
+                body=_("<h5><strong>Cancel to Pending</strong></h5>"))
+            # Reset values
+            freight.date_planned = False
+            freight.responsible_id = False
+            freight.commission_line_ids.unlink()
+
     @api.multi
     def action_partial(self):
         for freight in self:
@@ -210,6 +214,23 @@ class FmsFreight(models.Model):
         for freight in self:
             freight.state = 'closed'
             self.message_post(body=_("<h5><strong>Closed</strong></h5>"))
+            # Add employee commission automatically if not exists
+            lines = freight.commission_line_ids.filtered(
+                lambda l: l.employee_id.id == freight.responsible_id.id
+            )
+            if not lines:
+                vals = {
+                    'freight_id': self.id,
+                    'employee_id': freight.responsible_id.id,
+                    'emp_commission': freight.responsible_id.fms_commission,
+                    'currency_id':  self.currency_id.id,
+                }
+                new_commission = self.env['fms.freight.commission.line'].new(vals)
+                # force compute commission
+                new_commission._onchange_employee_id()
+                vals = new_commission._convert_to_write(new_commission._cache)
+                self.env['fms.freight.commission.line'].create(vals)
+
     @api.multi
     def action_reopen(self):
         for freight in self:
@@ -350,7 +371,7 @@ class FmsFreightCommissionLine(models.Model):
     emp_commission = fields.Float(string='Employee of commission',
         related='employee_id.fms_commission', store=False, readonly=True,
         compute_sudo=True)
-    product_id = fields.Many2one(
+    commission_product_id = fields.Many2one(
         'product.product', 'Product', required=True)
     currency_id = fields.Many2one(
         'res.currency', 'Currency', required=True,
@@ -358,19 +379,26 @@ class FmsFreightCommissionLine(models.Model):
     amount = fields.Monetary(
         string='Amount Commission', currency_field='currency_id')
 
+    @api.onchange('employee_id')
+    def _onchange_employee_id(self):
+        vals = {}
+        if self.freight_id.fr_commission != 0 and self.emp_commission != 0:
+            amount = self.freight_id.fr_commission * (self.emp_commission / 100)
+            vals.update({'amount': amount})
+        self.update(vals)
     # ---------------------------
     # CRUD overrides
     # ---------------------------
-    @api.model
-    def create(self, vals=None):
-        result = super(FmsFreight, self).create(vals)
-        # if self.freight_id.
-        if self.freight_id.fr_commission != 0 and self.emp_commission != 0:
-            result.amount = self.freight_id.fr_commission * (self.emp_commission / 100)
-
-        # result.name = self.env['ir.sequence'].next_by_code('fms.freight')
-        # result.message_subscribe(partner_ids=[result.user_id.partner_id.id])
-        return result
+    # @api.model
+    # def create(self, vals=None):
+    #     result = super(FmsFreight, self).create(vals)
+    #     # if self.freight_id.
+    #     if self.freight_id.fr_commission != 0 and self.emp_commission != 0:
+    #         result.amount = self.freight_id.fr_commission * (self.emp_commission / 100)
+    #
+    #     # result.name = self.env['ir.sequence'].next_by_code('fms.freight')
+    #     # result.message_subscribe(partner_ids=[result.user_id.partner_id.id])
+    #     return result
 
 
 class FmsFreightTags(models.Model):
