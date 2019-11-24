@@ -343,7 +343,6 @@ class FmsFreight(models.Model):
             'freight_id': self.id,
             }
         return vals
-
     @api.multi
     def create_invoicing_order_line_from_expedition(self, invoicing_order):
         vals_list = []
@@ -357,15 +356,32 @@ class FmsFreightCommissionLine(models.Model):
     _description = 'Freight Commission Line'
     _order = 'date, sequence, id desc'
 
+    def _default_date(self):
+        parent_id = self._context.get('params')['id']
+        parent_model = self._context.get('params')['model']
+
+        if parent_id and parent_model:
+            parent_obj = self.env[parent_model].browse(parent_id)
+            default_date = parent_obj.date_planned or datetime.now()
+            default_date = default_date.date()
+            return default_date
+
     freight_id = fields.Many2one(
         'fms.freight', 'freight',
         ondelete='cascade', required=True)
+    state = fields.Selection([
+        ('draft', 'Pending'),
+        ('done', 'Done'),
+        ('cancel', 'Cancelled'),],
+        string = 'Commission State',
+        help="Gives the state of the Commission.",
+        default='draft')
     sequence = fields.Integer(
         help="Gives the sequence order when displaying a list of"
         " commission order lines.", default=10)
     date = fields.Date(
         'Date', required=True,
-        default=fields.Date.context_today)
+        default=_default_date)
     employee_id = fields.Many2one(
         'hr.employee', 'Employee', required=True)
     emp_commission = fields.Float(string='Employee of commission',
@@ -386,18 +402,17 @@ class FmsFreightCommissionLine(models.Model):
             amount = self.freight_id.fr_commission * (self.emp_commission / 100)
             vals.update({'amount': amount})
         self.update(vals)
+
     # ---------------------------
     # CRUD overrides
     # ---------------------------
     # @api.model
     # def create(self, vals=None):
-    #     result = super(FmsFreight, self).create(vals)
-    #     # if self.freight_id.
-    #     if self.freight_id.fr_commission != 0 and self.emp_commission != 0:
-    #         result.amount = self.freight_id.fr_commission * (self.emp_commission / 100)
-    #
-    #     # result.name = self.env['ir.sequence'].next_by_code('fms.freight')
-    #     # result.message_subscribe(partner_ids=[result.user_id.partner_id.id])
+    #     result = super(FmsFreightCommissionLine, self).create(vals)
+    #     print(self.freight_id.date_planned)
+    #     print(result.freight_id.date_planned)
+    #     if result.freight_id.date_planned:
+    #         result.date = self.freight_id.date_planned
     #     return result
 
 
