@@ -10,6 +10,9 @@
         <field name="company_id" eval="False"/>
     </record>
 
+    <!-- ===============
+         INVOICING ORDER
+    ================ -->
     <record id="fms_invoicing_order_seq" model="ir.sequence">
         <field name="name">FMS Invoice Order</field>
         <field name="code">fms.invoicing.order</field>
@@ -17,7 +20,6 @@
         <field name="padding">4</field>
         <field name="company_id" eval="False"/>
     </record>
-
     <record id="fms_invoicing_order_line_seq" model="ir.sequence">
         <field name="name">FMS Invoice Order Line</field>
         <field name="code">fms.invoicing.order.line</field>
@@ -26,4 +28,14 @@
         <field name="company_id" eval="False"/>
     </record>
 
+    <!-- ======================
+         COMMISSION LIQUIDATION
+    ======================= -->
+    <record id="fms_commission_liquidation_seq" model="ir.sequence">
+        <field name="name">FMS Commission Liquidation</field>
+        <field name="code">fms.commission.liquidation</field>
+        <field name="prefix">CL%(y)s</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
 </odoo>

@@ -8,3 +8,5 @@ from . import fms_invoicing_line
 from . import account_invoice
 from . import res_config_settings
 from . import hr
+from . import fms_commission_liquidation
+from . import fms_commission_liquidation_line

@@ -223,13 +223,15 @@ class FmsFreight(models.Model):
                     'freight_id': self.id,
                     'employee_id': freight.responsible_id.id,
                     'emp_commission': freight.responsible_id.fms_commission,
+                    'date': freight.date_planned.date(),
                     'currency_id':  self.currency_id.id,
                 }
                 new_commission = self.env['fms.freight.commission.line'].new(vals)
                 # force compute commission
                 new_commission._onchange_employee_id()
                 vals = new_commission._convert_to_write(new_commission._cache)
-                self.env['fms.freight.commission.line'].create(vals)
+                # self.env['fms.freight.commission.line'].create(vals)
+                self.env['fms.freight.commission.line'].sudo().create(vals)
 
     @api.multi
     def action_reopen(self):
@@ -355,10 +357,11 @@ class FmsFreightCommissionLine(models.Model):
     _name = 'fms.freight.commission.line'
     _description = 'Freight Commission Line'
     _order = 'date, sequence, id desc'
+    _rec_name = 'complete_name'
 
     def _default_date(self):
-        parent_id = self._context.get('params')['id']
-        parent_model = self._context.get('params')['model']
+        parent_id = self._context.get('commission_id')
+        parent_model = self.freight_id._name
 
         if parent_id and parent_model:
             parent_obj = self.env[parent_model].browse(parent_id)
@@ -366,34 +369,42 @@ class FmsFreightCommissionLine(models.Model):
             default_date = default_date.date()
             return default_date
 
-    freight_id = fields.Many2one(
-        'fms.freight', 'freight',
-        ondelete='cascade', required=True)
+    complete_name = fields.Char('Complete Name',
+        compute='_compute_complete_name', store=True)
+    freight_id = fields.Many2one('fms.freight',
+        string='Expedition', ondelete='cascade', required=True)
     state = fields.Selection([
         ('draft', 'Pending'),
         ('done', 'Done'),
         ('cancel', 'Cancelled'),],
         string = 'Commission State',
-        help="Gives the state of the Commission.",
-        default='draft')
+        readonly=True, default='draft',
+        help="Gives the state of the Commission.",)
     sequence = fields.Integer(
         help="Gives the sequence order when displaying a list of"
         " commission order lines.", default=10)
-    date = fields.Date(
-        'Date', required=True,
-        default=_default_date)
-    employee_id = fields.Many2one(
-        'hr.employee', 'Employee', required=True)
-    emp_commission = fields.Float(string='Employee of commission',
+    date = fields.Date(string='Commission Date',
+        required=True, default=_default_date)
+    employee_id = fields.Many2one('hr.employee',
+        string='Employee', required=True)
+    emp_commission = fields.Float(string='Employee % commission',
         related='employee_id.fms_commission', store=False, readonly=True,
         compute_sudo=True)
-    commission_product_id = fields.Many2one(
-        'product.product', 'Product', required=True)
-    currency_id = fields.Many2one(
-        'res.currency', 'Currency', required=True,
+    commission_product_id = fields.Many2one('product.product',
+        string='Commission Product', required=True)
+    currency_id = fields.Many2one('res.currency', 'Currency',
+        required=True,
         default=lambda self: self.env.user.company_id.currency_id)
-    amount = fields.Monetary(
-        string='Amount Commission', currency_field='currency_id')
+    amount = fields.Monetary(string='Amount Commission',
+        currency_field='currency_id')
+    liquidation_order = fields.Many2one('fms.commission.liquidation',
+        string='Liquidation Order', readonly=True)
+
+    @api.depends('freight_id.partner_id')
+    def _compute_complete_name(self):
+        for name in self:
+            name.complete_name = '(%s) %s / %s' % (
+                name.id, name.freight_id.name, name.freight_id.partner_id.name)
 
     @api.onchange('employee_id')
     def _onchange_employee_id(self):
@@ -402,18 +413,6 @@ class FmsFreightCommissionLine(models.Model):
             amount = self.freight_id.fr_commission * (self.emp_commission / 100)
             vals.update({'amount': amount})
         self.update(vals)
-
-    # ---------------------------
-    # CRUD overrides
-    # ---------------------------
-    # @api.model
-    # def create(self, vals=None):
-    #     result = super(FmsFreightCommissionLine, self).create(vals)
-    #     print(self.freight_id.date_planned)
-    #     print(result.freight_id.date_planned)
-    #     if result.freight_id.date_planned:
-    #         result.date = self.freight_id.date_planned
-    #     return result
 
 
 class FmsFreightTags(models.Model):

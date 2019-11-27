@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-22 21:22+0000\n"
-"PO-Revision-Date: 2019-11-22 21:22+0000\n"
+"POT-Creation-Date: 2019-11-27 10:03+0000\n"
+"PO-Revision-Date: 2019-11-27 10:03+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -245,7 +245,7 @@ msgid "<h5><strong>Received</strong></h5>"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:239
+#: code:addons/fms/models/fms_freight.py:241
 #, python-format
 msgid "<h5><strong>Reopen: Closed to confirmed</strong></h5>"
 msgstr ""
@@ -387,18 +387,21 @@ msgid "<strong>Total</strong>"
 msgstr ""
 
 #. module: fms
-#: sql_constraint:fms.invoicing.order.line:0
-msgid "A payment line already exists with this reference in the same company!"
+#: sql_constraint:fms.commission.liquidation:0
+msgid "A commission line already exists with this reference in the same company!"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__message_needaction
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_needaction
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__message_needaction
 msgid "Action Needed"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__active
 #: model:ir.model.fields,field_description:fms.field_fms_freight__active
+#: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__active
 msgid "Active"
 msgstr ""
 
@@ -441,13 +444,20 @@ msgid "Administrator"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__c_amount
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__amount
 msgid "Amount Commission"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__amount_total
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__amount_total
 msgid "Amount Total"
+msgstr ""
+
+#. module: fms
+#: sql_constraint:fms.invoicing.order.line:0
+msgid "An invoice order already exists with this reference in the same company!"
 msgstr ""
 
 #. module: fms
@@ -456,17 +466,24 @@ msgid "Archived"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_search_view
+msgid "Associated Employee"
+msgstr ""
+
+#. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_search_view
 msgid "Associated Partner"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__message_attachment_count
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_attachment_count
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__message_attachment_count
 msgid "Attachment Count"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_form_view
 #: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_form_view
 msgid "Back to Draft"
 msgstr ""
@@ -479,17 +496,24 @@ msgid "Cancel"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_form_view
+msgid "Cancel Commission Liquidation"
+msgstr ""
+
+#. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_form_view
 msgid "Cancel Order"
 msgstr ""
 
 #. module: fms
+#: selection:fms.commission.liquidation,state:0
 #: selection:fms.invoicing.order,state:0
 msgid "Canceled"
 msgstr ""
 
 #. module: fms
 #: selection:fms.freight,state:0
+#: selection:fms.freight.commission.line,state:0
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
 msgid "Cancelled"
 msgstr ""
@@ -526,6 +550,11 @@ msgid "Click to add a new freight expedition tag."
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.actions.act_window,help:fms.fms_commission_liquidation_action
+msgid "Click to create a new commission liquidation order."
+msgstr ""
+
+#. module: fms
 #: model_terms:ir.actions.act_window,help:fms.fms_invoicing_action
 msgid "Click to create a new invoice order."
 msgstr ""
@@ -552,8 +581,58 @@ msgid "Commission"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__c_date
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__date
+msgid "Commission Date"
+msgstr ""
+
+#. module: fms
 #: model:ir.model.fields,field_description:fms.field_res_config_settings__default_commission_product_id
 msgid "Commission Default Product"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_form_view
+msgid "Commission Lines"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_line_form
+msgid "Commission Liquidation Line"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_line_tree_view
+msgid "Commission Liquidation Lines"
+msgstr ""
+
+#. module: fms
+#: model:ir.model,name:fms.model_fms_commission_liquidation
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__liquidation_id
+msgid "Commission Liquidation Order"
+msgstr ""
+
+#. module: fms
+#: model:ir.model,name:fms.model_fms_commission_liquidation_line
+msgid "Commission Liquidation Order Line"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_form_view
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_tree_view
+msgid "Commission Liquidation Orders"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__c_product_id
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__commission_product_id
+msgid "Commission Product"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__c_state
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__state
+msgid "Commission State"
 msgstr ""
 
 #. module: fms
@@ -568,10 +647,17 @@ msgid "Commissions"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__company_id
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__company_id
 #: model:ir.model.fields,field_description:fms.field_fms_freight__company_id
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__company_id
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order_line__company_id
 msgid "Company"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__complete_name
+msgid "Complete Name"
 msgstr ""
 
 #. module: fms
@@ -591,6 +677,7 @@ msgid "Configuration"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_form_view
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
 msgid "Confirm"
 msgstr ""
@@ -638,6 +725,8 @@ msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_add_follower_multi__create_uid
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__create_uid
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__create_uid
 #: model:ir.model.fields,field_description:fms.field_fms_freight__create_uid
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__create_uid
 #: model:ir.model.fields,field_description:fms.field_fms_freight_tags__create_uid
@@ -649,6 +738,8 @@ msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_add_follower_multi__create_date
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__create_date
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__create_date
 #: model:ir.model.fields,field_description:fms.field_fms_freight__create_date
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__create_date
 #: model:ir.model.fields,field_description:fms.field_fms_freight_tags__create_date
@@ -665,6 +756,8 @@ msgid "Credit Note"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__currency_id
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__currency_id
 #: model:ir.model.fields,field_description:fms.field_fms_freight__currency_id
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__currency_id
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__currency_id
@@ -673,6 +766,7 @@ msgid "Currency"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__c_partner_id
 #: model:ir.model.fields,field_description:fms.field_fms_freight__partner_id
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__partner_id
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order_line__partner_id
@@ -688,11 +782,6 @@ msgstr ""
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "DELIVERY DATA"
-msgstr ""
-
-#. module: fms
-#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__date
-msgid "Date"
 msgstr ""
 
 #. module: fms
@@ -774,6 +863,8 @@ msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_add_follower_multi__display_name
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__display_name
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__display_name
 #: model:ir.model.fields,field_description:fms.field_fms_freight__display_name
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__display_name
 #: model:ir.model.fields,field_description:fms.field_fms_freight_tags__display_name
@@ -784,19 +875,34 @@ msgid "Display Name"
 msgstr ""
 
 #. module: fms
+#: selection:fms.commission.liquidation,state:0
+#: selection:fms.freight.commission.line,state:0
 #: selection:fms.invoicing.order,state:0
 msgid "Done"
 msgstr ""
 
 #. module: fms
+#: selection:fms.commission.liquidation,state:0
 #: selection:fms.invoicing.order,state:0
 msgid "Draft"
 msgstr ""
 
 #. module: fms
 #: model:ir.model,name:fms.model_hr_employee
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__employee_id
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__employee_id
 msgid "Employee"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__emp_commission
+msgid "Employee % commission"
+msgstr ""
+
+#. module: fms
+#: model:ir.actions.act_window,name:fms.fms_commission_liquidation_action
+#: model:ir.ui.menu,name:fms.fms_commission_liquidation_menu
+msgid "Employee Commission Liquidation"
 msgstr ""
 
 #. module: fms
@@ -806,16 +912,13 @@ msgid "Employee commission"
 msgstr ""
 
 #. module: fms
-#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__emp_commission
-msgid "Employee of commission"
-msgstr ""
-
-#. module: fms
 #: model:ir.model.fields,help:fms.field_fms_freight__responsible_id
 msgid "Employee which is responsible to do the expedition."
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__c_freight_id
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__freight_id
 #: model:ir.ui.menu,name:fms.fms_freight_menu
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
 msgid "Expedition"
@@ -824,6 +927,11 @@ msgstr ""
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
 msgid "Expedition Admin"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__f_commission_id
+msgid "Expedition Commission Line"
 msgstr ""
 
 #. module: fms
@@ -935,18 +1043,21 @@ msgid "Factura_${(object.number or '').replace('/','_')}${object.state == 'draft
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__message_follower_ids
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_follower_ids
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__message_follower_ids
 msgid "Followers"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__message_channel_ids
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_channel_ids
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__message_channel_ids
 msgid "Followers (Channels)"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__message_partner_ids
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_partner_ids
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__message_partner_ids
 msgid "Followers (Partners)"
@@ -1010,8 +1121,19 @@ msgid "Freight value"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_form_view
+msgid "Get Employee Commissions"
+msgstr ""
+
+#. module: fms
 #: model:ir.model.fields,help:fms.field_fms_freight_commission_line__sequence
 msgid "Gives the sequence order when displaying a list of commission order lines."
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,help:fms.field_fms_commission_liquidation_line__c_state
+#: model:ir.model.fields,help:fms.field_fms_freight_commission_line__state
+msgid "Gives the state of the Commission."
 msgstr ""
 
 #. module: fms
@@ -1021,6 +1143,7 @@ msgid "Gives the state of the Expedition."
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_search_view
 #: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_search_view
 msgid "Group By..."
 msgstr ""
@@ -1034,6 +1157,8 @@ msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_add_follower_multi__id
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__id
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__id
 #: model:ir.model.fields,field_description:fms.field_fms_freight__id
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__id
 #: model:ir.model.fields,field_description:fms.field_fms_freight_tags__id
@@ -1044,18 +1169,21 @@ msgid "ID"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,help:fms.field_fms_commission_liquidation__message_unread
 #: model:ir.model.fields,help:fms.field_fms_freight__message_unread
 #: model:ir.model.fields,help:fms.field_fms_invoicing_order__message_unread
 msgid "If checked new messages require your attention."
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,help:fms.field_fms_commission_liquidation__message_needaction
 #: model:ir.model.fields,help:fms.field_fms_freight__message_needaction
 #: model:ir.model.fields,help:fms.field_fms_invoicing_order__message_needaction
 msgid "If checked, new messages require your attention."
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,help:fms.field_fms_commission_liquidation__message_has_error
 #: model:ir.model.fields,help:fms.field_fms_freight__message_has_error
 #: model:ir.model.fields,help:fms.field_fms_invoicing_order__message_has_error
 msgid "If checked, some messages have a delivery error."
@@ -1076,6 +1204,16 @@ msgstr ""
 #. module: fms
 #: model:ir.model.fields,help:fms.field_fms_freight__active
 msgid "If the active field is set to False, it will allow you to hide the expedition without removing it."
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,help:fms.field_fms_invoicing_order__active
+msgid "If the active field is set to False, it will allow you to hide the invoicing order without removing it."
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,help:fms.field_fms_commission_liquidation__active
+msgid "If the active field is set to False, it will allow you to hide the liquidation without removing it."
 msgstr ""
 
 #. module: fms
@@ -1120,6 +1258,7 @@ msgstr ""
 
 #. module: fms
 #: selection:fms.freight,state:0
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
 msgid "Invoiced"
 msgstr ""
 
@@ -1140,6 +1279,12 @@ msgid "Invoicing Order"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_line_form
+msgid "Invoicing Order Line"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__message_is_follower
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_is_follower
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__message_is_follower
 msgid "Is Follower"
@@ -1152,6 +1297,8 @@ msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_add_follower_multi____last_update
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation____last_update
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line____last_update
 #: model:ir.model.fields,field_description:fms.field_fms_freight____last_update
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line____last_update
 #: model:ir.model.fields,field_description:fms.field_fms_freight_tags____last_update
@@ -1163,6 +1310,8 @@ msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_add_follower_multi__write_uid
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__write_uid
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__write_uid
 #: model:ir.model.fields,field_description:fms.field_fms_freight__write_uid
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__write_uid
 #: model:ir.model.fields,field_description:fms.field_fms_freight_tags__write_uid
@@ -1174,6 +1323,8 @@ msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_add_follower_multi__write_date
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__write_date
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__write_date
 #: model:ir.model.fields,field_description:fms.field_fms_freight__write_date
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__write_date
 #: model:ir.model.fields,field_description:fms.field_fms_freight_tags__write_date
@@ -1184,11 +1335,37 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__date
+msgid "Liquidation Date"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__cl_line_ids
+msgid "Liquidation Lines"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_form_view
+msgid "Liquidation Name:"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__liquidation_order
+msgid "Liquidation Order"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__employee_id
+msgid "Liquidation Order Employee"
+msgstr ""
+
+#. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
 msgid "Location completion"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__message_main_attachment_id
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_main_attachment_id
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__message_main_attachment_id
 msgid "Main Attachment"
@@ -1200,12 +1377,14 @@ msgid "Manager"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__message_has_error
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_has_error
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__message_has_error
 msgid "Message Delivery error"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__message_ids
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_ids
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__message_ids
 msgid "Messages"
@@ -1217,9 +1396,11 @@ msgid "My Expeditions"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__name
 #: model:ir.model.fields,field_description:fms.field_fms_freight__name
 #: model:ir.model.fields,field_description:fms.field_fms_freight_tags__name
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__name
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_tree_view
 #: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_tree_view
 msgid "Name"
 msgstr ""
@@ -1240,36 +1421,41 @@ msgid "Next Activity Type"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:174
+#: code:addons/fms/models/fms_invoicing.py:169
 #, python-format
 msgid "No valid lines found for invoicing.Please review the order lines."
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__message_needaction_counter
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_needaction_counter
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__message_needaction_counter
 msgid "Number of Actions"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__message_has_error_counter
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_has_error_counter
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__message_has_error_counter
 msgid "Number of error"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,help:fms.field_fms_commission_liquidation__message_needaction_counter
 #: model:ir.model.fields,help:fms.field_fms_freight__message_needaction_counter
 #: model:ir.model.fields,help:fms.field_fms_invoicing_order__message_needaction_counter
 msgid "Number of messages which requires an action"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,help:fms.field_fms_commission_liquidation__message_has_error_counter
 #: model:ir.model.fields,help:fms.field_fms_freight__message_has_error_counter
 #: model:ir.model.fields,help:fms.field_fms_invoicing_order__message_has_error_counter
 msgid "Number of messages with delivery error"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,help:fms.field_fms_commission_liquidation__message_unread_counter
 #: model:ir.model.fields,help:fms.field_fms_freight__message_unread_counter
 #: model:ir.model.fields,help:fms.field_fms_invoicing_order__message_unread_counter
 msgid "Number of unread messages"
@@ -1303,7 +1489,6 @@ msgstr ""
 #. module: fms
 #: model:ir.actions.act_window,name:fms.fms_invoicing_line_tree_action
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__order_line_ids
-#: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_line_tree_form
 #: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_line_tree_view
 msgid "Order Lines"
 msgstr ""
@@ -1348,6 +1533,7 @@ msgstr ""
 
 #. module: fms
 #: selection:fms.freight,state:0
+#: selection:fms.freight.commission.line,state:0
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
 msgid "Pending"
 msgstr ""
@@ -1369,7 +1555,7 @@ msgid "Planned Date"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:131
+#: code:addons/fms/models/fms_invoicing.py:126
 #, python-format
 msgid "Please define a journal for the company '%s'."
 msgstr ""
@@ -1386,7 +1572,6 @@ msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__product_id
-#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__commission_product_id
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order_line__f_product_id
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order_line_create__product_id
 msgid "Product"
@@ -1498,6 +1683,7 @@ msgid "State"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__state
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__state
 msgid "Status"
 msgstr ""
@@ -1537,20 +1723,20 @@ msgid "Tags in expeditions"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:298
+#: code:addons/fms/models/fms_freight.py:300
 #, python-format
 msgid "The country of the delivery %s differs from that in location %s"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:165
+#: code:addons/fms/models/fms_invoicing.py:160
 #, python-format
 msgid "The line '%s' has not a product for invoicing:\n"
 "All expeditions must have a product before invoicing."
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:158
+#: code:addons/fms/models/fms_invoicing.py:153
 #, python-format
 msgid "The line '%s' is not in state Closed:\n"
 "All expeditions must be in Closed state before invoicing"
@@ -1563,7 +1749,7 @@ msgid "The state has been changed automatically to <strong>confirmed</strong> be
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:294
+#: code:addons/fms/models/fms_freight.py:296
 #, python-format
 msgid "The state of the delivery %s differs from that in location %s"
 msgstr ""
@@ -1572,6 +1758,18 @@ msgstr ""
 #: code:addons/fms/models/fms_freight.py:115
 #, python-format
 msgid "The value of the freight should be different to 0"
+msgstr ""
+
+#. module: fms
+#: code:addons/fms/models/fms_commission_liquidation.py:94
+#, python-format
+msgid "There aren't any commission line."
+msgstr ""
+
+#. module: fms
+#: code:addons/fms/models/fms_commission_liquidation.py:81
+#, python-format
+msgid "There aren't any commission pending for this employee and date."
 msgstr ""
 
 #. module: fms
@@ -1590,6 +1788,7 @@ msgid "Today"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_line_tree_view
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
 #: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_line_tree_view
 #: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_tree_view
@@ -1602,6 +1801,7 @@ msgid "Transmobil Invoices"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__message_unread
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_unread
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__message_unread
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_tree_view
@@ -1609,6 +1809,7 @@ msgid "Unread Messages"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__message_unread_counter
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_unread_counter
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__message_unread_counter
 msgid "Unread Messages Counter"
@@ -1654,12 +1855,14 @@ msgid "Visible by all employees"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__website_message_ids
 #: model:ir.model.fields,field_description:fms.field_fms_freight__website_message_ids
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__website_message_ids
 msgid "Website Messages"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,help:fms.field_fms_commission_liquidation__website_message_ids
 #: model:ir.model.fields,help:fms.field_fms_freight__website_message_ids
 #: model:ir.model.fields,help:fms.field_fms_invoicing_order__website_message_ids
 msgid "Website communication history"
@@ -1671,19 +1874,25 @@ msgid "Wizard to create order lines"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:330
+#: code:addons/fms/models/fms_commission_liquidation.py:127
+#, python-format
+msgid "You can only delete Liquidation Orders in state draft."
+msgstr ""
+
+#. module: fms
+#: code:addons/fms/models/fms_freight.py:332
 #, python-format
 msgid "You can only delete expeditions in state canceled."
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:111
+#: code:addons/fms/models/fms_invoicing.py:106
 #, python-format
 msgid "You cannot cancel an order with invoice. You can delete the invoice and then cancel it."
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:89
+#: code:addons/fms/models/fms_invoicing.py:84
 #, python-format
 msgid "You cannot delete an order invoiced. You can delete de invoice and then cancel it in order to do so."
 msgstr ""
@@ -1696,10 +1905,5 @@ msgstr ""
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__zip_id
 msgid "ZIP Location"
-msgstr ""
-
-#. module: fms
-#: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__freight_id
-msgid "freight"
 msgstr ""
 

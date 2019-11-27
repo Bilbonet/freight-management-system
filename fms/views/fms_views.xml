@@ -168,16 +168,23 @@
                     </group>
                     <notebook>
                         <page name="commissions" string="Commissions" attrs="{'invisible':[('state','in',('draft','partial','received'))]}">
-                            <field name="commission_line_ids">
-                                <tree string="Commissions" editable="bottom">
+                            <field name="commission_line_ids" context="{'commission_id': active_id}">
+                                <tree string="Commissions" editable="bottom" decoration-success="state == 'done'" decoration-muted="state=='cancel'">
                                     <field name="sequence" widget="handle"/>
-                                    <field name="date"/>
-                                    <field name="employee_id" options='{"no_open": True, "no_create": True}'/>
+                                    <field name="date"
+                                           attrs="{'readonly': [('liquidation_order', '!=', False)]}"/>
+                                    <field name="employee_id"
+                                           options='{"no_open": True, "no_create": True}'
+                                           attrs="{'readonly': [('liquidation_order', '!=', False)]}"/>
                                     <field name="commission_product_id"
                                            domain="[('fms_commission', '=', True)]"
-                                           options='{"no_open": True, "no_create": True}'/>
-                                    <field name="amount" sum="Total Amount"/>
+                                           options='{"no_open": True, "no_create": True}'
+                                           attrs="{'readonly': [('liquidation_order', '!=', False)]}"/>
+                                    <field name="state"/>
+                                    <field name="amount" sum="Total Amount"
+                                           attrs="{'readonly': [('liquidation_order', '!=', False)]}"/>
                                     <field name="currency_id" invisible="1"/>
+                                    <field name="liquidation_order"/>
                                </tree>
                             </field>
                         </page>
@@ -224,8 +231,9 @@
                 <filter string="Confirmed" name="confirmed" domain="[('state','=','confirmed')]"/>
                 <filter string="Closed" name="closed" domain="[('state','=','closed')]"/>
                 <filter string="Cancelled" name="cancelled" domain="[('state','=','cancel')]"/>
-                <filter string="To do" name="to_do" domain="[('state','not in',('closed', 'invoiced', 'canceled'))]"/>
+                <filter string="Invoiced" name="invoiced" domain="[('state','=','invoiced')]"/>
                 <separator/>
+                <filter string="To do" name="to_do" domain="[('state','not in',('closed', 'invoiced', 'canceled'))]"/>
                 <filter string="For Today" name="today"
                         domain="[('date_planned','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))),
                                 ('date_planned','&lt;=', datetime.datetime.combine(context_today(), datetime.time(23,59,59)))]"/>

@@ -7,3 +7,5 @@ access_fms_freight_tags_manager,fms.freight.tags.manager,model_fms_freight_tags,
 access_fms_freight_tags_user,fms.freight.tags.user,model_fms_freight_tags,fms.group_fms_user,1,0,0,0
 fms_invoicing_manager,Fms invoicing manager,model_fms_invoicing_order,account.group_account_manager,1,1,1,1
 fms_invoicing_line_manager,Fms invoicing line manager,model_fms_invoicing_order_line,account.group_account_manager,1,1,1,1
+fms_commission_liquidation_manager,Fms commission liquidation manager,model_fms_commission_liquidation,account.group_account_manager,1,1,1,1
+fms_commission_liquidation_line_manager,Fms commission liquidation line manager,model_fms_commission_liquidation_line,account.group_account_manager,1,1,1,1

@@ -82,7 +82,7 @@ class FmsInvoicingOrderLineCreate(models.TransientModel):
     @api.multi
     def create_order_lines(self):
         if self.freight_ids:
-            pass
+            # pass
             self.freight_ids.create_invoicing_order_line_from_expedition(
                 self.order_id)
         return True

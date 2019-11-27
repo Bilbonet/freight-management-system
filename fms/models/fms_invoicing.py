@@ -11,19 +11,16 @@ class FmsInvoicingOrder(models.Model):
     _inherit = ['mail.thread']
     _order = 'id desc'
 
-    name = fields.Char(
-        string='Name', readonly=True, copy=False)
-    company_id = fields.Many2one(
-        'res.company',
-        string='Company',
-        required=True,
-        default=lambda self: self.env['res.company']._company_default_get(
-            self._name
-        ),
-    )
-    currency_id = fields.Many2one(
-        related='company_id.currency_id', store=True,
-        readonly=True)
+    name = fields.Char(string='Name',
+        readonly=True, copy=False)
+    company_id = fields.Many2one('res.company',
+        string='Company', required=True,
+        default=lambda self: self.env.user.company_id)
+    currency_id = fields.Many2one(related='company_id.currency_id',
+        store=True, readonly=True)
+    active = fields.Boolean(default=True, track_visibility="onchange",
+        help="If the active field is set to False, it will allow you to hide"
+             " the invoicing order without removing it.")
     state = fields.Selection(
         [
             ('draft', 'Draft'),
@@ -33,7 +30,7 @@ class FmsInvoicingOrder(models.Model):
         track_visibility='onchange')
     partner_id = fields.Many2one('res.partner',
         string='Customer', required=True,
-        readonly=True, states={'draft': [('readonly', False)]}, )
+        readonly=True, states={'draft': [('readonly', False)]},)
     journal_id = fields.Many2one('account.journal',
         string='Journal', required=True, ondelete='restrict',
         readonly=True, states={'draft': [('readonly', False)]},
@@ -41,17 +38,15 @@ class FmsInvoicingOrder(models.Model):
         domain="[('type', '=', 'sale'),"
         "('company_id', '=', company_id)]",
         track_visibility='onchange', index=True)
-    date_invoice = fields.Date(
-        string='Invoice Date', readonly=True,
-        states={'draft': [('readonly', False)]}, track_visibility='onchange')
-    order_line_ids = fields.One2many(
-        'fms.invoicing.order.line', 'order_id', string='Order Lines',
-        readonly=True, states={'draft': [('readonly', False)]})
-    amount_total = fields.Monetary(
-        compute='_compute_total', store=True, readonly=True,
-        currency_field='currency_id')
-    invoice_id = fields.Many2one(
-        comodel_name='account.invoice', string='Invoice', copy=False)
+    date_invoice = fields.Date(string='Invoice Date',
+        readonly=True, states={'draft': [('readonly', False)]},
+        track_visibility='onchange')
+    order_line_ids = fields.One2many('fms.invoicing.order.line', 'order_id',
+        string='Order Lines')
+    amount_total = fields.Monetary(compute='_compute_total',
+        store=True, readonly=True, currency_field='currency_id')
+    invoice_id = fields.Many2one(comodel_name='account.invoice',
+        string='Invoice', copy=False)
 
     @api.model
     def _default_journal(self):

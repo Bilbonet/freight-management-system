@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <odoo>
 
-    <record id="fms_invoicing_line_tree_form" model="ir.ui.view">
+    <record id="fms_invoicing_line_form" model="ir.ui.view">
         <field name="name">fms.invoicing.order.line form view</field>
         <field name="model">fms.invoicing.order.line</field>
         <field name="arch" type="xml">
-            <form string="Order Lines">
+            <form string="Invoicing Order Line">
                 <group name="main" col="2">
                     <group name="left">
                         <field name="order_id" invisible="not context.get('fms_invoicing_order_line_main_view')"/>
@@ -30,7 +30,7 @@
         <field name="name">fms.invoicing.order.line tree view</field>
         <field name="model">fms.invoicing.order.line</field>
         <field name="arch" type="xml">
-            <tree string="Order Lines">
+            <tree string="Order Lines" default_order="f_date_planned" create="false">
                 <field name="order_id" invisible="not context.get('fms_invoicing_order_line_main_view')"/>
                 <field name="freight_id"/>
                 <field name="f_date_planned"/>

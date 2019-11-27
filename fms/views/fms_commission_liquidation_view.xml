@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<odoo>
+    <!--Main FORM view-->
+    <record id="fms_commission_liquidation_form_view" model="ir.ui.view">
+        <field name="name">fms.commission.liquidation form view</field>
+        <field name="model">fms.commission.liquidation</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_populate" type="object"
+                        string=" Get Employee Commissions"
+                        states="draft" class="oe_highlight" icon="fa-refresh"/>
+                    <button name="action_confirm" type="object"
+                            string="Confirm"
+                            states="draft" groups="account.group_account_manager"/>
+                    <button name="action_cancel" type="object"
+                            string="Cancel Commission Liquidation"
+                            states="done"/>
+                    <button name="cancel2draft" type="object"
+                            string=" Back to Draft" icon="fa-mail-reply"
+                            states="cancel"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet string="Commission Liquidation Orders">
+                    <!--<div class="oe_button_box" name="button_box">-->
+                        <!--<button name="action_show_invoice"-->
+                                <!--type="object" icon="fa-pencil-square-o"-->
+                                <!--attrs="{'invisible': [('invoice_id', '=', False)]}"-->
+                                <!--class="oe_stat_button">-->
+                            <!--<field string="View Invoice"-->
+                                   <!--name="invoice_id" widget="statinfo"/>-->
+                        <!--</button>-->
+                        <!--<button class="oe_stat_button" type="object"-->
+                                <!--name="toggle_active" icon="fa-archive">-->
+                            <!--<field name="active" widget="boolean_button"-->
+                                   <!--options="{&quot;terminology&quot;: &quot;archive&quot;}"/>-->
+                        <!--</button>-->
+                    <!--</div>-->
+
+                    <h1>
+                        <label for="name" string="Liquidation Name: " attrs="{'invisible':[('name','=', False)]}" class="oe_inline"/>
+                        <field name="name" class="oe_inline" readonly="1"/>
+                    </h1>
+                    <group name="main">
+                        <group>
+                            <field name="employee_id"/>
+                        </group>
+                        <group>
+                            <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="commission-lines" string="Commission Lines">
+                            <field name="cl_line_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--TREE view-->
+    <record id="fms_commission_liquidation_tree_view" model="ir.ui.view">
+        <field name="name">fms.commission.liquidation tree view</field>
+        <field name="model">fms.commission.liquidation</field>
+        <field name="arch" type="xml">
+            <tree string="Commission Liquidation Orders" decoration-success="state == 'done'" decoration-danger="state=='cancel'"
+                  decoration-muted="state == 'done'">
+                <field name="name" string="Name"/>
+                <field name="employee_id"/>
+                <field name="date"/>
+                <field name="amount_total"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--SEARCH view-->
+    <record id="fms_commission_liquidation_search_view" model="ir.ui.view">
+        <field name="name">fms.commission.liquidation search view</field>
+        <field name="model">fms.commission.liquidation</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="employee_id"/>
+                <separator/>
+                <group expand="0" string="Group By...">
+                    <filter string="Associated Employee"
+                            name="group_by_employee"
+                            domain="[]"
+                            context="{'group_by':'employee_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!--ACTION Commission Liquidation-->
+    <record id="fms_commission_liquidation_action" model="ir.actions.act_window">
+        <field name="name">Employee Commission Liquidation</field>
+        <field name="res_model">fms.commission.liquidation</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="fms_commission_liquidation_search_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Click to create a new commission liquidation order.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="fms_commission_liquidation_menu"
+              name="Employee Commission Liquidation"
+              parent="fms_invoicing_main_menu"
+              action="fms_commission_liquidation_action"
+              sequence="5"/>
+</odoo>

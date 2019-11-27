@@ -8,38 +8,35 @@ from odoo.exceptions import UserError, ValidationError
 class FmsInvoicingOrderLine(models.Model):
     _name = 'fms.invoicing.order.line'
     _description = 'Invoicing Line'
+    _order = 'f_date_planned, id desc'
 
-    name = fields.Char(
-        string='Order Line Reference', readonly=True, copy=False)
-    order_id = fields.Many2one(
-        'fms.invoicing.order', string='FMS Invoicing Order',
-        ondelete='cascade', index=True)
-    company_id = fields.Many2one(
-        related='order_id.company_id', store=True, readonly=True)
-    currency_id = fields.Many2one(
-        related='order_id.currency_id', store=True, readonly=True)
-    state = fields.Selection(
-        related='order_id.state', string='State',
-        readonly=True, store=True)
-    partner_id = fields.Many2one(
-        related='order_id.partner_id', store=True, readonly=True)
-    freight_id = fields.Many2one(
-        'fms.freight', string='Expedition Reference',
-        ondelete='restrict')
-    f_date_planned = fields.Datetime(
-        related='freight_id.date_planned', readonly=True)
-    f_product_id = fields.Many2one(
-        related='freight_id.product_id', readonly=True)
-    f_state = fields.Selection(
-        related='freight_id.state', readonly=True)
-    amount = fields.Monetary(
-        related='freight_id.fr_commission', readonly=True,
-        currency_field='currency_id')
+    name = fields.Char(string='Order Line Reference',
+        readonly=True, copy=False)
+    order_id = fields.Many2one('fms.invoicing.order',
+        string='FMS Invoicing Order', readonly=True, ondelete='cascade', index=True)
+    company_id = fields.Many2one(related='order_id.company_id',
+        store=True, readonly=True)
+    currency_id = fields.Many2one(related='order_id.currency_id',
+        store=True, readonly=True)
+    state = fields.Selection(related='order_id.state',
+        string='State', readonly=True, store=True)
+    partner_id = fields.Many2one(related='order_id.partner_id',
+        store=True, readonly=True)
+    freight_id = fields.Many2one('fms.freight',
+        string='Expedition Reference', ondelete='restrict')
+    f_date_planned = fields.Datetime(related='freight_id.date_planned',
+        readonly=True)
+    f_product_id = fields.Many2one(related='freight_id.product_id',
+        readonly=True)
+    f_state = fields.Selection(related='freight_id.state',
+        readonly=True)
+    amount = fields.Monetary(related='freight_id.fr_commission',
+        readonly=True, currency_field='currency_id')
 
     _sql_constraints = [(
         'name_company_unique',
         'unique(name, company_id)',
-        'A payment line already exists with this reference '
+        'An invoice order already exists with this reference '
         'in the same company!'
         )]
 

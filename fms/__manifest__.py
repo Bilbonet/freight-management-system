@@ -35,6 +35,8 @@
         'views/account_invoice_view.xml',
         'views/res_config_settings_views.xml',
         'views/hr_views.xml',
+        'views/fms_commission_liquidation_view.xml',
+        'views/fms_commission_liquidation_line_view.xml',
     ],
     'installable': True,
 }

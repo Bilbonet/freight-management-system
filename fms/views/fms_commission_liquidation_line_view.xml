@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="fms_commission_liquidation_line_form" model="ir.ui.view">
+        <field name="name">fms.commission.liquidation.line form view</field>
+        <field name="model">fms.commission.liquidation.line</field>
+        <field name="arch" type="xml">
+            <form string="Commission Liquidation Line">
+                <group name="main" col="3">
+                    <field name="liquidation_id" invisible="1"/>
+                    <field name="employee_id" invisible="1"/>
+                    <field name="f_commission_id" options='{"no_create": True}'/>
+                    <field name="c_freight_id"/>
+                    <field name="c_partner_id"/>
+                    <field name="c_date"/>
+                    <field name="c_amount"/>
+                    <field name="company_id" widget="selection" groups="base.group_multi_company"/>
+                    <field name="currency_id" invisible="1"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="fms_commission_liquidation_line_tree_view" model="ir.ui.view">
+        <field name="name">fms.commission.liquidation.line tree view</field>
+        <field name="model">fms.commission.liquidation.line</field>
+        <field name="arch" type="xml">
+            <tree string="Commission Liquidation Lines" default_order="c_date" create="false">
+                <field name="c_date"/>
+                <field name="c_freight_id"/>
+                <field name="c_partner_id"/>
+                <field name="c_product_id"/>
+                <field name="c_state"/>
+                <field name="c_amount" sum="Total Amount"/>
+                <field name="currency_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>
