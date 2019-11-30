@@ -54,7 +54,7 @@ class FmsFreight(models.Model):
     date_order = fields.Datetime(
         'Date Order', required=True,
         default=fields.Datetime.now)
-    tag_ids = fields.Many2many('fms.freight.tags', string='Tags')
+    tag_ids = fields.Many2many('fms.freight.tags', string='Freight State')
     product_id = fields.Many2one(
         'product.product', 'Product')
     privacy_visibility = fields.Selection([

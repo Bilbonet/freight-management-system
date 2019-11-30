@@ -20,10 +20,10 @@
             <tree string="Expeditions" decoration-warning="state == 'partial'" decoration-info="state == 'received'" decoration-success="state == 'confirmed'"
                   decoration-muted="state=='cancel'" decoration-danger="state=='invoiced'">
                 <field name="name"/>
-                <field name="date_order" widget='date'/>
                 <field name="partner_id"/>
                 <field name="zip"/>
                 <field name="city"/>
+                <field name="delivery_name"/>
                 <field name="date_planned"/>
                  <field name="tag_ids" widget="many2many_tags"/>
                 <field name="state"/>
@@ -85,7 +85,7 @@
                     </group>
                     <group string="Customer Data">
                         <group>
-                            <field attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}" domain="[('customer','=',True), ('is_company', '=', True)]" name="partner_id"/>
+                            <field attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}" domain="[('customer','=',True)]" name="partner_id"/>
                             <field attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}" name="date_order"/>
                         </group>
                         <group>
