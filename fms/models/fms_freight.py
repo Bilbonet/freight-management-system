@@ -85,28 +85,28 @@ class FmsFreight(models.Model):
     phone = fields.Char(string='Delivery phone')
     mobile = fields.Char(string='Delivery mobile')
     # Freight Information
-    fr_desc = fields.Html(string='Freight Description',
-                          anitize_attributes=True,
-                          strip_classes=False,
-                          sanitize_style=True)
+    fr_desc = fields.Html(string='Freight Description', copy=False,
+        sanitize_attributes=True, strip_classes=False, sanitize_style=True)
     fr_packages = fields.Integer(string='Nº Packages')
-    fr_value = fields.Monetary(
-        string='Freight value', currency_field='currency_id')
-    fr_commission = fields.Monetary(
-        string='Value of commission', currency_field='currency_id')
+    fr_value = fields.Monetary(string='Freight value',
+        currency_field='currency_id')
+    fr_commission = fields.Monetary(string='Value of commission',
+        currency_field='currency_id')
     fr_commission_percent = fields.Float(string='Percent of commission')
     # Freight Delivery
     date_planned = fields.Datetime('Scheduled Date',
-        track_visibility="onchange",
+        track_visibility="onchange", copy=False,
         help='Date at which the expedition should be delivered')
-    responsible_id = fields.Many2one('hr.employee', string='Responsible',
-        track_visibility="onchange",
+    responsible_id = fields.Many2one('hr.employee',
+        string='Responsible', track_visibility="onchange", copy=False,
         help="Employee which is responsible to do the expedition.")
     # Commission Lines
     commission_line_ids = fields.One2many(
         'fms.freight.commission.line', 'freight_id', string="Commission")
     invoice_id = fields.Many2one(
         comodel_name='account.invoice', string='Invoice', copy=False)
+    digital_signature = fields.Binary(string='Digital Signature',
+        oldname="signature_image", attachment=True)
 
     @api.onchange('fr_commission_percent')
     def _calculate_fr_commission_percent(self):
@@ -319,11 +319,11 @@ class FmsFreight(models.Model):
     @api.model
     def create(self, vals=None):
         # Assign name by sequence
-        result = super(FmsFreight, self).create(vals)
-        result.name = self.env['ir.sequence'].next_by_code('fms.freight')
+        res = super(FmsFreight, self).create(vals)
+        res.name = self.env['ir.sequence'].next_by_code('fms.freight')
         # Add User as follower
-        result.message_subscribe(partner_ids=[result.user_id.partner_id.id])
-        return result
+        res.message_subscribe(partner_ids=[res.user_id.partner_id.id])
+        return res
 
     @api.multi
     def unlink(self):
@@ -332,6 +332,7 @@ class FmsFreight(models.Model):
                 raise UserError(_(
                     "You can only delete expeditions in state canceled."))
         return super(FmsFreight, self).unlink()
+
     # ---------------------------
     # Invoicing
     # ---------------------------
@@ -359,16 +360,6 @@ class FmsFreightCommissionLine(models.Model):
     _order = 'date, sequence, id desc'
     _rec_name = 'complete_name'
 
-    def _default_date(self):
-        parent_id = self._context.get('commission_id')
-        parent_model = self.freight_id._name
-
-        if parent_id and parent_model:
-            parent_obj = self.env[parent_model].browse(parent_id)
-            default_date = parent_obj.date_planned or datetime.now()
-            default_date = default_date.date()
-            return default_date
-
     complete_name = fields.Char('Complete Name',
         compute='_compute_complete_name', store=True)
     freight_id = fields.Many2one('fms.freight',
@@ -383,8 +374,7 @@ class FmsFreightCommissionLine(models.Model):
     sequence = fields.Integer(
         help="Gives the sequence order when displaying a list of"
         " commission order lines.", default=10)
-    date = fields.Date(string='Commission Date',
-        required=True, default=_default_date)
+    date = fields.Date(string='Commission Date', required=True)
     employee_id = fields.Many2one('hr.employee',
         string='Employee', required=True)
     emp_commission = fields.Float(string='Employee % commission',
@@ -399,6 +389,15 @@ class FmsFreightCommissionLine(models.Model):
         currency_field='currency_id')
     liquidation_order = fields.Many2one('fms.commission.liquidation',
         string='Liquidation Order', readonly=True)
+
+    @api.model
+    def default_get(self, fields):
+        res = super(FmsFreightCommissionLine, self).default_get(fields)
+        date = self._context.get('date_planned')
+        res.update({
+            'date': date or datetime.now(),
+        })
+        return res
 
     @api.depends('freight_id.partner_id')
     def _compute_complete_name(self):

@@ -17,6 +17,7 @@
         'product',
         'mail_activity_board',
         'account',
+        'web_widget_digitized_signature',
     ],
     'data': [
         'security/fms_security.xml',
@@ -28,6 +29,7 @@
         'data/invoice_mail_template_data.xml',
         'views/fms_views.xml',
         'views/product_template_view.xml',
+        'report/report_templates.xml',
         'report/fms_freight_report.xml',
         'report/account_invoice_report.xml',
         'views/fms_invoicing.xml',

@@ -7,11 +7,13 @@
 
 |badge1| |badge2|
 
-=========================
-Freight Management System
-=========================
+============================
+Freight Expedition Timesheet
+============================
 
-This application allows you to manage Freight Expeditions.
+This application allows you to manage Freight Expedition Timesheets.
+* Each employee can encode and track their time spent on the different
+  Freight Expeditions.
 
 Installation
 ============

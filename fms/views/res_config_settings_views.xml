@@ -41,12 +41,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-
                 </div>
             </xpath>
         </field>
@@ -66,5 +60,5 @@
         parent="fms_config_menu"
         sequence="0"
         action="fms_config_settings_action"
-        groups="base.group_system"/>
+        groups="base.group_no_one"/>
 </odoo>

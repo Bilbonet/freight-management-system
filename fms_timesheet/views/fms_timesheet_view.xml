@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="fms_freight_form_timesheet_view" model="ir.ui.view">
+        <field name="name">fms.freight.form timesheet view</field>
+        <field name="model">fms.freight</field>
+        <field name="inherit_id" ref="fms.fms_freight_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[@name='commissions']" position="after">
+                <page string="Timesheets" attrs="{'invisible':[('state','in',('draft','partial','received'))]}">
+                    <field name="timesheet_ids" context="{'date_planned': date_planned, 'employee_id': responsible_id}">
+                        <tree editable="bottom" string="Timesheet" default_order="date_time_start">
+                            <field name="date_time_start"/>
+                            <field name="date_time_stop"/>
+                            <field name="employee_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="name"/>
+                            <field name="amount" string="Duration" sum="Total Duratión" widget="float_time"/>
+                            <button name="button_end_work"
+                                    string="Stop"
+                                    type="object"
+                                    icon="fa-stop-circle"
+                                    attrs="{'invisible': [('amount', '>', 0)]}"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

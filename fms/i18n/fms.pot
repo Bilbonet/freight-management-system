@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-30 16:15+0000\n"
-"PO-Revision-Date: 2019-11-30 16:15+0000\n"
+"POT-Creation-Date: 2019-12-04 11:43+0000\n"
+"PO-Revision-Date: 2019-12-04 11:43+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -153,6 +153,7 @@ msgid "&amp;nbsp;<span>en</span>"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "<br/>\n"
 "                            <strong>Date Planned: </strong>"
@@ -286,6 +287,7 @@ msgid "<span>Nuestra Ref.</span>"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "<span>Our Ref.:</span>"
 msgstr ""
@@ -311,6 +313,7 @@ msgid "<strong class=\"mr16\">Subtotal</strong>"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "<strong>Center Code:</strong>"
 msgstr ""
@@ -326,21 +329,25 @@ msgid "<strong>Cuenta Bancaria:</strong>"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "<strong>Date Order: </strong>"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "<strong>Delivery Note:</strong>"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "<strong>Department Code:</strong>"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "<strong>Email: </strong>"
 msgstr ""
@@ -356,21 +363,25 @@ msgid "<strong>Forma Pago: </strong>"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "<strong>Mobile: </strong>"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "<strong>Order Doc.:</strong>"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "<strong>Phone: </strong>"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "<strong>Sale Doc.:</strong>"
 msgstr ""
@@ -780,6 +791,7 @@ msgid "Customer Data"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "DELIVERY DATA"
 msgstr ""
@@ -813,6 +825,11 @@ msgstr ""
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
 msgid "Delivery Data"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
+msgid "Delivery Signature"
 msgstr ""
 
 #. module: fms
@@ -859,6 +876,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:fms.field_fms_freight__partner_department
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order_line_create__partner_department
 msgid "Department code"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__digital_signature
+msgid "Digital Signature"
 msgstr ""
 
 #. module: fms
@@ -1023,6 +1045,7 @@ msgid "FMS Invoicing Order"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "FREIGHT DESCRIPTION"
 msgstr ""
@@ -1370,6 +1393,11 @@ msgid "Location completion"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.report_layout_standard
+msgid "Logo"
+msgstr ""
+
+#. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__message_main_attachment_id
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_main_attachment_id
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__message_main_attachment_id
@@ -1566,6 +1594,11 @@ msgid "Please define a journal for the company '%s'."
 msgstr ""
 
 #. module: fms
+#: model:ir.actions.report,name:fms.fms_freight_delivery_note_report_action
+msgid "Print Delivery Note"
+msgstr ""
+
+#. module: fms
 #: model:ir.actions.report,name:fms.fms_freight_report_action
 msgid "Print Freight"
 msgstr ""
@@ -1677,6 +1710,12 @@ msgstr ""
 #: model:ir.actions.act_window,name:fms.fms_config_settings_action
 #: model:ir.ui.menu,name:fms.fms_menu_configuration
 msgid "Settings"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "Signature"
 msgstr ""
 
 #. module: fms

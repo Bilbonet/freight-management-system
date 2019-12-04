@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <template id="report_layout_standard">
+        <div class="header">
+            <div class="o_boxed_header">
+            <div class="row mb4">
+                <div class="col-6">
+                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
+                </div>
+                <div class="col-6 text-right">
+                    <ul class="list-inline">
+                        <li><span t-field="company.name"/></li>
+                        <li><span t-field="company.street"/></li>
+                        <li><span t-field="company.zip"/> <span t-field="company.city"/></li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="article o_report_layout_boxed"  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-call="web.address_layout"/>
+            <t t-raw="0"/>
+        </div>
+    </template>
+
+    <!-- fms: layout to t-call from reports -->
+    <template id="report_layout">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+
+        <t t-call="fms.report_layout_standard"><t t-raw="0"/></t>
+
+    </template>
+
+</odoo>
