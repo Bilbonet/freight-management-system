@@ -124,7 +124,7 @@
                                        attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
                             </div>
                         </group>
-                        <group>
+                        <group name="delivery_contact">
                             <field name="phone" widget="phone" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
                             <field name="mobile" widget="phone" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
                             <field name="email" widget="email" context="{'gravatar_image': True}" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
@@ -188,14 +188,6 @@
                                     <field name="liquidation_order"/>
                                </tree>
                             </field>
-                        </page>
-                        <page name="signature" string="Signature" attrs="{'invisible':[('state','in',('draft','partial','received'))]}">
-                            <!--<label for="digital_signature" string="Signature" class="oe_edit_only" />-->
-                            <div class="col-xs-10 col-sm-9 col-md-5">
-                            <h2>
-                                <field name="digital_signature" widget="signature" nolabel="1"/>
-                            </h2>
-                            </div>
                         </page>
                         <page name="information" string="Other Information" groups="fms.group_fms_manager">
                             <group>
@@ -315,7 +307,8 @@
     <!-- ==== EXPEDITIONS MENUS ===== -->
     <menuitem id="fms_main_menu"
               name="F.M.S"
-              web_icon="fms,static/description/icon.png"/>
+              web_icon="fms,static/description/icon.png"
+              groups='fms.group_fms_manager,fms.group_fms_user'/>
     <menuitem id="fms_freight_menu"
               name="Expedition"
               parent="fms.fms_main_menu"

@@ -30,10 +30,8 @@ class FmsTimesheet(models.Model):
     @api.model
     def default_get(self, fields):
         res = super(FmsTimesheet, self).default_get(fields)
-        date_start = self._context.get('date_planned')
         employee =  self._context.get('employee_id')
         res.update({
-            'date_time_start': date_start or datetime.now(),
             'employee_id': employee or False,
         })
         return res

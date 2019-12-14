@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="fms_freight_form_signature_view" model="ir.ui.view">
+        <field name="name">fms.freight.form signature view</field>
+        <field name="model">fms.freight</field>
+        <field name="inherit_id" ref="fms.fms_freight_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='delivery_contact']" position="replace">
+                <group name="delivery_contact">
+                    <group>
+                        <field name="phone" widget="phone" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
+                        <field name="mobile" widget="phone" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
+                        <field name="email" widget="email" context="{'gravatar_image': True}" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
+                    </group>
+                    <group states="confirmed,closed,cancel,invoiced">
+                        <group attrs="{'invisible': [('digital_signature', '!=', False)]}">
+                            <button name="%(fms_digitized_signature_action)d" type="action"
+                                    string=" Contact Signature" icon="fa-edit"
+                                    class="oe_highlight"/>
+                        </group>
+                        <group attrs="{'invisible': [('digital_signature', '=', False)]}">
+                            <button name="%(fms_digitized_signature_action)d" type="action" width="300" context="{'digital_signature': digital_signature}">
+                                <div class="col-xs-10">
+                                    <h2>
+                                        <field name="digital_signature" widget="signature" nolabel="1"/>
+                                    </h2>
+                                </div>
+                            </button>
+                        </group>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

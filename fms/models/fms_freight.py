@@ -24,45 +24,36 @@ class FmsFreight(models.Model):
         ('closed', 'Closed'),
         ('cancel', 'Cancelled'),
         ('invoiced', 'Invoiced')],
+        default='draft',
         string = 'Expedition State',
-        help="Gives the state of the Expedition.",
-        default='draft')
-    currency_id = fields.Many2one(
-        'res.currency', 'Currency', required=True,
+        help="Gives the state of the Expedition.")
+    currency_id = fields.Many2one('res.currency',
+        string='Currency', required=True,
         default=lambda self: self.env.user.company_id.currency_id)
-    company_id = fields.Many2one(
-        'res.company', string='Company', required=True,
+    company_id = fields.Many2one('res.company',
+        string='Company', required=True,
         default=lambda self: self.env.user.company_id)
-    user_id = fields.Many2one(
-        'res.users', 'Administrator', required=True,
+    user_id = fields.Many2one('res.users',
+        string='Administrator', required=True,
         default=(lambda self: self.env.user),
         domain=lambda self: [
             ("groups_id", "=", self.env.ref("fms.group_fms_manager").id)])
-    partner_id = fields.Many2one(
-        'res.partner',
-        'Customer', required=True, change_default=True)
-    partner_center = fields.Char(
-        'Center code', size=32, index=True)
-    partner_department = fields.Char(
-        'Department code', size=32, index=True)
-    partner_delivery_note = fields.Char(
-        'Delivery note', size=32, index=True)
-    partner_order_doc = fields.Char(
-        'Order doc.', size=32, index=True)
-    partner_sale_doc = fields.Char(
-        'Sale doc.', size=32, index=True)
-    date_order = fields.Datetime(
-        'Date Order', required=True,
-        default=fields.Datetime.now)
+    partner_id = fields.Many2one('res.partner',
+        strin='Customer', required=True, change_default=True)
+    partner_center = fields.Char('Center code', size=32, index=True)
+    partner_department = fields.Char('Department code', size=32, index=True)
+    partner_delivery_note = fields.Char('Delivery note', size=32, index=True)
+    partner_order_doc = fields.Char('Order doc.', size=32, index=True)
+    partner_sale_doc = fields.Char('Sale doc.', size=32, index=True)
+    date_order = fields.Datetime('Date Order',
+        required=True, default=fields.Datetime.now)
     tag_ids = fields.Many2many('fms.freight.tags', string='Freight State')
-    product_id = fields.Many2one(
-        'product.product', 'Product')
+    product_id = fields.Many2one('product.product', string='Product')
     privacy_visibility = fields.Selection([
         ('followers', 'On invitation only'),
         ('employees', 'Visible by all employees'),
-    ],
-        string='Privacy', required=True,
-        default='followers',
+        ],
+        default='followers', string='Privacy', required=True,
         help="Holds visibility of the expedition:\n "
              "- On invitation only: Employees may only "
              "see the followed expeditions.\n"
@@ -105,8 +96,6 @@ class FmsFreight(models.Model):
         'fms.freight.commission.line', 'freight_id', string="Commission")
     invoice_id = fields.Many2one(
         comodel_name='account.invoice', string='Invoice', copy=False)
-    digital_signature = fields.Binary(string='Digital Signature',
-        oldname="signature_image", attachment=True)
 
     @api.onchange('fr_commission_percent')
     def _calculate_fr_commission_percent(self):
@@ -192,7 +181,6 @@ class FmsFreight(models.Model):
             freight.date_planned = False
             freight.responsible_id = False
             freight.commission_line_ids.unlink()
-
     @api.multi
     def action_partial(self):
         for freight in self:
@@ -232,7 +220,6 @@ class FmsFreight(models.Model):
                 vals = new_commission._convert_to_write(new_commission._cache)
                 # self.env['fms.freight.commission.line'].create(vals)
                 self.env['fms.freight.commission.line'].sudo().create(vals)
-
     @api.multi
     def action_reopen(self):
         for freight in self:

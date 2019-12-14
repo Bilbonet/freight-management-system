@@ -17,7 +17,6 @@
         'product',
         'mail_activity_board',
         'account',
-        'web_widget_digitized_signature',
     ],
     'data': [
         'security/fms_security.xml',

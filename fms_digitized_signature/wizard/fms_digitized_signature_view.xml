@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="fms_difitized_signature_wizard_action" model="ir.ui.view">
+        <field name="name">fms.freight digitized signature wizard</field>
+        <field name="model">fms.digitized.signature.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Delivery Contact Signature">
+                <group>
+                    <!--<label for="digital_signature" string="Signature" class="oe_edit_only" />-->
+                    <div class="col-xs-10 col-sm-9 col-md-5">
+                        <h2>
+                            <field name="digital_signature" widget="signature" nolabel="1"/>
+                        </h2>
+                    </div>
+                </group>
+                <footer>
+                    <button type="object" name="save" string="Save" class="oe_highlight"/>
+                    <button special="cancel" string="Cancel" class="oe_link"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="fms_digitized_signature_action" model="ir.actions.act_window">
+        <field name="name">Delivery Contact Signature</field>
+        <field name="res_model">fms.digitized.signature.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="fms_difitized_signature_wizard_action"/>
+    </record>
+
+</odoo>
