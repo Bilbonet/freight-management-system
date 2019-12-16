@@ -14,16 +14,17 @@
                         <field name="email" widget="email" context="{'gravatar_image': True}" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
                     </group>
                     <group states="confirmed,closed,cancel,invoiced">
-                        <group attrs="{'invisible': [('digital_signature', '!=', False)]}">
+                        <group>
                             <button name="%(fms_digitized_signature_action)d" type="action"
                                     string=" Contact Signature" icon="fa-edit"
-                                    class="oe_highlight"/>
+                                    class="oe_highlight"
+                                    attrs="{'invisible': [('digital_signature', '!=', False)]}"/>
                         </group>
                         <group attrs="{'invisible': [('digital_signature', '=', False)]}">
                             <button name="%(fms_digitized_signature_action)d" type="action" width="300" context="{'digital_signature': digital_signature}">
                                 <div class="col-xs-10">
                                     <h2>
-                                        <field name="digital_signature" widget="signature" nolabel="1"/>
+                                        <field name="digital_signature" widget="signature" nolabel="1" readonly='True'/>
                                     </h2>
                                 </div>
                             </button>
