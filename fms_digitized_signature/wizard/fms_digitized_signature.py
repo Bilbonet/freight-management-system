@@ -10,6 +10,7 @@ class FmsDigitizedSignatureWizard(models.TransientModel):
 
     freight_id = fields.Many2one('fms.freight', string='Freight Expedition')
     digital_signature = fields.Binary(string='Digital Signature', attachment=False)
+    signature_notes = fields.Char(string="Signature Notes")
 
     @api.model
     def default_get(self, field_list):
@@ -21,6 +22,7 @@ class FmsDigitizedSignatureWizard(models.TransientModel):
         if expedition.digital_signature:
             res.update({
                 'digital_signature': expedition.digital_signature,
+                'signature_notes': expedition.signature_notes,
                 })
         return res
 
@@ -30,3 +32,4 @@ class FmsDigitizedSignatureWizard(models.TransientModel):
         assert self._context['active_model'] == 'fms.freight',\
             'Active model should be fms.freight'
         self.freight_id.digital_signature = self.digital_signature
+        self.freight_id.signature_notes = self.signature_notes

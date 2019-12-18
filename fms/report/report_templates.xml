@@ -4,18 +4,16 @@
     <template id="report_layout_standard">
         <div class="header">
             <div class="o_boxed_header">
-            <div class="row mb4">
-                <div class="col-6">
-                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
+                <div class="row mb4">
+                    <div class="col-6">
+                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 90px;" alt="Company Logo"/>
+                        <p t-field="company.name"/>
+                    </div>
+                    <div class="col-6 text-right">
+                        <img t-if="doc.partner_id.image" t-att-src="image_data_uri(doc.partner_id.image)" style="max-height: 90px;" alt="Contact Logo"/>
+                        <p t-field="doc.partner_id.name" />
+                    </div>
                 </div>
-                <div class="col-6 text-right">
-                    <ul class="list-inline">
-                        <li><span t-field="company.name"/></li>
-                        <li><span t-field="company.street"/></li>
-                        <li><span t-field="company.zip"/> <span t-field="company.city"/></li>
-                    </ul>
-                </div>
-            </div>
             </div>
         </div>
 

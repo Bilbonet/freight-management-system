@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="fms_freight_delivery_note_report_document"
+              inherit_id="fms.fms_freight_delivery_note_report_document">
+        <xpath expr="//div[@name='exp_name']" position="after">
+            <div class="mt64">
+                <div t-if="doc.digital_signature" id="signature" class="row" name="signature">
+                    <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
+                        <h5>Delivery Signature</h5>
+                        <img t-attf-src="data:image/*;base64,{{doc.digital_signature}}" alt="Signature"/>
+                        <p t-field="doc.signature_notes" class="text-center"/>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

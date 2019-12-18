@@ -9,3 +9,4 @@ class FmsFreight(models.Model):
 
     digital_signature = fields.Binary(string='Digital Signature',
         store=True, attachment=False)
+    signature_notes = fields.Char(string="Signature Notes")

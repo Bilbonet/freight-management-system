@@ -21,7 +21,7 @@
                 <div class="col-6">
                     <div class="jumbotron text-center">
                         <h3 class="text-center">
-                            <span>Our Ref.:</span>
+                            <span>Expedition:</span>
                             <span t-field="doc.name"/>
                         </h3>
                         <div class="text-left">
@@ -33,40 +33,12 @@
                 <div class="col-1"/>
                 <div class="col-5">
                     <div style="font:15px lucida-console,sans-serif !important;" >
-                        <span style="color:#3498DB !important;" t-field="doc.partner_id.name" /><br/>
-                        <span style="color:gray !important;" t-field="doc.partner_id.street" /><br/>
-                        <t t-if="doc.partner_id.street2">
-                            <span style="color:gray !important;" t-field="doc.partner_id.street2" /><br/>
-                        </t>
-                        <span style="color:gray !important;" t-field="doc.partner_id.zip" />
-                        <span style="color:gray !important;" t-field="doc.partner_id.city" /> -
-                        <span style="color:gray !important;" t-field="doc.partner_id.state_id" /><br/>
-                        <span style="color:gray !important;" t-field="doc.partner_id.vat" /><br/>
+                        <strong>Center: </strong><span class="m-0" t-field="doc.partner_center"/><br/>
+                        <strong>Department: </strong><span class="m-0" t-field="doc.partner_department"/><br/>
+                        <strong>Delivery Note: </strong><span class="m-0" t-field="doc.partner_delivery_note"/><br/>
+                        <strong>Order: </strong><span class="m-0" t-field="doc.partner_order_doc"/><br/>
+                        <strong>Sale Doc.: </strong><span class="m-0" t-field="doc.partner_sale_doc"/><br/>
                     </div>
-                </div>
-            </div>
-
-            <!-- Partner Data -->
-            <div class="row mt32 mb32" id="informations">
-                <div t-if="doc.partner_center" class="col-auto mw-100 mb-2">
-                    <strong>Center Code:</strong>
-                    <p class="m-0" t-field="doc.partner_center"/>
-                </div>
-                <div t-if="doc.partner_department" class="col-auto mw-100 mb-2">
-                    <strong>Department Code:</strong>
-                    <p class="m-0" t-field="doc.partner_department"/>
-                </div>
-                <div t-if="doc.partner_delivery_note" class="col-auto mw-100 mb-2">
-                    <strong>Delivery Note:</strong>
-                    <p class="m-0" t-field="doc.partner_delivery_note"/>
-                </div>
-                <div t-if="doc.partner_order_doc" class="col-auto mw-100 mb-2">
-                    <strong>Order Doc.:</strong>
-                    <p class="m-0" t-field="doc.partner_order_doc"/>
-                </div>
-                <div t-if="doc.partner_sale_doc" class="col-auto mw-100 mb-2">
-                    <strong>Sale Doc.:</strong>
-                    <p class="m-0" t-field="doc.partner_sale_doc"/>
                 </div>
             </div>
 
@@ -157,7 +129,7 @@
                 <div class="col-6">
                     <div class="jumbotron text-center">
                         <h3 class="text-center">
-                            <span>Our Ref.:</span>
+                            <span>Expedition:</span>
                             <span t-field="doc.name"/>
                         </h3>
                         <div class="text-left">
@@ -169,40 +141,12 @@
                 <div class="col-1"/>
                 <div class="col-5">
                     <div style="font:15px lucida-console,sans-serif !important;" >
-                        <span style="color:#3498DB !important;" t-field="doc.partner_id.name" /><br/>
-                        <span style="color:gray !important;" t-field="doc.partner_id.street" /><br/>
-                        <t t-if="doc.partner_id.street2">
-                            <span style="color:gray !important;" t-field="doc.partner_id.street2" /><br/>
-                        </t>
-                        <span style="color:gray !important;" t-field="doc.partner_id.zip" />
-                        <span style="color:gray !important;" t-field="doc.partner_id.city" /> -
-                        <span style="color:gray !important;" t-field="doc.partner_id.state_id" /><br/>
-                        <span style="color:gray !important;" t-field="doc.partner_id.vat" /><br/>
+                        <strong>Center: </strong><span class="m-0" t-field="doc.partner_center"/><br/>
+                        <strong>Department: </strong><span class="m-0" t-field="doc.partner_department"/><br/>
+                        <strong>Delivery Note: </strong><span class="m-0" t-field="doc.partner_delivery_note"/><br/>
+                        <strong>Order: </strong><span class="m-0" t-field="doc.partner_order_doc"/><br/>
+                        <strong>Sale Doc.: </strong><span class="m-0" t-field="doc.partner_sale_doc"/><br/>
                     </div>
-                </div>
-            </div>
-
-            <!-- Partner Data -->
-            <div class="row mt32 mb32" id="informations">
-                <div t-if="doc.partner_center" class="col-auto mw-100 mb-2">
-                    <strong>Center Code:</strong>
-                    <p class="m-0" t-field="doc.partner_center"/>
-                </div>
-                <div t-if="doc.partner_department" class="col-auto mw-100 mb-2">
-                    <strong>Department Code:</strong>
-                    <p class="m-0" t-field="doc.partner_department"/>
-                </div>
-                <div t-if="doc.partner_delivery_note" class="col-auto mw-100 mb-2">
-                    <strong>Delivery Note:</strong>
-                    <p class="m-0" t-field="doc.partner_delivery_note"/>
-                </div>
-                <div t-if="doc.partner_order_doc" class="col-auto mw-100 mb-2">
-                    <strong>Order Doc.:</strong>
-                    <p class="m-0" t-field="doc.partner_order_doc"/>
-                </div>
-                <div t-if="doc.partner_sale_doc" class="col-auto mw-100 mb-2">
-                    <strong>Sale Doc.:</strong>
-                    <p class="m-0" t-field="doc.partner_sale_doc"/>
                 </div>
             </div>
 
@@ -240,19 +184,9 @@
                     <h5>FREIGHT DESCRIPTION</h5>
                 </div>
             </div>
-            <div class="row mt16 mb16">
+            <div class="row mt16 mb16" name="exp_name">
                 <span t-field="doc.fr_desc"/>
             </div>
-
-            <div class="mt64">
-                <div t-if="doc.digital_signature" id="signature" class="row" name="signature">
-                    <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
-                        <h5>Delivery Signature</h5>
-                        <img t-attf-src="data:image/*;base64,{{doc.digital_signature}}" alt="Signature"/>
-                    </div>
-                </div>
-            </div>
-
             <div class="oe_structure"/>
         </div>
     </t>

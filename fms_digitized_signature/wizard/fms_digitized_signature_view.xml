@@ -11,6 +11,7 @@
                         <h2>
                             <field name="digital_signature" widget="signature" nolabel="1"/>
                         </h2>
+                        <field name="signature_notes" nolabel="1"/>
                     </div>
                 </group>
                 <footer>

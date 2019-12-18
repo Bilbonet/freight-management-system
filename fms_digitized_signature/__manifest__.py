@@ -15,6 +15,7 @@
     'data': [
         'wizard/fms_digitized_signature_view.xml',
         'views/fms_views.xml',
+        'report/fms_freight_report.xml',
     ],
     'installable': True,
 }
