@@ -31,5 +31,7 @@ class FmsDigitizedSignatureWizard(models.TransientModel):
         self.ensure_one()
         assert self._context['active_model'] == 'fms.freight',\
             'Active model should be fms.freight'
-        self.freight_id.digital_signature = self.digital_signature
-        self.freight_id.signature_notes = self.signature_notes
+        self.freight_id.update({
+            'digital_signature': self.digital_signature,
+            'signature_notes': self.signature_notes,
+        })

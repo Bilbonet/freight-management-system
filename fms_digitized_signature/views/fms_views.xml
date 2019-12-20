@@ -13,21 +13,23 @@
                         <field name="mobile" widget="phone" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
                         <field name="email" widget="email" context="{'gravatar_image': True}" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
                     </group>
-                    <group states="confirmed,closed,cancel,invoiced" style="margin:0px;">
-                        <group>
-                            <button name="%(fms_digitized_signature_action)d" type="action"
-                                    string=" Contact Signature" icon="fa-edit"
-                                    class="oe_highlight"
-                                    attrs="{'invisible': [('digital_signature', '!=', False)]}"/>
-                        </group>
-                        <group attrs="{'invisible': [('digital_signature', '=', False)]}">
-                            <button name="%(fms_digitized_signature_action)d" type="action" width="300" context="{'digital_signature': digital_signature}">
-                                <div class="col-xs-10">
-                                    <field name="digital_signature" widget="signature" nolabel="1" readonly='True'/>
-                                    <field name="signature_notes" readonly='True' nolabel="1"/>
-                                </div>
-                            </button>
-                        </group>
+                     <group states="confirmed" style="margin:0px;">
+                         <button name="%(fms_digitized_signature_action)d" type="action"
+                                 attrs="{'invisible': [('digital_signature', '=', False)]}">
+                             <div>
+                                 <field name="digital_signature" widget="signature" nolabel="1" readonly='True'/>
+                                 <field name="signature_notes" readonly='True' nolabel="1"/>
+                             </div>
+                         </button>
+                         <button name="%(fms_digitized_signature_action)d" type="action"
+                                 string=" Contact Signature" icon="fa-edit" class="oe_highlight"
+                                 attrs="{'invisible': [('digital_signature', '!=', False)]}"/>
+                    </group>
+                    <group states="closed,cancel,invoiced" style="margin:0px;">
+                        <div attrs="{'invisible': [('digital_signature', '=', False)]}" style="text-align: center;">
+                            <field name="digital_signature" widget="signature" nolabel="1" readonly='True'/>
+                            <field name="signature_notes" readonly='True' nolabel="1"/>
+                        </div>
                     </group>
                 </group>
             </xpath>
