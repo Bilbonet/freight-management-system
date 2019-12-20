@@ -97,28 +97,24 @@ class FmsFreight(models.Model):
     invoice_id = fields.Many2one(
         comodel_name='account.invoice', string='Invoice', copy=False)
 
-    @api.onchange('fr_commission_percent')
+    @api.onchange('fr_value','fr_commission_percent')
     def _calculate_fr_commission_percent(self):
+        vals = {}
         if self.fr_value == 0 and self.fr_commission_percent != 0:
-            raise ValidationError(
-                _("The value of the freight should be different to 0"))
+            vals.update({'fr_commission': 0.0})
         elif self.fr_commission_percent > 100:
             raise ValidationError(
                 _("Commission percent should be less or equal to 100!"))
         else:
-            self.fr_commission = self.fr_value * (
-                                self.fr_commission_percent / 100)
-
-    @api.onchange('fr_value')
-    def _calculate_fr_value(self):
-        if self.fr_commission_percent != 0:
-            self.fr_commission = self.fr_value * (
-                                self.fr_commission_percent / 100)
+            vals.update({
+                'fr_commission': self.fr_value * (self.fr_commission_percent / 100)
+            })
+        self.update(vals)
 
     @api.onchange('date_planned')
     def _onchange_date_planned(self):
         if self.state == "received":
-            self.state = 'confirmed'
+            self.update({'state': 'confirmed'})
             self._origin.message_post(
                 body=_("The state has been changed automatically to "
                 "<strong>confirmed</strong> because the date has been established"))
@@ -127,6 +123,12 @@ class FmsFreight(models.Model):
     def _onchange_user_id(self):
         if self.user_id.partner_id not in self.message_partner_ids:
             self._origin.message_subscribe([self.user_id.partner_id.id])
+
+    @api.onchange('partner_id')
+    def _onchange_partner_id(self):
+        vals = {}
+        vals.update({'fr_commission_percent': self.partner_id.fms_commission})
+        self.update(vals)
 
     def format_date(self, date):
         # format date following user language

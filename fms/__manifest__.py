@@ -38,6 +38,7 @@
         'views/hr_views.xml',
         'views/fms_commission_liquidation_view.xml',
         'views/fms_commission_liquidation_line_view.xml',
+        'views/res_partner_views.xml',
     ],
     'installable': True,
 }
