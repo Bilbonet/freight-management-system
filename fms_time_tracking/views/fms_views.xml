@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="fms_freight_form_time_tracking_view" model="ir.ui.view">
+        <field name="name">fms.freight.form Time Tracking view</field>
+        <field name="model">fms.freight</field>
+        <field name="inherit_id" ref="fms.fms_freight_form_view" />
+        <field name="arch" type="xml">
+            <button name="toggle_active" position="before">
+                <field name="tt_running" invisible="1"/>
+                <button name="action_check_start" type="object"
+                        string="Start" class="oe_stat_button text-success" icon="fa-play text-success"
+                        attrs="{'invisible': ['|',('state', '!=', 'confirmed'),('tt_running', '=', True)]}">
+                </button>
+                <button name="action_check_stop" type="object"
+                        string="Stop" class="oe_stat_button text-danger" icon="fa-stop text-danger"
+                        attrs="{'invisible': ['|',('state', '!=', 'confirmed'),('tt_running', '=', False)]}">
+                </button>
+            </button>
+            <xpath expr="//notebook/page[@name='commissions']" position="after">
+                <page string="Time Tracking" attrs="{'invisible':[('state','in',('draft','partial','received'))]}">
+                    <field name="time_tracking_ids">
+                        <tree editable="bottom" string="Time Tracking" default_order="check_start desc">
+                            <field name="employee_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="check_start"/>
+                            <field name="check_stop"/>
+                            <field name="worked_hours" sum="Total Time" widget="float_time"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_fms_time_tracking_manager,fms.time_tracking.manager,model_fms_time_tracking,fms.group_fms_manager,1,1,1,1
+access_fms_time_tracking_user,fms.time_tracking.user,model_fms_time_tracking,fms.group_fms_user,1,0,1,0
