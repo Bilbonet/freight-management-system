@@ -42,6 +42,7 @@ class FmsFreight(models.Model):
             'employee_id': employee.id,
         }
 
+        location_name = _('Google Map API KEY Problem')
         key = self.env['ir.config_parameter'].sudo().get_param(
                                                 'fms_time_tracking.fms_google_api_key')
         if key and latitude and longitude:
