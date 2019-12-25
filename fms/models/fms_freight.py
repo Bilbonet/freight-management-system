@@ -201,6 +201,7 @@ class FmsFreight(models.Model):
             self.message_post(body=_("<h5><strong>Confirmed</strong></h5>"))
     @api.multi
     def action_close(self):
+        self.ensure_one()
         for freight in self:
             freight.state = 'closed'
             self.message_post(body=_("<h5><strong>Closed</strong></h5>"))
@@ -220,7 +221,6 @@ class FmsFreight(models.Model):
                 # force compute commission
                 new_commission._onchange_employee_id()
                 vals = new_commission._convert_to_write(new_commission._cache)
-                # self.env['fms.freight.commission.line'].create(vals)
                 self.env['fms.freight.commission.line'].sudo().create(vals)
     @api.multi
     def action_reopen(self):

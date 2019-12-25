@@ -23,6 +23,15 @@ class FmsTimeTracking(models.Model):
     check_stop = fields.Datetime(string="Check Stop")
     worked_hours = fields.Float(string='Worked Hours',
         compute='_compute_worked_hours', store=True, readonly=True)
+    # Location
+    location_name_start = fields.Char(string="Location Name Start", readonly=True)
+    latitude_start = fields.Char(string="Latitude Start", readonly=True)
+    longitude_start = fields.Char(string="Longitude Start", readonly=True)
+    os_name = fields.Char(string="Operating System", readonly=True)
+    browser_name = fields.Char(string="Browser", readonly=True)
+    location_name_stop = fields.Char(string="Location Name Stop", readonly=True)
+    latitude_stop = fields.Char(string="Latitude Stop", readonly=True)
+    longitude_stop = fields.Char(string="Longitude Stop", readonly=True)
 
     @api.depends('check_start', 'check_stop')
     def _compute_worked_hours(self):

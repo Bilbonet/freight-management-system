@@ -1,12 +1,5 @@
 <?xml version="1.0"?>
 <odoo>
-    <!-- Menus -->
-
-
-    <!--<menuitem id="menu_tsm_search" name="Search"-->
-              <!--parent="tsm_main_menu"-->
-              <!--groups="base.group_no_one,tsm_base.group_tsm_user"-->
-              <!--sequence="4"/>-->
 
     <!-- ===================
          FREIGHT EXPEDITIONS

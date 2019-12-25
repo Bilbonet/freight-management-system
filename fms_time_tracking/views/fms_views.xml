@@ -8,22 +8,26 @@
         <field name="arch" type="xml">
             <button name="toggle_active" position="before">
                 <field name="tt_running" invisible="1"/>
-                <button name="action_check_start" type="object"
-                        string="Start" class="oe_stat_button text-success" icon="fa-play text-success"
+                <button type="object" mode="action_time_check"
+                        string="Start" class="action_time_check oe_stat_button text-success" icon="fa-play text-success"
                         attrs="{'invisible': ['|',('state', '!=', 'confirmed'),('tt_running', '=', True)]}">
                 </button>
-                <button name="action_check_stop" type="object"
-                        string="Stop" class="oe_stat_button text-danger" icon="fa-stop text-danger"
+                <button type="object" mode="action_time_check"
+                        string="Stop" class="action_time_check oe_stat_button text-danger" icon="fa-stop text-danger"
                         attrs="{'invisible': ['|',('state', '!=', 'confirmed'),('tt_running', '=', False)]}">
                 </button>
             </button>
             <xpath expr="//notebook/page[@name='commissions']" position="after">
-                <page string="Time Tracking" attrs="{'invisible':[('state','in',('draft','partial','received'))]}">
+                <page string="Time Tracking"
+                      groups="fms.group_fms_manager"
+                      attrs="{'invisible':[('state','in',('draft','partial','received'))]}">
                     <field name="time_tracking_ids">
                         <tree editable="bottom" string="Time Tracking" default_order="check_start desc">
                             <field name="employee_id" options="{'no_create': True, 'no_open': True}"/>
-                            <field name="check_start"/>
-                            <field name="check_stop"/>
+                            <field name="check_start" class="text-success"/>
+                            <field name="location_name_start" class="text-success"/>
+                            <field name="check_stop" class="text-danger"/>
+                            <field name="location_name_stop" class="text-danger"/>
                             <field name="worked_hours" sum="Total Time" widget="float_time"/>
                         </tree>
                     </field>

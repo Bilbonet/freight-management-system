@@ -13,7 +13,10 @@
     ],
     'data': [
         'security/ir.model.access.csv',
+        'views/res_config_settings_view.xml',
+        'views/templates.xml',
         'views/fms_views.xml',
+        'views/fms_time_tracking_views.xml',
     ],
     'installable': True,
 }

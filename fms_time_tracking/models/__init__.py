@@ -3,3 +3,4 @@
 
 from . import fms_time_tracking
 from . import fms_freight
+from . import res_config_settings

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="fms_time_tracking_form_view" model="ir.ui.view">
+        <field name="name">fms.time.tracking form</field>
+        <field name="model">fms.time.tracking</field>
+        <field name="arch" type="xml">
+            <form string="Employee Time Tracking">
+                <sheet string="Time Tracking">
+                    <div class="oe_button_box h1 text-success">
+                        <span class="fa fa-clock-o" aria-label="" title="" style="margin-right: 10px"/>
+                        <field name="worked_hours" widget="float_time"/>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field class="oe_inline" name="employee_id" readonly="1"/>
+                        </h1>
+                        <field name="os_name" nolabel="1" style="margin-right: 8px"/>
+                        <field name="browser_name" nolabel="1"/>
+                    </div>
+                    <group string="Check Start">
+                        <div>
+                            <field name="check_start" nolabel="1" class="text-success"/><br/>
+                            <field name="location_name_start" nolabel="1" class="text-success"/>
+                        </div>
+                        <group>
+                            <field name="latitude_start"/>
+                            <field name="longitude_start"/>
+                        </group>
+                    </group>
+                    <group string="Check Stop">
+                        <div>
+                            <field name="check_stop" nolabel="1" class="text-danger"/><br/>
+                            <field name="location_name_stop" nolabel="1" class="text-danger"/>
+                        </div>
+                        <group>
+                            <field name="latitude_stop"/>
+                            <field name="longitude_stop"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>
