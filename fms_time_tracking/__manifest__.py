@@ -8,9 +8,12 @@
     'license': 'AGPL-3',
     'author': 'Jesus Ramiro (Bilbonet.NET)',
     'website': 'https://www.bilbonet.net',
-    'depends': [
-        'fms',
-    ],
+    'depends': ['fms',],
+    'external_dependencies': {
+        'python': [
+            'httpagentparser',
+        ],
+    },
     'data': [
         'security/ir.model.access.csv',
         'views/res_config_settings_view.xml',
