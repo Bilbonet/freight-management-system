@@ -13,8 +13,6 @@ FormController.include({
                     // result.state Will return ['granted', 'prompt', 'denied']
                     if (result.state != 'denied'){
                         navigator.geolocation.getCurrentPosition(function(position) {
-                            self.latitude =  position.coords.latitude;
-                            self.longitude = position.coords.longitude;
                             self.update_time_check(event, position.coords.latitude, position.coords.longitude);
                         });
                     } else {
