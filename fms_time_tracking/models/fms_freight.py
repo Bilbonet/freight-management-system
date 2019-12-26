@@ -42,7 +42,6 @@ class FmsFreight(models.Model):
             'employee_id': employee.id,
         }
 
-        location_name = _('Google Map API KEY Problem')
         key = self.env['ir.config_parameter'].sudo().get_param(
                                                 'fms_time_tracking.fms_google_api_key')
         if key and latitude and longitude:
@@ -52,15 +51,19 @@ class FmsFreight(models.Model):
             api_response_dict = api_response.json()
             if api_response_dict['status'] == 'OK':
                 location_name = api_response_dict['results'][0]['formatted_address']
+            else:
+                location_name = api_response_dict['status']
         else:
             location_name = _('It has not been able to establish location')
 
         if not self.tt_running:
             agent = request.httprequest.environ.get('HTTP_USER_AGENT')
             agent_details = httpagentparser.detect(agent)
-            user_os = agent_details['platform']['name']
-            browser_name = agent_details['browser']['name']
-            bit_type = platform.architecture()
+            user_os = agent_details.get('name', '')
+            if not user_os:
+                user_os = agent_details.get('platform', {}).get('name')
+            browser_name = agent_details.get('browser', {}).get('name', '')
+            bit_type = platform.architecture() or ''
             vals.update({
                 'check_start': action_date,
                 'location_name_start': location_name,
