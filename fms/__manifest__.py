@@ -24,8 +24,6 @@
         'wizard/fms_invoicing_line_create_view.xml',
         'wizard/fms_add_follower_multi_view.xml',
         'data/ir_sequence_data.xml',
-        'data/fms_freight_email_template.xml',
-        'data/invoice_mail_template_data.xml',
         'views/fms_views.xml',
         'views/product_template_view.xml',
         'report/report_templates.xml',
@@ -39,6 +37,8 @@
         'views/fms_commission_liquidation_view.xml',
         'views/fms_commission_liquidation_line_view.xml',
         'views/res_partner_views.xml',
+        'data/fms_freight_email_template.xml',
+        'data/invoice_mail_template_data.xml',
     ],
     'installable': True,
 }
