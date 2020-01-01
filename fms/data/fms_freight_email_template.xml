@@ -94,7 +94,7 @@
                         <tr style="color:#875A7B;">
                             <td style="width:140px;padding:5px">Order:</td>
                             <td>
-                                % if object.partner_delivery_note:
+                                % if object.partner_order_doc:
                                 <strong>${(object.partner_order_doc)}</strong>
                                 % endif
                             </td>
@@ -103,7 +103,7 @@
                         <tr style="color:#875A7B;">
                             <td style="width:140px;padding:5px">Sale Doc.:</td>
                             <td>
-                                % if object.partner_delivery_note:
+                                % if object.partner_sale_doc:
                                 <strong>${(object.partner_sale_doc)}</strong>
                                 % endif
                             </td>
