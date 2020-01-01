@@ -8,16 +8,15 @@
         <field name="partner_to">${object.partner_id.id}</field>
         <field name="model_id" ref="fms.model_fms_freight"/>
         <field name="auto_delete" eval="True"/>
-        <field name="report_template" ref="fms.fms_freight_report_action"/>
+        <!--<field name="report_template" ref="fms.fms_freight_report_action"/>-->
         <field name="report_name">${object.name}</field>
         <field name="lang">${object.partner_id.lang}</field>
         <field name="body_html"><![CDATA[
 <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
-    <p>Hello ${object.partner_id.name or ''},</p>
-    <p>We inform you about the following Freight: </p>
+    <p>We inform you about the following Expedition: </p>
 
     <p style="border-left: 1px solid #8e0000; margin-left: 30px;">
-       &nbsp;&nbsp;Name: <strong>${object.name}</strong><br />
+       &nbsp;&nbsp;Expedition: <strong>${object.name}</strong><br />
        &nbsp;&nbsp;Date: <strong>${object.format_date(object.date_order)}</strong><br />
 
        % if object.user_id:
@@ -91,6 +90,25 @@
                                 % endif
                             </td>
                         </tr>
+
+                        <tr style="color:#875A7B;">
+                            <td style="width:140px;padding:5px">Order:</td>
+                            <td>
+                                % if object.partner_delivery_note:
+                                <strong>${(object.partner_order_doc)}</strong>
+                                % endif
+                            </td>
+                        </tr>
+
+                        <tr style="color:#875A7B;">
+                            <td style="width:140px;padding:5px">Sale Doc.:</td>
+                            <td>
+                                % if object.partner_delivery_note:
+                                <strong>${(object.partner_sale_doc)}</strong>
+                                % endif
+                            </td>
+                        </tr>
+
                     </tbody>
                 </table>
             </td>
