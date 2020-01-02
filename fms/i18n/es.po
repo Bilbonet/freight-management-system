@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-01 09:32+0000\n"
-"PO-Revision-Date: 2020-01-01 09:32+0000\n"
+"POT-Creation-Date: 2020-01-02 16:23+0000\n"
+"PO-Revision-Date: 2020-01-02 16:23+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,6 +17,7 @@ msgstr ""
 
 #. module: fms
 #: model:mail.template,body_html:fms.fms_freight_email_template
+#: model:mail.template,body_html:fms.fms_freight_email_template_expedition
 msgid "\n"
 "<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
 "    <p>We inform you about the following Expedition: </p>\n"
@@ -100,7 +101,7 @@ msgid "\n"
 "                        <tr style=\"color:#875A7B;\">\n"
 "                            <td style=\"width:140px;padding:5px\">Order:</td>\n"
 "                            <td>\n"
-"                                % if object.partner_delivery_note:\n"
+"                                % if object.partner_order_doc:\n"
 "                                <strong>${(object.partner_order_doc)}</strong>\n"
 "                                % endif\n"
 "                            </td>\n"
@@ -109,7 +110,7 @@ msgid "\n"
 "                        <tr style=\"color:#875A7B;\">\n"
 "                            <td style=\"width:140px;padding:5px\">Sale Doc.:</td>\n"
 "                            <td>\n"
-"                                % if object.partner_delivery_note:\n"
+"                                % if object.partner_sale_doc:\n"
 "                                <strong>${(object.partner_sale_doc)}</strong>\n"
 "                                % endif\n"
 "                            </td>\n"
@@ -144,14 +145,14 @@ msgid "\n"
 "        "
 msgstr "\n"
 "<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
-"    <p>Le informamos sobre la siguiente expedición: </p>\n"
+"    <p>Le informamos acerca de la siguiente expedición: </p>\n"
 "\n"
 "    <p style=\"border-left: 1px solid #8e0000; margin-left: 30px;\">\n"
 "       &nbsp;&nbsp;Expedición: <strong>${object.name}</strong><br />\n"
-"       &nbsp;&nbsp;Date: <strong>${object.format_date(object.date_order)}</strong><br />\n"
+"       &nbsp;&nbsp;Fecha: <strong>${object.format_date(object.date_order)}</strong><br />\n"
 "\n"
 "       % if object.user_id:\n"
-"       &nbsp;&nbsp;Su contacto: <a href=\"mailto:${object.user_id.email or ''}?subject=Freight%20${object.name}\"><strong>${object.user_id.name}</strong></a>\n"
+"       &nbsp;&nbsp;Su Contacto: <a href=\"mailto:${object.user_id.email or ''}?subject=Freight%20${object.name}\"><strong>${object.user_id.name}</strong></a>\n"
 "       % endif\n"
 "    </p>\n"
 "\n"
@@ -206,7 +207,7 @@ msgstr "\n"
 "                            </td>\n"
 "                        </tr>\n"
 "                        <tr style=\"color:#875A7B;\">\n"
-"                            <td style=\"width:140px;padding:5px\">Cófigo Departamento:</td>\n"
+"                            <td style=\"width:140px;padding:5px\">Código Departamento:</td>\n"
 "                            <td>\n"
 "                                % if object.partner_department:\n"
 "                                <strong>${(object.partner_department)}</strong>\n"
@@ -232,7 +233,7 @@ msgstr "\n"
 "                        </tr>\n"
 "\n"
 "                        <tr style=\"color:#875A7B;\">\n"
-"                            <td style=\"width:140px;padding:5px\">Documento Venta:</td>\n"
+"                            <td style=\"width:140px;padding:5px\">Dcumento Vneta:</td>\n"
 "                            <td>\n"
 "                                % if object.partner_sale_doc:\n"
 "                                <strong>${(object.partner_sale_doc)}</strong>\n"
@@ -275,13 +276,9 @@ msgstr ""
 
 #. module: fms
 #: model:mail.template,subject:fms.fms_freight_email_template
+#: model:mail.template,subject:fms.fms_freight_email_template_expedition
 msgid "${object.company_id.name} Freight (${object.name})"
 msgstr "${object.company_id.name} Expedición (${object.name})"
-
-#. module: fms
-#: model:mail.template,report_name:fms.fms_freight_email_template
-msgid "${object.name}"
-msgstr ""
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
@@ -318,6 +315,13 @@ msgid "<br/>\n"
 "                        <strong>Department: </strong>"
 msgstr "<br/>\n"
 "                        <strong>Departamento: </strong>"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
+msgid "<br/>\n"
+"                        <strong>Nº Packages: </strong>"
+msgstr "<br/>\n"
+"                        <strong>Nº Bultos: </strong>"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
@@ -859,7 +863,7 @@ msgstr "Confirmado"
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.report_layout_standard
 msgid "Contact Logo"
-msgstr ""
+msgstr "Logo Contacto"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__delivery_name
@@ -926,7 +930,7 @@ msgstr "Creado el"
 #: code:addons/fms/models/account_invoice.py:32
 #, python-format
 msgid "Credit Note"
-msgstr ""
+msgstr "Nota Credito"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__currency_id
@@ -960,7 +964,7 @@ msgstr "DATOS ENTREGA"
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__date_order
 msgid "Date Order"
-msgstr "Fecha Orden"
+msgstr "Fecha pedido"
 
 #. module: fms
 #: model:ir.model.fields,help:fms.field_fms_freight__date_planned
@@ -1087,6 +1091,11 @@ msgstr "Comisión Empleado"
 #: model:ir.model.fields,help:fms.field_fms_freight__responsible_id
 msgid "Employee which is responsible to do the expedition."
 msgstr "Empleado responsable de la expedición"
+
+#. module: fms
+#: model:mail.template,report_name:fms.fms_freight_email_template_expedition
+msgid "Expedición_${object.name}"
+msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__c_freight_id
@@ -1617,6 +1626,11 @@ msgstr "Siguiente tipo de actividad"
 #, python-format
 msgid "No valid lines found for invoicing.Please review the order lines."
 msgstr "No se han encontrado lineas validas para la fcturación. Por favor revisa las lineas de la orden."
+
+#. module: fms
+#: model:mail.template,report_name:fms.fms_freight_email_template
+msgid "Nota_Entrega_${object.name}"
+msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__message_needaction_counter

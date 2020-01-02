@@ -146,6 +146,7 @@
                         <strong>Delivery Note: </strong><span class="m-0" t-field="doc.partner_delivery_note"/><br/>
                         <strong>Order: </strong><span class="m-0" t-field="doc.partner_order_doc"/><br/>
                         <strong>Sale Doc.: </strong><span class="m-0" t-field="doc.partner_sale_doc"/><br/>
+                        <strong>Nº Packages: </strong><span class="m-0" t-field="doc.fr_packages"/><br/>
                     </div>
                 </div>
             </div>
