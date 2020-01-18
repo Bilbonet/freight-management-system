@@ -35,15 +35,15 @@
         <field name="arch" type="xml">
             <form string="Expedition">
                 <header>
-                    <button icon="fa-times" name="action_cancel" states="draft,partial,received,confirmed"
-                            string="Cancel" type="object" groups="fms.group_fms_manager"/>
-                    <button icon="fa-reply" name="action_cancel_draft" states="cancel" string="Set to Draft" type="object"/>
-                    <button class="oe_highlight" icon="fa-frown-o" name="action_partial" states="draft,received" string="Partial" type="object"/>
-                    <button class="oe_highlight" icon="fa-thumbs-up" name="action_receive" states="draft,partial" string="Receive" type="object"/>
-                    <button class="oe_highlight" icon="fa-check-square-o" name="action_confirm" states="received" string="Confirm" type="object"/>
-                    <button class="oe_highlight" icon="fa-lock" name="action_close" states="confirmed" string="Close" type="object"/>
-                    <button class="oe_highlight" icon="fa-unlock" name="action_reopen" states="closed" string="Re-Open" type="object"/>
-                    <button icon="fa-send-o" name="action_send_email" type="object" string="Send Email" groups="fms.group_fms_manager"/>
+                    <button string="Cancel" icon="fa-times" name="action_cancel" type="object"
+                            states="partial,received,confirmed" groups="fms.group_fms_manager"/>
+                    <button string="Set to Draft" icon="fa-reply" name="action_cancel_draft" states="cancel" type="object"/>
+                    <button string="Partial" class="oe_highlight" icon="fa-frown-o" name="action_partial" states="draft,received" type="object"/>
+                    <button string="Receive" class="oe_highlight" icon="fa-thumbs-up" name="action_receive" states="draft,partial" type="object"/>
+                    <button string="Confirm" class="oe_highlight" icon="fa-check-square-o" name="action_confirm" states="received" type="object"/>
+                    <button string="Close" class="oe_highlight" icon="fa-lock" name="action_close" states="confirmed" type="object"/>
+                    <button string="Re-Open" class="oe_highlight" icon="fa-unlock" name="action_reopen" states="closed" type="object"/>
+                    <button string="Send Email" icon="fa-send-o" name="action_send_email" type="object" groups="fms.group_fms_manager"/>
                     <field name="state" statusbar_visible="draft,partial,received,confirmed,closed" widget="statusbar"/>
                 </header>
                 <sheet string="Expedition">
@@ -78,58 +78,58 @@
                     </group>
                     <group string="Customer Data">
                         <group>
-                            <field attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}" domain="[('customer','=',True)]" name="partner_id"/>
-                            <field attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}" name="date_order"/>
+                            <field name="partner_id" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}" domain="[('customer','=',True)]"/>
+                            <field name="date_order" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
                         </group>
                         <group>
                             <group>
-                                <field attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}" name="partner_center"/>
-                                <field attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}" name="partner_department"/>
+                                <field name="partner_center" attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
+                                <field name="partner_department" attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
                             </group>
                             <group>
-                                <field attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}" name="partner_delivery_note"/>
-                                <field attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}" name="partner_order_doc"/>
-                                <field attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}" name="partner_sale_doc"/>
+                                <field name="partner_delivery_note" attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
+                                <field name="partner_order_doc" attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
+                                <field name="partner_sale_doc" attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
                             </group>
                         </group>
                     </group>
                     <group string="Delivery Data">
                         <group>
-                            <field name="delivery_name" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
+                            <field name="delivery_name" attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
                             <label for="street" string="Address"/>
                             <div class="o_address_format">
                                 <field name="street" placeholder="Street..." class="o_address_street"
-                                       attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
+                                       attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
                                 <field name="street2" placeholder="Street 2..." class="o_address_street"
-                                       attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
+                                       attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
                                 <field name="zip_id" placeholder="Location completion" class="oe_edit_only"
                                        options="{'create_name_field': 'city', 'no_open': True, 'no_create': True}"
-                                       attrs="{'invisible':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
+                                       attrs="{'invisible':[('state','in',('closed','invoiced','cancel'))]}"/>
                                 <field name="city" placeholder="City" class="o_address_city"
-                                       attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
+                                       attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
                                 <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'
                                        context="{'country_id': country_id, 'zip': zip}"
-                                       attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
+                                       attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
                                 <field name="zip" placeholder="ZIP" class="o_address_zip"
-                                       attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
+                                       attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
                                 <field name="country_id" placeholder="Country" class="o_address_country"
                                        options='{"no_open": True, "no_create": True}'
-                                       attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
+                                       attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
                             </div>
                         </group>
                         <group name="delivery_contact">
-                            <field name="phone" widget="phone" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
-                            <field name="mobile" widget="phone" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
-                            <field name="email" widget="email" context="{'gravatar_image': True}" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
+                            <field name="phone" widget="phone" attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
+                            <field name="mobile" widget="phone" attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
+                            <field name="email" widget="email" attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}" context="{'gravatar_image': True}"/>
                         </group>
                     </group>
                     <group string="Freight Description">
                         <group>
-                            <field name="fr_desc" type="html" nolabel="1" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
+                            <field name="fr_desc" type="html" nolabel="1" attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
                         </group>
                         <group>
                             <group>
-                                <field name="fr_packages" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
+                                <field name="fr_packages" attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
                                 <field name="tag_ids" widget="many2many_tags"
                                        options="{'color_field': 'color', 'no_open': True, 'no_create': True}"
                                        attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
@@ -141,10 +141,10 @@
                                                'required':[('state','in',('closed',))]}"/>
                             </group>
                             <group groups="fms.group_fms_manager">
-                                <field name="fr_value" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
+                                <field name="fr_value" attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
                                 <label string="% commission" for="fr_commission_percent"/>
-                                <field name="fr_commission_percent" nolabel="1" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
-                                <field name="fr_commission" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
+                                <field name="fr_commission_percent" nolabel="1" attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
+                                <field name="fr_commission" attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
                             </group>
                         </group>
                     </group>

@@ -8,16 +8,18 @@ from datetime import datetime
 
 class FmsFreight(models.Model):
     _name = 'fms.freight'
-    _description = 'Freight Management'
+    _description = 'Freight Expedition Management'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'name desc'
 
-    name = fields.Char()
-    active = fields.Boolean(default=True, track_visibility="onchange",
+    name = fields.Char(string='Reference', index=True,
+        readonly=True, copy=False,
+        help='The reference that will be used on freight expeditions')
+    active = fields.Boolean(default=True,
         help="If the active field is set to False, it will allow you to hide"
              " the expedition without removing it.")
     state = fields.Selection([
-        ('draft', 'Pending'),
+        ('draft', 'Draft'),
         ('partial', 'Partial'),
         ('received', 'Received'),
         ('confirmed', 'Confirmed'),
@@ -111,14 +113,6 @@ class FmsFreight(models.Model):
             })
         self.update(vals)
 
-    @api.onchange('date_planned')
-    def _onchange_date_planned(self):
-        if self.state == "received":
-            self.update({'state': 'confirmed'})
-            self._origin.message_post(
-                body=_("The state has been changed automatically to "
-                "<strong>confirmed</strong> because the date has been established"))
-
     @api.onchange('user_id')
     def _onchange_user_id(self):
         if self.user_id.partner_id not in self.message_partner_ids:
@@ -169,42 +163,47 @@ class FmsFreight(models.Model):
     # Buttons Actions
     # ---------------------------
     @api.multi
-    def action_cancel(self):
-        for freight in self:
-            freight.state = 'cancel'
-            freight.message_post(body=_("<h5><strong>Cancelled</strong></h5>"))
-    @api.multi
-    def action_cancel_draft(self):
-        for freight in self:
-            freight.state = 'draft'
-            freight.message_post(
-                body=_("<h5><strong>Cancel to Pending</strong></h5>"))
-            # Reset values
-            freight.date_planned = False
-            freight.responsible_id = False
-            freight.commission_line_ids.unlink()
-    @api.multi
     def action_partial(self):
         for freight in self:
-            freight.state = 'partial'
-            self.message_post(
+            vals = ({
+                'state': 'partial'
+            })
+            if not freight.name:
+                vals.update({
+                    'name': self.env['ir.sequence'].next_by_code('fms.freight')
+                })
+            freight.update(vals)
+            freight.message_post(
                 body=_("<h5><strong>Receive Partial</strong></h5>"))
+
     @api.multi
     def action_receive(self):
         for freight in self:
-            freight.state = 'received'
-            self.message_post(body=_("<h5><strong>Received</strong></h5>"))
+            vals = ({
+                'state': 'received'
+            })
+            if not freight.name:
+                vals.update({
+                    'name': self.env['ir.sequence'].next_by_code('fms.freight')
+                })
+            freight.update(vals)
+            freight.message_post(body=_("<h5><strong>Received</strong></h5>"))
+
     @api.multi
     def action_confirm(self):
         for freight in self:
-            freight.state = 'confirmed'
-            self.message_post(body=_("<h5><strong>Confirmed</strong></h5>"))
+            freight.update({
+                'state': 'confirmed',
+                'tag_ids': False
+            })
+            freight.message_post(body=_("<h5><strong>Confirmed</strong></h5>"))
+
     @api.multi
     def action_close(self):
         self.ensure_one()
         for freight in self:
-            freight.state = 'closed'
-            self.message_post(body=_("<h5><strong>Closed</strong></h5>"))
+            freight.update({'state': 'closed'})
+            freight.message_post(body=_("<h5><strong>Closed</strong></h5>"))
             # Add employee commission automatically if not exists
             lines = freight.commission_line_ids.filtered(
                 lambda l: l.employee_id.id == freight.responsible_id.id
@@ -222,12 +221,34 @@ class FmsFreight(models.Model):
                 new_commission._onchange_employee_id()
                 vals = new_commission._convert_to_write(new_commission._cache)
                 self.env['fms.freight.commission.line'].sudo().create(vals)
+
     @api.multi
     def action_reopen(self):
         for freight in self:
-            freight.state = 'confirmed'
-            self.message_post(
+            freight.update({'state': 'confirmed'})
+            freight.message_post(
                 body=_("<h5><strong>Reopen: Closed to confirmed</strong></h5>"))
+
+    @api.multi
+    def action_cancel(self):
+        for freight in self:
+            freight.update({'state': 'cancel'})
+            freight.message_post(body=_("<h5><strong>Cancelled</strong></h5>"))
+
+    @api.multi
+    def action_cancel_draft(self):
+        for freight in self:
+            vals = ({
+                'state': 'draft',
+                'date_planned': False,
+                'responsible_id': False,
+                'tag_ids': False,
+            })
+            freight.update(vals)
+            freight.commission_line_ids.unlink()
+            freight.message_post(
+                body=_("<h5><strong>Cancel to Draft</strong></h5>"))
+
     def action_show_invoice(self):
         action = self.env.ref('account.action_invoice_tree1')
         result = action.read()[0]
@@ -235,6 +256,7 @@ class FmsFreight(models.Model):
         result['views'] = [(form_view.id, 'form')]
         result['res_id'] = self.invoice_id.id
         return result
+
     # ---------------------------
     # Delivery Address
     # ---------------------------
@@ -255,12 +277,14 @@ class FmsFreight(models.Model):
                 },
             }
         return {'domain': {'zip_id': []}}
+
     @api.onchange('country_id')
     def _onchange_country_id(self):
         if self.country_id and self.country_id != self.state_id.country_id:
             self.state_id = False
         if self.zip_id and self.zip_id.city_id.country_id != self.country_id:
             self.zip_id = False
+
     @api.onchange('zip_id')
     def _onchange_zip_id(self):
         if self.zip_id:
@@ -274,6 +298,7 @@ class FmsFreight(models.Model):
             if self.zip_id.city_id.state_id:
                 vals.update({'state_id': self.zip_id.city_id.state_id})
             self.update(vals)
+
     @api.constrains('zip_id', 'country_id', 'city_id', 'state_id')
     def _check_zip(self):
         if self.env.context.get('skip_check_zip'):
@@ -289,6 +314,7 @@ class FmsFreight(models.Model):
                 raise ValidationError(_(
                     "The country of the delivery %s differs from that in "
                     "location %s") % (rec.name, rec.zip_id.name))
+
     @api.onchange('state_id')
     def _onchange_state_id(self):
         vals = {}
@@ -307,20 +333,51 @@ class FmsFreight(models.Model):
     # ---------------------------
     @api.model
     def create(self, vals=None):
-        # Assign name by sequence
         res = super(FmsFreight, self).create(vals)
-        res.name = self.env['ir.sequence'].next_by_code('fms.freight')
-        # Add User as follower
+        # Add Responsible selected as follower
         res.message_subscribe(partner_ids=[res.user_id.partner_id.id])
         return res
 
     @api.multi
     def unlink(self):
         for expedition in self:
-            if expedition.state != 'cancel':
+            if expedition.state not in ('draft', 'cancel'):
                 raise UserError(_(
-                    "You can only delete expeditions in state canceled."))
+                    "You can only delete expeditions in state draft or canceled."))
         return super(FmsFreight, self).unlink()
+
+    @api.multi
+    def write(self, values):
+        for freight in self:
+            """If state is 'received' and change field 'date_planed': 
+               - Automatically change the state to confirmed
+               - Remove freight tags
+            """
+            if values.get('date_planned') and freight.state == 'received':
+                values.update({
+                    'state': 'confirmed',
+                    'tag_ids': False
+                })
+                freight.message_post(
+                    body=_("The state has been changed automatically to "
+                    "<strong>Confirmed</strong> because the "
+                    "<strong>date</strong> has been changed in received state.<br>"
+                    "And all expedition tags has been removed too."))
+            else:
+                """Create a message in chatter with the name 
+                   of the freight tags if they have been changed
+                """
+                if values.get('tag_ids'):
+                    if values['tag_ids'][0][2]:
+                        tag_ids = values['tag_ids'][0][2]
+                        tags = self.env['fms.freight.tags'].browse(tag_ids)
+                        tag_names = ''
+                        for tag in tags:
+                            tag_names += '<li>' + tag.name + "</li>"
+                        message = _("Expedition Tags:\n <ul>%s</ul>" % tag_names)
+                        freight.message_post(body=message)
+
+        return super(FmsFreight, self).write(values)
 
     # ---------------------------
     # Invoicing
@@ -404,13 +461,12 @@ class FmsFreightCommissionLine(models.Model):
 
 
 class FmsFreightTags(models.Model):
-    """ Tags of freights """
     _name = "fms.freight.tags"
-    _description = "Tags in expeditions"
+    _description = "Tags in freight expeditions"
 
     name = fields.Char(required=True)
     color = fields.Integer(string='Color Index', default=10)
 
     _sql_constraints = [
-        ('name_uniq', 'unique (name)', "Tag name already exists !"),
+        ('name_uniq', 'unique (name)', "Tag name already exists!"),
     ]

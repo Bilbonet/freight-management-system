@@ -9,9 +9,9 @@
             <xpath expr="//group[@name='delivery_contact']" position="replace">
                 <group name="delivery_contact">
                     <group>
-                        <field name="phone" widget="phone" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
-                        <field name="mobile" widget="phone" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
-                        <field name="email" widget="email" context="{'gravatar_image': True}" attrs="{'readonly':[('state','in',('confirmed','closed','invoiced','cancel'))]}"/>
+                        <field name="phone" widget="phone" attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
+                        <field name="mobile" widget="phone" attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
+                        <field name="email" widget="email" context="{'gravatar_image': True}" attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
                     </group>
                      <group states="confirmed" style="margin:0px;">
                          <button name="%(fms_digitized_signature_action)d" type="action"
