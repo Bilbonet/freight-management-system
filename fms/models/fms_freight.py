@@ -194,9 +194,12 @@ class FmsFreight(models.Model):
         for freight in self:
             freight.update({
                 'state': 'confirmed',
-                'tag_ids': False
+                'tag_ids': [(6, 0, [])],
             })
-            freight.message_post(body=_("<h5><strong>Confirmed</strong></h5>"))
+            freight.message_post(body=_(
+                "<h5><strong>Confirmed</strong></h5>"
+                "And all expedition tags has been removed too."
+            ))
 
     @api.multi
     def action_close(self):
@@ -242,7 +245,7 @@ class FmsFreight(models.Model):
                 'state': 'draft',
                 'date_planned': False,
                 'responsible_id': False,
-                'tag_ids': False,
+                'tag_ids': [(6, 0, [])],
             })
             freight.update(vals)
             freight.commission_line_ids.unlink()
@@ -356,7 +359,7 @@ class FmsFreight(models.Model):
             if values.get('date_planned') and freight.state == 'received':
                 values.update({
                     'state': 'confirmed',
-                    'tag_ids': False
+                    'tag_ids': [(6, 0, [])],
                 })
                 freight.message_post(
                     body=_("The state has been changed automatically to "
@@ -364,7 +367,7 @@ class FmsFreight(models.Model):
                     "<strong>date</strong> has been changed in received state.<br>"
                     "And all expedition tags has been removed too."))
             else:
-                """Create a message in chatter with the name 
+                """Create a message in chatter with the name
                    of the freight tags if they have been changed
                 """
                 if values.get('tag_ids'):
