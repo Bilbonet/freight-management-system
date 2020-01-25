@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-18 21:33+0000\n"
-"PO-Revision-Date: 2020-01-18 21:33+0000\n"
+"POT-Creation-Date: 2020-01-25 20:35+0000\n"
+"PO-Revision-Date: 2020-01-25 20:35+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -260,19 +260,19 @@ msgid "<div style=\"margin: 0px; padding: 0px;\">\n"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:250
+#: code:addons/fms/models/fms_freight.py:253
 #, python-format
 msgid "<h5><strong>Cancel to Draft</strong></h5>"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:236
+#: code:addons/fms/models/fms_freight.py:239
 #, python-format
 msgid "<h5><strong>Cancelled</strong></h5>"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:206
+#: code:addons/fms/models/fms_freight.py:209
 #, python-format
 msgid "<h5><strong>Closed</strong></h5>"
 msgstr ""
@@ -280,7 +280,7 @@ msgstr ""
 #. module: fms
 #: code:addons/fms/models/fms_freight.py:199
 #, python-format
-msgid "<h5><strong>Confirmed</strong></h5>"
+msgid "<h5><strong>Confirmed</strong></h5>And all expedition tags has been removed too."
 msgstr ""
 
 #. module: fms
@@ -296,7 +296,7 @@ msgid "<h5><strong>Received</strong></h5>"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:230
+#: code:addons/fms/models/fms_freight.py:233
 #, python-format
 msgid "<h5><strong>Reopen: Closed to confirmed</strong></h5>"
 msgstr ""
@@ -1020,7 +1020,7 @@ msgid "Expedition Tags"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:377
+#: code:addons/fms/models/fms_freight.py:380
 #, python-format
 msgid "Expedition Tags:\n"
 " <ul>%s</ul>"
@@ -1819,7 +1819,7 @@ msgid "Tags in freight expeditions"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:314
+#: code:addons/fms/models/fms_freight.py:317
 #, python-format
 msgid "The country of the delivery %s differs from that in location %s"
 msgstr ""
@@ -1844,13 +1844,13 @@ msgid "The reference that will be used on freight expeditions"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:362
+#: code:addons/fms/models/fms_freight.py:365
 #, python-format
 msgid "The state has been changed automatically to <strong>Confirmed</strong> because the <strong>date</strong> has been changed in received state.<br>And all expedition tags has been removed too."
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:310
+#: code:addons/fms/models/fms_freight.py:313
 #, python-format
 msgid "The state of the delivery %s differs from that in location %s"
 msgstr ""
@@ -1975,7 +1975,7 @@ msgid "You can only delete Liquidation Orders in state draft."
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:345
+#: code:addons/fms/models/fms_freight.py:348
 #, python-format
 msgid "You can only delete expeditions in state draft or canceled."
 msgstr ""
