@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-25 20:36+0000\n"
-"PO-Revision-Date: 2020-01-25 20:36+0000\n"
+"POT-Creation-Date: 2020-01-27 17:19+0000\n"
+"PO-Revision-Date: 2020-01-27 17:19+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -270,11 +270,6 @@ msgstr "\n"
 "        "
 
 #. module: fms
-#: model:mail.template,subject:fms.invoice_email_template
-msgid "${object.company_id.name} Factura (Ref: ${object.number or 'n/a'})"
-msgstr ""
-
-#. module: fms
 #: model:mail.template,subject:fms.fms_freight_email_template
 #: model:mail.template,subject:fms.fms_freight_email_template_expedition
 msgid "${object.company_id.name} Freight (${object.name})"
@@ -286,11 +281,6 @@ msgstr "${object.company_id.name} Expedición (${object.name})"
 #: model_terms:ir.ui.view,arch_db:fms.fms_view_partner_form
 msgid "% commission"
 msgstr "% comisión"
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
-msgid "&amp;nbsp;<span>en</span>"
-msgstr ""
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
@@ -338,56 +328,6 @@ msgid "<br/>\n"
 "                        <strong>Sale Doc.: </strong>"
 msgstr "<br/>\n"
 "                        <strong>Venta Doc.: </strong>"
-
-#. module: fms
-#: model:mail.template,body_html:fms.invoice_email_template
-msgid "<div style=\"margin: 0px; padding: 0px;\">\n"
-"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        Estimado ${object.partner_id.name}\n"
-"        % if object.partner_id.parent_id:\n"
-"            (${object.partner_id.parent_id.name})\n"
-"        % endif\n"
-"        <br/><br/>\n"
-"        Aquí esta su\n"
-"        % if object.number:\n"
-"            factura <strong>${object.number}</strong>\n"
-"        % else:\n"
-"            factura pro-forma\n"
-"        %endif\n"
-"        % if object.origin:\n"
-"            (con motivo origén: ${object.origin})\n"
-"        % endif\n"
-"        por un valor de <strong>${format_amount(object.amount_total, object.currency_id)}.</strong>\n"
-"    </p>\n"
-"    <p>\n"
-"        % if object.state=='paid':\n"
-"            Esta factura ya está pagada.\n"
-"        % else:\n"
-"            En el adjunto se detalla la modalidad de pago y los vencimientos.\n"
-"        % endif\n"
-"    </p>\n"
-"    <br/><br/>\n"
-"    <p>Si tiene alguna pregunta, no dude en contactarnos.</p>\n"
-"    <p>Gracias por su confianza en ${object.company_id.name or 'us'}!</p>\n"
-"    % if object.user_id.signature:\n"
-"       ${object.user_id.signature | safe}\n"
-"    % else\n"
-"        <div style=\"padding:0px;margin:auto;\">\n"
-"            <table cellspacing=\"0\" cellpadding=\"0\">\n"
-"                <tbody>\n"
-"                    <tr>\n"
-"                        <td style=\"padding:10px 10px 10px 0px;font-size: 12px\" width=\"200\">\n"
-"                            <img src=\"/logo.png\" style=\"padding: 0px; margin: 0px; height: auto; width: 100px;\" alt=\"${user.company_id.name}\"/>\n"
-"                        </td>\n"
-"                    </tr>\n"
-"                </tbody>\n"
-"            </table>\n"
-"        </div>\n"
-"    % endif\n"
-"    <br/>\n"
-"</div>\n"
-"            "
-msgstr ""
 
 #. module: fms
 #: code:addons/fms/models/fms_freight.py:253
@@ -442,71 +382,16 @@ msgid "<span class=\"o_form_label\">Expedition Default Product</span>"
 msgstr "<span class=\"o_form_label\">Expedición producto por defecto</span>"
 
 #. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
-msgid "<span>Albarán</span>"
-msgstr ""
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
-msgid "<span>Centro</span>"
-msgstr ""
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
-msgid "<span>Dpto.</span>"
-msgstr ""
-
-#. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "<span>Expedition:</span>"
 msgstr "<span>Expedición:</span>"
 
 #. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
-msgid "<span>Fecha Exp.</span>"
-msgstr ""
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
-msgid "<span>Nuestra Ref.</span>"
-msgstr ""
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
-msgid "<span>Pedido</span>"
-msgstr ""
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
-msgid "<span>Total Neto</span>"
-msgstr ""
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
-msgid "<span>Valor Mercancía</span>"
-msgstr ""
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
-msgid "<strong class=\"mr16\">Subtotal</strong>"
-msgstr ""
-
-#. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "<strong>Center: </strong>"
 msgstr "<strong>Centro:</strong>"
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
-msgid "<strong>Commentario:</strong>"
-msgstr "<strong>Comentario:</strong>"
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
-msgid "<strong>Cuenta Bancaria:</strong>"
-msgstr ""
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
@@ -518,17 +403,7 @@ msgstr "<strong>Fecha Orden: </strong>"
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "<strong>Email: </strong>"
-msgstr ""
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
-msgid "<strong>Fecha Factura: </strong>"
-msgstr ""
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
-msgid "<strong>Forma Pago: </strong>"
-msgstr ""
+msgstr "<strong>Email: </strong>"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
@@ -544,14 +419,8 @@ msgstr "<strong>Teléfono: </strong>"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
 msgid "<strong>Subtotal</strong>"
-msgstr ""
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
-msgid "<strong>Total</strong>"
-msgstr ""
+msgstr "<strong>Subtotal</strong>"
 
 #. module: fms
 #: sql_constraint:fms.commission.liquidation:0
@@ -563,7 +432,7 @@ msgstr "Ya existe una linea de comisión con esta referencia en la conpañia"
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_needaction
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__message_needaction
 msgid "Action Needed"
-msgstr "Acción Necesaria"
+msgstr "Acción requerida"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__active
@@ -932,12 +801,6 @@ msgid "Created on"
 msgstr "Creado el"
 
 #. module: fms
-#: code:addons/fms/models/account_invoice.py:32
-#, python-format
-msgid "Credit Note"
-msgstr "Nota Credito"
-
-#. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__currency_id
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__currency_id
 #: model:ir.model.fields,field_description:fms.field_fms_freight__currency_id
@@ -1038,6 +901,11 @@ msgid "Delivery zip"
 msgstr "C.P. Entrega"
 
 #. module: fms
+#: model:mail.template,report_name:fms.fms_freight_email_template
+msgid "Delivery_note_${object.name}"
+msgstr "Nota_entrega_${object.name}"
+
+#. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__partner_department
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order_line_create__partner_department
 msgid "Department code"
@@ -1098,11 +966,6 @@ msgstr "Comisión Empleado"
 #: model:ir.model.fields,help:fms.field_fms_freight__responsible_id
 msgid "Employee which is responsible to do the expedition."
 msgstr "Empleado responsable de la expedición"
-
-#. module: fms
-#: model:mail.template,report_name:fms.fms_freight_email_template_expedition
-msgid "Expedición_${object.name}"
-msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__c_freight_id
@@ -1169,6 +1032,11 @@ msgid "Expedition:"
 msgstr "Expedición:"
 
 #. module: fms
+#: model:mail.template,report_name:fms.fms_freight_email_template_expedition
+msgid "Expedition_${object.name}"
+msgstr "Expedicion_${object.name}"
+
+#. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order_line_create__freight_ids
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_tree_view
 #: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_form_view
@@ -1185,17 +1053,7 @@ msgstr "Expediciones Ordenes Facturación"
 #: model:ir.ui.menu,name:fms.fms_main_menu
 #: model_terms:ir.ui.view,arch_db:fms.res_config_settings_view_form
 msgid "F.M.S"
-msgstr ""
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
-msgid "FACTURA Rectificativa:"
-msgstr ""
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
-msgid "FACTURA:"
-msgstr ""
+msgstr "F.M.S"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.res_config_settings_view_form
@@ -1229,21 +1087,6 @@ msgstr "FMS % de comisión por defecto"
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "FREIGHT DESCRIPTION"
 msgstr "DESCRIPCIÓN MERCANCIA"
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
-msgid "Factura Borrador:"
-msgstr ""
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
-msgid "Factura Cancelada:"
-msgstr ""
-
-#. module: fms
-#: model:mail.template,report_name:fms.invoice_email_template
-msgid "Factura_${(object.number or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}"
-msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__message_follower_ids
@@ -1305,7 +1148,7 @@ msgstr "Descripción expedición"
 #. module: fms
 #: model:ir.model,name:fms.model_fms_freight
 msgid "Freight Expedition Management"
-msgstr ""
+msgstr "Gestión Expediciones Mercancia"
 
 #. module: fms
 #: model_terms:ir.actions.act_window,help:fms.fms_freight_action_from_menu
@@ -1377,7 +1220,7 @@ msgstr "Asigna la visivilidad de la expedición:\n"
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order_line__id
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order_line_create__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: fms
 #: model:ir.model.fields,help:fms.field_fms_commission_liquidation__message_unread
@@ -1433,22 +1276,15 @@ msgid "Import Expeditions"
 msgstr "Importar Expediciones"
 
 #. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
-msgid "Importe"
-msgstr ""
-
-#. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__notes
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
 msgid "Internal Notes"
 msgstr "Notas internas"
 
 #. module: fms
-#: code:addons/fms/models/account_invoice.py:30
 #: model:ir.model,name:fms.model_account_invoice
 #: model:ir.model.fields,field_description:fms.field_fms_freight__invoice_id
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__invoice_id
-#, python-format
 msgid "Invoice"
 msgstr "Factura"
 
@@ -1637,11 +1473,6 @@ msgid "No valid lines found for invoicing.Please review the order lines."
 msgstr "No se han encontrado lineas validas para la fcturación. Por favor revisa las lineas de la orden."
 
 #. module: fms
-#: model:mail.template,report_name:fms.fms_freight_email_template
-msgid "Nota_Entrega_${object.name}"
-msgstr ""
-
-#. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__message_needaction_counter
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_needaction_counter
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__message_needaction_counter
@@ -1680,11 +1511,6 @@ msgstr "Número de mensajes no leidos"
 #: model:ir.model.fields,field_description:fms.field_fms_freight__fr_packages
 msgid "Nº Packages"
 msgstr "Nº Bultos"
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
-msgid "Nº Proveedor:"
-msgstr ""
 
 #. module: fms
 #: selection:fms.freight,privacy_visibility:0
@@ -1727,11 +1553,6 @@ msgstr "Otra información"
 #: selection:fms.freight,activity_state:0
 msgid "Overdue"
 msgstr "Vencimiento"
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
-msgid "PRO-FORMA:"
-msgstr ""
 
 #. module: fms
 #: selection:fms.freight,state:0
@@ -1872,12 +1693,6 @@ msgstr "Seleccione Expediciones para crear la factura"
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
 msgid "Send Email"
 msgstr "Enviar Email"
-
-#. module: fms
-#: code:addons/fms/models/account_invoice.py:47
-#, python-format
-msgid "Send Invoice"
-msgstr "Enviar Factura"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__sequence
@@ -2030,11 +1845,6 @@ msgid "Total Amount"
 msgstr "Importe total"
 
 #. module: fms
-#: model:ir.actions.report,name:fms.account_invoices
-msgid "Transmobil Invoices"
-msgstr "Transmobil Facturas"
-
-#. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__message_unread
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_unread
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__message_unread
@@ -2059,23 +1869,6 @@ msgstr "Usuario"
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order_line__amount
 msgid "Value of commission"
 msgstr "Valor comisión"
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_invoice_document
-msgid "Vencimiento(s)"
-msgstr ""
-
-#. module: fms
-#: code:addons/fms/models/account_invoice.py:31
-#, python-format
-msgid "Vendor Bill"
-msgstr "Proveedor Factura"
-
-#. module: fms
-#: code:addons/fms/models/account_invoice.py:33
-#, python-format
-msgid "Vendor Credit note"
-msgstr "Proveedor Factura Rectificativa"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view

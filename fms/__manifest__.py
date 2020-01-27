@@ -28,7 +28,6 @@
         'views/product_template_view.xml',
         'report/report_templates.xml',
         'report/fms_freight_report.xml',
-        'report/account_invoice_report.xml',
         'views/fms_invoicing.xml',
         'views/fms_invoicing_line.xml',
         'views/account_invoice_view.xml',
@@ -38,7 +37,6 @@
         'views/fms_commission_liquidation_line_view.xml',
         'views/res_partner_views.xml',
         'data/fms_freight_email_template.xml',
-        'data/invoice_mail_template_data.xml',
     ],
     'installable': True,
 }
