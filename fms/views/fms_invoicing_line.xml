@@ -30,7 +30,8 @@
         <field name="name">fms.invoicing.order.line tree view</field>
         <field name="model">fms.invoicing.order.line</field>
         <field name="arch" type="xml">
-            <tree string="Order Lines" default_order="f_date_planned" create="false">
+            <tree string="Order Lines" default_order="f_date_planned" create="false"
+                  decoration-success="f_state=='invoiced'">
                 <field name="order_id" invisible="not context.get('fms_invoicing_order_line_main_view')"/>
                 <field name="freight_id"/>
                 <field name="f_date_planned"/>

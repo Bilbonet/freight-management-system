@@ -96,8 +96,11 @@ class FmsFreight(models.Model):
     # Commission Lines
     commission_line_ids = fields.One2many(
         'fms.freight.commission.line', 'freight_id', string="Commission")
-    invoice_id = fields.Many2one(
-        comodel_name='account.invoice', string='Invoice', copy=False)
+    # Invoicing
+    invoice_id = fields.Many2one(comodel_name='account.invoice',
+        string='Invoice', copy=False)
+    invoicing_order_id = fields.Many2one(comodel_name='fms.invoicing.order',
+        string='Invoicing Order', copy=False)
 
     @api.onchange('fr_value','fr_commission_percent')
     def _calculate_fr_commission_percent(self):
@@ -251,6 +254,14 @@ class FmsFreight(models.Model):
             freight.commission_line_ids.unlink()
             freight.message_post(
                 body=_("<h5><strong>Cancel to Draft</strong></h5>"))
+
+    def action_show_order(self):
+        action = self.env.ref('fms.fms_invoicing_action')
+        result = action.read()[0]
+        form_view = self.env.ref('fms.fms_invoicing_form_view')
+        result['views'] = [(form_view.id, 'form')]
+        result['res_id'] = self.invoicing_order_id.id
+        return result
 
     def action_show_invoice(self):
         action = self.env.ref('account.action_invoice_tree1')

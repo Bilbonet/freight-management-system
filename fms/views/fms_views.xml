@@ -48,6 +48,14 @@
                 </header>
                 <sheet string="Expedition">
                     <div class="oe_button_box" name="button_box">
+                        <button name="action_show_order"
+                                type="object" icon="fa-list-ol"
+                                groups="account.group_account_manager"
+                                attrs="{'invisible': [('invoicing_order_id', '=', False)]}"
+                                class="oe_stat_button">
+                            <field string="View Order"
+                                   name="invoicing_order_id" widget="statinfo"/>
+                        </button>
                         <button name="action_show_invoice"
                                 type="object" icon="fa-pencil-square-o"
                                 groups="account.group_account_manager"

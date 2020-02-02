@@ -30,6 +30,7 @@ class FmsInvoicingOrderLineCreate(models.TransientModel):
         order = self.env['fms.invoicing.order'].browse(context['active_id'])
         res.update({
             'order_id': order.id,
+            'date_planned': order.date_invoice,
             })
         return res
 
@@ -37,6 +38,7 @@ class FmsInvoicingOrderLineCreate(models.TransientModel):
     def _prepare_expedition_domain(self):
         self.ensure_one()
         domain = [('state', '=', 'closed'),
+                  ('invoicing_order_id', '=', False),
                   ('partner_id', '=', self.order_id.partner_id.id),
                   ('company_id', '=', self.order_id.company_id.id),
                   ('date_planned', '<=', self.date_planned),]
@@ -47,13 +49,13 @@ class FmsInvoicingOrderLineCreate(models.TransientModel):
         if self.product_id:
             domain += [('product_id', '=', self.product_id.id)]
 
-        orderlines = self.env['fms.invoicing.order.line'].search([
-            ('state', 'in', ('draft','done')),
-            ('freight_id', '!=', False)])
-        if orderlines:
-            expeditions_ids = [
-                orderline.freight_id.id for orderline in orderlines]
-            domain += [('id', 'not in', expeditions_ids)]
+        # orderlines = self.env['fms.invoicing.order.line'].search([
+        #     ('state', 'in', ('draft','done')),
+        #     ('freight_id', '!=', False)])
+        # if orderlines:
+        #     expeditions_ids = [
+        #         orderline.freight_id.id for orderline in orderlines]
+        #     domain += [('id', 'not in', expeditions_ids)]
         return domain
 
     @api.multi
@@ -82,7 +84,11 @@ class FmsInvoicingOrderLineCreate(models.TransientModel):
     @api.multi
     def create_order_lines(self):
         if self.freight_ids:
-            # pass
-            self.freight_ids.create_invoicing_order_line_from_expedition(
-                self.order_id)
+            lines = self.freight_ids.create_invoicing_order_line_from_expedition(
+                                                                    self.order_id)
+            if lines:
+                for expedition in self.freight_ids:
+                    expedition.update({
+                        'invoicing_order_id': self.order_id,
+                    })
         return True

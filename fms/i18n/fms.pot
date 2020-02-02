@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-27 17:19+0000\n"
-"PO-Revision-Date: 2020-01-27 17:19+0000\n"
+"POT-Creation-Date: 2020-02-02 20:21+0000\n"
+"PO-Revision-Date: 2020-02-02 20:21+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -146,6 +146,15 @@ msgid "\n"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,help:fms.field_fms_invoicing_order__invoice_state
+msgid " * The 'Draft' status is used when a user is encoding a new and unconfirmed Invoice.\n"
+" * The 'Open' status is used when user creates invoice, an invoice number is generated. It stays in the open status till the user pays the invoice.\n"
+" * The 'In Payment' status is used when payments have been registered for the entirety of the invoice in a journal configured to post entries at bank reconciliation only, and some of them haven't been reconciled with a bank statement line yet.\n"
+" * The 'Paid' status is set automatically when the invoice is paid. Its related journal entries may or may not be reconciled.\n"
+" * The 'Cancelled' status is used when user cancel invoice."
+msgstr ""
+
+#. module: fms
 #: model:mail.template,subject:fms.fms_freight_email_template
 #: model:mail.template,subject:fms.fms_freight_email_template_expedition
 msgid "${object.company_id.name} Freight (${object.name})"
@@ -200,43 +209,43 @@ msgid "<br/>\n"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:253
+#: code:addons/fms/models/fms_freight.py:256
 #, python-format
 msgid "<h5><strong>Cancel to Draft</strong></h5>"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:239
+#: code:addons/fms/models/fms_freight.py:242
 #, python-format
 msgid "<h5><strong>Cancelled</strong></h5>"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:209
+#: code:addons/fms/models/fms_freight.py:212
 #, python-format
 msgid "<h5><strong>Closed</strong></h5>"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:199
+#: code:addons/fms/models/fms_freight.py:202
 #, python-format
 msgid "<h5><strong>Confirmed</strong></h5>And all expedition tags has been removed too."
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:177
+#: code:addons/fms/models/fms_freight.py:180
 #, python-format
 msgid "<h5><strong>Receive Partial</strong></h5>"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:190
+#: code:addons/fms/models/fms_freight.py:193
 #, python-format
 msgid "<h5><strong>Received</strong></h5>"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:233
+#: code:addons/fms/models/fms_freight.py:236
 #, python-format
 msgid "<h5><strong>Reopen: Closed to confirmed</strong></h5>"
 msgstr ""
@@ -542,7 +551,7 @@ msgid "Commission State"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:109
+#: code:addons/fms/models/fms_freight.py:112
 #, python-format
 msgid "Commission percent should be less or equal to 100!"
 msgstr ""
@@ -572,7 +581,7 @@ msgid "Complete Name"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:151
+#: code:addons/fms/models/fms_freight.py:154
 #, python-format
 msgid "Compose Email"
 msgstr ""
@@ -883,7 +892,7 @@ msgid "Expedition Tags"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:380
+#: code:addons/fms/models/fms_freight.py:391
 #, python-format
 msgid "Expedition Tags:\n"
 " <ul>%s</ul>"
@@ -1155,6 +1164,11 @@ msgid "Invoice"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_form_view
+msgid "Invoice Add Lines"
+msgstr ""
+
+#. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__date_invoice
 msgid "Invoice Date"
 msgstr ""
@@ -1167,6 +1181,11 @@ msgstr ""
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_form_view
 msgid "Invoice Orders"
+msgstr ""
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__invoice_state
+msgid "Invoice State"
 msgstr ""
 
 #. module: fms
@@ -1187,6 +1206,7 @@ msgstr ""
 
 #. module: fms
 #: model:ir.model,name:fms.model_fms_invoicing_order
+#: model:ir.model.fields,field_description:fms.field_fms_freight__invoicing_order_id
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order_line_create__order_id
 msgid "Invoicing Order"
 msgstr ""
@@ -1333,7 +1353,7 @@ msgid "Next Activity Type"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:169
+#: code:addons/fms/models/fms_invoicing.py:161
 #, python-format
 msgid "No valid lines found for invoicing.Please review the order lines."
 msgstr ""
@@ -1463,7 +1483,7 @@ msgid "Planned Date"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:126
+#: code:addons/fms/models/fms_invoicing.py:134
 #, python-format
 msgid "Please define a journal for the company '%s'."
 msgstr ""
@@ -1545,7 +1565,7 @@ msgid "Search Expeditions"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/wizard/fms_invoicing_line_create.py:65
+#: code:addons/fms/wizard/fms_invoicing_line_create.py:67
 #, python-format
 msgid "Select Expeditions to Create Transactions"
 msgstr ""
@@ -1634,23 +1654,16 @@ msgid "Tags in freight expeditions"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:317
+#: code:addons/fms/models/fms_freight.py:328
 #, python-format
 msgid "The country of the delivery %s differs from that in location %s"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:160
+#: code:addons/fms/models/fms_invoicing.py:168
 #, python-format
 msgid "The line '%s' has not a product for invoicing:\n"
 "All expeditions must have a product before invoicing."
-msgstr ""
-
-#. module: fms
-#: code:addons/fms/models/fms_invoicing.py:153
-#, python-format
-msgid "The line '%s' is not in state Closed:\n"
-"All expeditions must be in Closed state before invoicing"
 msgstr ""
 
 #. module: fms
@@ -1659,13 +1672,13 @@ msgid "The reference that will be used on freight expeditions"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:365
+#: code:addons/fms/models/fms_freight.py:376
 #, python-format
 msgid "The state has been changed automatically to <strong>Confirmed</strong> because the <strong>date</strong> has been changed in received state.<br>And all expedition tags has been removed too."
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:313
+#: code:addons/fms/models/fms_freight.py:324
 #, python-format
 msgid "The state of the delivery %s differs from that in location %s"
 msgstr ""
@@ -1738,6 +1751,11 @@ msgid "View Invoice"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+msgid "View Order"
+msgstr ""
+
+#. module: fms
 #: selection:fms.freight,privacy_visibility:0
 msgid "Visible by all employees"
 msgstr ""
@@ -1768,19 +1786,26 @@ msgid "You can only delete Liquidation Orders in state draft."
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:348
+#: code:addons/fms/models/fms_freight.py:359
 #, python-format
 msgid "You can only delete expeditions in state draft or canceled."
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:106
+#: code:addons/fms/models/fms_invoicing.py:114
 #, python-format
 msgid "You cannot cancel an order with invoice. You can delete the invoice and then cancel it."
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:84
+#: code:addons/fms/models/fms_invoicing_line.py:98
+#, python-format
+msgid "You cannot delete an expedition invoiced.\n"
+"You have to delete the line into the invoice first."
+msgstr ""
+
+#. module: fms
+#: code:addons/fms/models/fms_invoicing.py:87
 #, python-format
 msgid "You cannot delete an order invoiced. You can delete de invoice and then cancel it in order to do so."
 msgstr ""

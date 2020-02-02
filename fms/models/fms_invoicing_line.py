@@ -48,8 +48,6 @@ class FmsInvoicingOrderLine(models.Model):
             'quantity': 1,
             'uom_id': self.f_product_id.uom_id.id,
             'fms_freight_id': self.freight_id.id,
-            # 'discount': self.discount,
-            # 'contract_line_id': self.id,
         }
         invoice_line = self.env['account.invoice.line'].new(invoice_line_vals)
         # Get other invoice line values from product onchange
@@ -66,17 +64,18 @@ class FmsInvoicingOrderLine(models.Model):
     def _set_expedition_invoiced(self, invoice_id):
         self.ensure_one()
         vals = {
-            'invoice_id': invoice_id,
             'state': 'invoiced',
+            'invoice_id': invoice_id,
         }
         self.freight_id.update(vals)
     def _set_expedition_closed(self):
         self.ensure_one()
         vals = {
-            'invoice_id': False,
             'state': 'closed',
+            'invoice_id': [(6, 0, [])],
         }
         self.freight_id.update(vals)
+
     # -----------------------
     # CRUD overrides
     # -----------------------
@@ -87,3 +86,23 @@ class FmsInvoicingOrderLine(models.Model):
                 'fms.invoicing.order.line') or 'New'
 
         return super(FmsInvoicingOrderLine, self).create(vals)
+
+    @api.multi
+    def unlink(self):
+        for line in self:
+            if line.freight_id.state == 'invoiced':
+                invoice_line = self.env['account.invoice.line'].search([
+                    ('fms_freight_id', '=', line.freight_id.id),
+                ], limit=1)
+                if invoice_line:
+                    raise UserError(_(
+                        "You cannot delete an expedition invoiced.\n"
+                        "You have to delete the line into the invoice first."))
+                else:
+                    line._set_expedition_closed()
+
+            line.freight_id.update({
+                        'invoicing_order_id': [(6, 0, [])],
+                    })
+
+        return super(FmsInvoicingOrderLine, self).unlink()

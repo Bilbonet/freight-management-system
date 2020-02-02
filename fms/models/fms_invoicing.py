@@ -47,6 +47,9 @@ class FmsInvoicingOrder(models.Model):
         store=True, readonly=True, currency_field='currency_id')
     invoice_id = fields.Many2one(comodel_name='account.invoice',
         string='Invoice', copy=False)
+    invoice_state = fields.Selection(related='invoice_id.state',
+        string='Invoice State', copy=False)
+
 
     @api.model
     def _default_journal(self):
@@ -90,8 +93,13 @@ class FmsInvoicingOrder(models.Model):
     # Action Buttons
     # ------------------------
     def create_invoice(self):
-        invoice_values = self._prepare_invoice_values()
-        return self._finalize_and_create_invoice(invoice_values)
+        order_lines, invoice_values = self._prepare_invoice_values()
+        return self._finalize_and_create_invoice(order_lines, invoice_values)
+
+    def invoice_add_lines(self):
+        self._create_new_invoice_lines()
+        return True
+
     def action_show_invoice(self):
         action = self.env.ref('account.action_invoice_tree1')
         result = action.read()[0]
@@ -146,30 +154,25 @@ class FmsInvoicingOrder(models.Model):
         :return: order lines (fms.invoicing.order.line recordset)
         """
         self.ensure_one()
-        order_lines = self.order_line_ids
+        order_lines = self.order_line_ids.search([
+            ('f_state', '=', 'closed'),
+        ])
+        if not order_lines:
+            raise UserError(_(
+                "No valid lines found for invoicing."
+                "Please review the order lines."))
+
         for line in order_lines:
-            if line.f_state != 'closed':
-                raise ValidationError(
-                    _("The line '%s' is not in state Closed:\n"
-                      "All expeditions must be in Closed state "
-                      "before invoicing")
-                    % (line.name or '')
-                )
             if not line.f_product_id:
                 raise ValidationError(
                     _("The line '%s' has not a product for invoicing:\n"
                       "All expeditions must have a product before invoicing.")
                     % (line.name or '')
                 )
-
         return order_lines
+
     def _prepare_invoice_values(self):
         order_lines = self._get_lines_to_invoice()
-        if not order_lines:
-            raise UserError(_(
-                "No valid lines found for invoicing."
-                "Please review the order lines."))
-
         invoice_values = self._prepare_invoice()
         for line in order_lines:
             invoice_values.setdefault('invoice_line_ids', [])
@@ -178,7 +181,7 @@ class FmsInvoicingOrder(models.Model):
                 invoice_values['invoice_line_ids'].append(
                     (0, 0, invoice_line_values)
                 )
-        return invoice_values
+        return order_lines, invoice_values
 
     @api.model
     def _finalize_invoice_values(self, invoice_values):
@@ -203,12 +206,10 @@ class FmsInvoicingOrder(models.Model):
             price_unit = invoice_line.price_unit
             invoice_line.invoice_id = new_invoice
             invoice_line._onchange_product_id()
-            invoice_line.update(
-                {
+            invoice_line.update({
                     'name': name,
                     'price_unit': price_unit,
-                }
-            )
+                })
         return new_invoice._convert_to_write(new_invoice._cache)
     @api.model
     def _finalize_invoice_creation(self, invoice):
@@ -219,7 +220,7 @@ class FmsInvoicingOrder(models.Model):
         invoice.fiscal_position_id = fiscal_position
         invoice.compute_taxes()
     @api.model
-    def _finalize_and_create_invoice(self, invoice_values):
+    def _finalize_and_create_invoice(self, order_lines, invoice_values):
         """
         This method:
          - finalizes the invoice values (onchange's...)
@@ -242,11 +243,33 @@ class FmsInvoicingOrder(models.Model):
         self.update(vals)
 
         # Update Expeditions
-        for order_line in self.order_line_ids:
+        for order_line in order_lines:
            order_line._set_expedition_invoiced(invoice.id)
 
         return invoice
 
+    # -----------------
+    # Invoice Add Lines
+    # -----------------
+    def _create_new_invoice_lines(self):
+        order_lines = self._get_lines_to_invoice()
+        for line in order_lines:
+            invoice_line_values = line._prepare_invoice_line()
+            if invoice_line_values:
+                invoice_line_values.update({
+                    'invoice_id': self.invoice_id
+                })
+                new_line = self.env['account.invoice.line'].new(invoice_line_values)
+                new_line._onchange_product_id()
+                new_line.update({
+                    'name': line.name,
+                    'price_unit': line.amount,
+                })
+                new_line =  new_line._convert_to_write(new_line._cache)
+                self.env['account.invoice.line'].create(new_line)
 
+                # Update Expedition
+                line._set_expedition_invoiced(self.invoice_id.id)
 
-
+        self.invoice_id.compute_taxes()
+        return True
