@@ -154,9 +154,9 @@ class FmsInvoicingOrder(models.Model):
         :return: order lines (fms.invoicing.order.line recordset)
         """
         self.ensure_one()
-        order_lines = self.order_line_ids.search([
-            ('f_state', '=', 'closed'),
-        ])
+        order_lines = self.order_line_ids.filtered(
+            lambda lines: lines.f_state == 'closed'
+        )
         if not order_lines:
             raise UserError(_(
                 "No valid lines found for invoicing."

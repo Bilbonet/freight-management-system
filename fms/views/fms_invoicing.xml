@@ -8,15 +8,15 @@
             <form>
                 <header>
                     <button name="%(fms_invoicing_line_create_action)d" type="action"
-                        string="Import Expeditions" class="oe_highlight"
-                        states="draft,done"
-                        attrs="{'invisible': [('invoice_state', '!=', 'draft')]}"/>
+                            string="Import Expeditions" class="oe_highlight"
+                            attrs="{'invisible': ['|',('state', 'not in', ('draft','done')),('invoice_state', '!=', 'draft')]}"/>
                     <button name="create_invoice" type="object"
                             string="Create invoice"
                             states="draft" groups="account.group_account_manager"/>
                     <button name="invoice_add_lines" type="object"
                             string="Invoice Add Lines" icon="fa-rotate-right"
-                            states="done" groups="account.group_account_manager"/>
+                            attrs="{'invisible': ['|',('state', '!=', 'done'),('invoice_state', '!=', 'draft')]}"
+                            groups="account.group_account_manager"/>
                     <button name="action_cancel" type="object"
                             string="Cancel Order"
                             states="done"/>
