@@ -1,8 +1,11 @@
 # Copyright 2019 Jesus Ramiro <jesus@bilbonet.net>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import models, fields, api, _
-from odoo.exceptions import UserError, ValidationError
+from odoo import api, models, fields, _
+from odoo.exceptions import UserError
+from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
+from datetime import datetime
+
 
 class FmsCommissionLiquidation(models.Model):
     _name = 'fms.commission.liquidation'
@@ -17,7 +20,7 @@ class FmsCommissionLiquidation(models.Model):
         default=lambda self: self.env.user.company_id)
     currency_id = fields.Many2one(related='company_id.currency_id',
         store=True, readonly=True)
-    active = fields.Boolean(default=True, track_visibility="onchange",
+    active = fields.Boolean(default=True,
         help="If the active field is set to False, it will allow you to hide"
              " the liquidation without removing it.")
     state = fields.Selection(
@@ -53,6 +56,23 @@ class FmsCommissionLiquidation(models.Model):
             rec.amount_total = sum(
                 rec.mapped('cl_line_ids.c_amount') or
                 [0.0])
+
+    @api.onchange('employee_id')
+    def _onchange_employee_id(self):
+        if self.cl_line_ids:
+            raise UserError(_(
+                "There are commission lines.\n "
+                "Before you change the employee you have to delete all lines."))
+
+    @api.onchange('date')
+    def _onchange_date(self):
+        if self.cl_line_ids:
+            for line in self.cl_line_ids:
+                if line.c_date > self.date:
+                    raise UserError(_(
+                        "There are commission lines with date higher than "
+                        "selected date.\n"
+                        "Please delete those lines or select a higher date."))
 
     def _prepare_commission_domain(self):
         self.ensure_one()
@@ -120,10 +140,11 @@ class FmsCommissionLiquidation(models.Model):
             vals['name'] = self.env['ir.sequence'].next_by_code(
                 'fms.commission.liquidation') or 'New'
         return super(FmsCommissionLiquidation, self).create(vals)
+
     @api.multi
     def unlink(self):
         for liquidation in self:
-            if liquidation.state != 'cancel':
+            if liquidation.state != 'draft':
                 raise UserError(_(
                     "You can only delete Liquidation Orders in state draft."))
         return super(FmsCommissionLiquidation, self).unlink()

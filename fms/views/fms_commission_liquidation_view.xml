@@ -22,20 +22,13 @@
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet string="Commission Liquidation Orders">
-                    <!--<div class="oe_button_box" name="button_box">-->
-                        <!--<button name="action_show_invoice"-->
-                                <!--type="object" icon="fa-pencil-square-o"-->
-                                <!--attrs="{'invisible': [('invoice_id', '=', False)]}"-->
-                                <!--class="oe_stat_button">-->
-                            <!--<field string="View Invoice"-->
-                                   <!--name="invoice_id" widget="statinfo"/>-->
-                        <!--</button>-->
-                        <!--<button class="oe_stat_button" type="object"-->
-                                <!--name="toggle_active" icon="fa-archive">-->
-                            <!--<field name="active" widget="boolean_button"-->
-                                   <!--options="{&quot;terminology&quot;: &quot;archive&quot;}"/>-->
-                        <!--</button>-->
-                    <!--</div>-->
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object"
+                                name="toggle_active" icon="fa-archive">
+                            <field name="active" widget="boolean_button"
+                                   options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
 
                     <h1>
                         <label for="name" string="Liquidation Name: " attrs="{'invisible':[('name','=', False)]}" class="oe_inline"/>

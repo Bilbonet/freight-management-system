@@ -4,6 +4,7 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError, ValidationError
 
+
 class FmsCommissionLiquidationLine(models.Model):
     _name = 'fms.commission.liquidation.line'
     _description = 'Commission Liquidation Order Line'
@@ -24,6 +25,8 @@ class FmsCommissionLiquidationLine(models.Model):
         string='Expedition', readonly=True, ondelete='restrict')
     c_partner_id = fields.Many2one(related='f_commission_id.freight_id.partner_id',
         string='Customer', readonly=True)
+    c_delivery_name = fields.Char(related='f_commission_id.freight_id.delivery_name',
+        string='Contact Name', readonly=True)
     c_date = fields.Date(related='f_commission_id.date',
         string='Commission Date', readonly=True)
     c_product_id = fields.Many2one(related='f_commission_id.commission_product_id',

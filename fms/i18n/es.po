@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-02 20:22+0000\n"
-"PO-Revision-Date: 2020-02-02 20:22+0000\n"
+"POT-Creation-Date: 2020-02-04 21:25+0000\n"
+"PO-Revision-Date: 2020-02-04 21:25+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -416,7 +416,7 @@ msgstr "<strong>Fecha Orden: </strong>"
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "<strong>Email: </strong>"
-msgstr ""
+msgstr "<strong>Email: </strong>"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
@@ -433,7 +433,7 @@ msgstr "<strong>Teléfono: </strong>"
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "<strong>Subtotal</strong>"
-msgstr ""
+msgstr "<strong>Subtotal</strong>"
 
 #. module: fms
 #: sql_constraint:fms.commission.liquidation:0
@@ -445,7 +445,7 @@ msgstr "Ya existe una linea de comisión con esta referencia en la conpañia"
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_needaction
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__message_needaction
 msgid "Action Needed"
-msgstr "Acción Necesaria"
+msgstr "Acción requerida"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__active
@@ -753,6 +753,7 @@ msgid "Contact Logo"
 msgstr "Logo Contacto"
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__c_delivery_name
 #: model:ir.model.fields,field_description:fms.field_fms_freight__delivery_name
 msgid "Contact Name"
 msgstr "Nombre del contacto"
@@ -1066,7 +1067,7 @@ msgstr "Expediciones Ordenes Facturación"
 #: model:ir.ui.menu,name:fms.fms_main_menu
 #: model_terms:ir.ui.view,arch_db:fms.res_config_settings_view_form
 msgid "F.M.S"
-msgstr ""
+msgstr "F.M.S"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.res_config_settings_view_form
@@ -1161,7 +1162,7 @@ msgstr "Descripción expedición"
 #. module: fms
 #: model:ir.model,name:fms.model_fms_freight
 msgid "Freight Expedition Management"
-msgstr ""
+msgstr "Administración Expediciones Mercancia"
 
 #. module: fms
 #: model_terms:ir.actions.act_window,help:fms.fms_freight_action_from_menu
@@ -1826,13 +1827,29 @@ msgid "The state of the delivery %s differs from that in location %s"
 msgstr "La provincia de la entrega %s difiere de esta en la localización "
 
 #. module: fms
-#: code:addons/fms/models/fms_commission_liquidation.py:94
+#: code:addons/fms/models/fms_commission_liquidation.py:72
+#, python-format
+msgid "There are commission lines with date higher than selected date.\n"
+"Please delete those lines or select a higher date."
+msgstr "Hay lineas de comisiones con fecha mayor que la fecha selecionada.\n"
+"Por favor elimine dichas lineas o seleccione una fecha mayor."
+
+#. module: fms
+#: code:addons/fms/models/fms_commission_liquidation.py:63
+#, python-format
+msgid "There are commission lines.\n"
+" Before you change the employee you have to delete all lines."
+msgstr "Existen lineas de comisiones.\n"
+" Antes de modificar el empleado debe eliminar todas las lineas."
+
+#. module: fms
+#: code:addons/fms/models/fms_commission_liquidation.py:114
 #, python-format
 msgid "There aren't any commission line."
 msgstr "No hay ninguna linea de comisión"
 
 #. module: fms
-#: code:addons/fms/models/fms_commission_liquidation.py:81
+#: code:addons/fms/models/fms_commission_liquidation.py:101
 #, python-format
 msgid "There aren't any commission pending for this employee and date."
 msgstr "No hay ninguna comisión pendiente para este empleado fecha"
@@ -1922,7 +1939,7 @@ msgid "Wizard to create order lines"
 msgstr "Asistente para la creación de lineas"
 
 #. module: fms
-#: code:addons/fms/models/fms_commission_liquidation.py:127
+#: code:addons/fms/models/fms_commission_liquidation.py:148
 #, python-format
 msgid "You can only delete Liquidation Orders in state draft."
 msgstr "Usted solo puede eliminar ordenes de liquidación en estado borrador."

@@ -8,10 +8,12 @@
                 <group name="main" col="3">
                     <field name="liquidation_id" invisible="1"/>
                     <field name="employee_id" invisible="1"/>
-                    <field name="f_commission_id" options='{"no_create": True}'/>
+                    <field name="f_commission_id" readonly="1"/>
                     <field name="c_freight_id"/>
                     <field name="c_partner_id"/>
+                    <field name="c_delivery_name"/>
                     <field name="c_date"/>
+                    <field name="c_product_id"/>
                     <field name="c_amount"/>
                     <field name="company_id" widget="selection" groups="base.group_multi_company"/>
                     <field name="currency_id" invisible="1"/>
@@ -28,6 +30,7 @@
                 <field name="c_date"/>
                 <field name="c_freight_id"/>
                 <field name="c_partner_id"/>
+                <field name="c_delivery_name"/>
                 <field name="c_product_id"/>
                 <field name="c_state"/>
                 <field name="c_amount" sum="Total Amount"/>
