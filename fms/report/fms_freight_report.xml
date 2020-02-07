@@ -12,7 +12,7 @@
     />
 
 <template id="fms_freight_report_document">
-    <t t-call="fms.report_layout">
+    <t t-call="fms.expedition_report_layout">
         <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)" />
         <div class="page">
             <div class="oe_structure"/>
@@ -120,7 +120,7 @@
     />
 
 <template id="fms_freight_delivery_note_report_document">
-    <t t-call="fms.report_layout">
+    <t t-call="fms.expedition_report_layout">
         <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)" />
         <div class="page">
             <div class="oe_structure"/>

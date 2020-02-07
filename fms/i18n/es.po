@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-04 21:25+0000\n"
-"PO-Revision-Date: 2020-02-04 21:25+0000\n"
+"POT-Creation-Date: 2020-02-07 20:21+0000\n"
+"PO-Revision-Date: 2020-02-07 20:21+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -304,6 +304,13 @@ msgstr "<br/>\n"
 "                            <strong>Fecha Planificada: </strong>"
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_report_document
+msgid "<br/>\n"
+"                            <strong>Employee: </strong>"
+msgstr "<br/>\n"
+"                            <strong>Empleado: </strong>"
+
+#. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "<br/>\n"
@@ -395,6 +402,11 @@ msgid "<span class=\"o_form_label\">Expedition Default Product</span>"
 msgstr "<span class=\"o_form_label\">Expedición producto por defecto</span>"
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_report_document
+msgid "<span>Commissions Liquidation:</span>"
+msgstr "<span>Liquidación Comisiones:</span>"
+
+#. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "<span>Expedition:</span>"
@@ -413,10 +425,15 @@ msgid "<strong>Date Order: </strong>"
 msgstr "<strong>Fecha Orden: </strong>"
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_report_document
+msgid "<strong>Date: </strong>"
+msgstr "<strong>Fecha: </strong>"
+
+#. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "<strong>Email: </strong>"
-msgstr "<strong>Email: </strong>"
+msgstr ""
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
@@ -433,7 +450,7 @@ msgstr "<strong>Teléfono: </strong>"
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "<strong>Subtotal</strong>"
-msgstr "<strong>Subtotal</strong>"
+msgstr ""
 
 #. module: fms
 #: sql_constraint:fms.commission.liquidation:0
@@ -491,6 +508,11 @@ msgstr "Dirección"
 #: model:ir.model.fields,field_description:fms.field_fms_freight__user_id
 msgid "Administrator"
 msgstr "Administrador"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_report_document
+msgid "Amount"
+msgstr "Importe"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__c_amount
@@ -609,6 +631,11 @@ msgid "Click to create a new invoice order."
 msgstr "Click para crear una nueva orden de facturación"
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_report_document
+msgid "Client"
+msgstr "Cliente"
+
+#. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
 msgid "Close"
 msgstr "Cerrar"
@@ -705,7 +732,8 @@ msgid "Company"
 msgstr "Compañía"
 
 #. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_layout_standard
+#: model_terms:ir.ui.view,arch_db:fms.expedition_report_layout_boxed
+#: model_terms:ir.ui.view,arch_db:fms.fms_report_layout_header
 msgid "Company Logo"
 msgstr "Logotipo de la compañia"
 
@@ -748,13 +776,14 @@ msgid "Contact"
 msgstr "Contacto"
 
 #. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.report_layout_standard
+#: model_terms:ir.ui.view,arch_db:fms.expedition_report_layout_boxed
 msgid "Contact Logo"
 msgstr "Logo Contacto"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__c_delivery_name
 #: model:ir.model.fields,field_description:fms.field_fms_freight__delivery_name
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_report_document
 msgid "Contact Name"
 msgstr "Nombre del contacto"
 
@@ -842,6 +871,11 @@ msgstr "Datos de cliente"
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "DELIVERY DATA"
 msgstr "DATOS ENTREGA"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_report_document
+msgid "Date"
+msgstr "Fecha"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__date_order
@@ -985,6 +1019,7 @@ msgstr "Empleado responsable de la expedición"
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__c_freight_id
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__freight_id
 #: model:ir.ui.menu,name:fms.fms_freight_menu
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
 msgid "Expedition"
 msgstr "Expedición"
@@ -1067,7 +1102,7 @@ msgstr "Expediciones Ordenes Facturación"
 #: model:ir.ui.menu,name:fms.fms_main_menu
 #: model_terms:ir.ui.view,arch_db:fms.res_config_settings_view_form
 msgid "F.M.S"
-msgstr "F.M.S"
+msgstr ""
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.res_config_settings_view_form
@@ -1162,7 +1197,7 @@ msgstr "Descripción expedición"
 #. module: fms
 #: model:ir.model,name:fms.model_fms_freight
 msgid "Freight Expedition Management"
-msgstr "Administración Expediciones Mercancia"
+msgstr ""
 
 #. module: fms
 #: model_terms:ir.actions.act_window,help:fms.fms_freight_action_from_menu
@@ -1234,7 +1269,7 @@ msgstr "Asigna la visivilidad de la expedición:\n"
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order_line__id
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order_line_create__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,help:fms.field_fms_commission_liquidation__message_unread
@@ -1580,6 +1615,11 @@ msgid "Overdue"
 msgstr "Vencimiento"
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_report_layout_footer
+msgid "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
+msgstr "Página: <span class=\"page\"/>/<span class=\"topage\"/>"
+
+#. module: fms
 #: selection:fms.freight,state:0
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
@@ -1626,6 +1666,11 @@ msgstr "Fecha Planificada"
 #, python-format
 msgid "Please define a journal for the company '%s'."
 msgstr "Por favor defina un diario para la compañia '%s'."
+
+#. module: fms
+#: model:ir.actions.report,name:fms.fms_commission_liquidation_report_action
+msgid "Print Commission Liquidation"
+msgstr "Imprimir Liquidación Comisiones"
 
 #. module: fms
 #: model:ir.actions.report,name:fms.fms_freight_delivery_note_report_action
@@ -1827,7 +1872,7 @@ msgid "The state of the delivery %s differs from that in location %s"
 msgstr "La provincia de la entrega %s difiere de esta en la localización "
 
 #. module: fms
-#: code:addons/fms/models/fms_commission_liquidation.py:72
+#: code:addons/fms/models/fms_commission_liquidation.py:70
 #, python-format
 msgid "There are commission lines with date higher than selected date.\n"
 "Please delete those lines or select a higher date."
@@ -1835,7 +1880,7 @@ msgstr "Hay lineas de comisiones con fecha mayor que la fecha selecionada.\n"
 "Por favor elimine dichas lineas o seleccione una fecha mayor."
 
 #. module: fms
-#: code:addons/fms/models/fms_commission_liquidation.py:63
+#: code:addons/fms/models/fms_commission_liquidation.py:61
 #, python-format
 msgid "There are commission lines.\n"
 " Before you change the employee you have to delete all lines."
@@ -1843,13 +1888,13 @@ msgstr "Existen lineas de comisiones.\n"
 " Antes de modificar el empleado debe eliminar todas las lineas."
 
 #. module: fms
-#: code:addons/fms/models/fms_commission_liquidation.py:114
+#: code:addons/fms/models/fms_commission_liquidation.py:112
 #, python-format
 msgid "There aren't any commission line."
 msgstr "No hay ninguna linea de comisión"
 
 #. module: fms
-#: code:addons/fms/models/fms_commission_liquidation.py:101
+#: code:addons/fms/models/fms_commission_liquidation.py:99
 #, python-format
 msgid "There aren't any commission pending for this employee and date."
 msgstr "No hay ninguna comisión pendiente para este empleado fecha"
@@ -1939,7 +1984,7 @@ msgid "Wizard to create order lines"
 msgstr "Asistente para la creación de lineas"
 
 #. module: fms
-#: code:addons/fms/models/fms_commission_liquidation.py:148
+#: code:addons/fms/models/fms_commission_liquidation.py:147
 #, python-format
 msgid "You can only delete Liquidation Orders in state draft."
 msgstr "Usted solo puede eliminar ordenes de liquidación en estado borrador."

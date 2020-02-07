@@ -3,8 +3,6 @@
 
 from odoo import api, models, fields, _
 from odoo.exceptions import UserError
-from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
-from datetime import datetime
 
 
 class FmsCommissionLiquidation(models.Model):
@@ -109,10 +107,11 @@ class FmsCommissionLiquidation(models.Model):
             }
             for line in self.cl_line_ids:
                 line.f_commission_id.update(vals)
-            self.state = 'done'
+            self.update({'state': 'done'})
         else:
             raise UserError(_(
                 "There aren't any commission line."))
+
     def action_cancel(self):
         if self.cl_line_ids:
             vals = {
@@ -129,7 +128,7 @@ class FmsCommissionLiquidation(models.Model):
             }
             for line in self.cl_line_ids:
                 line.f_commission_id.update(vals)
-            self.state = 'draft'
+            self.update({'state': 'draft'})
 
     # ------------------------
     # CRUD overrides

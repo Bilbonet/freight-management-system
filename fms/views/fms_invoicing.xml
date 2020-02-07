@@ -9,7 +9,7 @@
                 <header>
                     <button name="%(fms_invoicing_line_create_action)d" type="action"
                             string="Import Expeditions" class="oe_highlight"
-                            attrs="{'invisible': ['|',('state', 'not in', ('draft','done')),('invoice_state', '!=', 'draft')]}"/>
+                            attrs="{'invisible': ['|',('state', 'not in', ('draft','done')),('invoice_id', '!=', False),('invoice_state', '!=', 'draft')]}"/>
                     <button name="create_invoice" type="object"
                             string="Create invoice"
                             states="draft" groups="account.group_account_manager"/>
@@ -19,7 +19,7 @@
                             groups="account.group_account_manager"/>
                     <button name="action_cancel" type="object"
                             string="Cancel Order"
-                            states="done"/>
+                            attrs="{'invisible': ['|',('state', '!=', 'done'),('invoice_id', '!=', False),('invoice_state', '!=', 'draft')]}"/>/>
                     <button name="cancel2draft" type="object"
                             string="Back to Draft"
                             states="cancel"/>

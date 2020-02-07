@@ -14,9 +14,11 @@
                   decoration-muted="state=='cancel'" decoration-danger="state=='invoiced'">
                 <field name="name"/>
                 <field name="partner_id"/>
+                <field name="partner_delivery_note"/>
+                <field name="partner_order_doc"/>
+                <field name="delivery_name"/>
                 <field name="zip"/>
                 <field name="city"/>
-                <field name="delivery_name"/>
                 <field name="date_planned"/>
                  <field name="tag_ids" widget="many2many_tags"/>
                 <field name="state"/>

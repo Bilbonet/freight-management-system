@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 <odoo>
-
-    <template id="report_layout_standard">
+    <!--
+        EXPEDITION LAYOUT
+    -->
+    <template id="expedition_report_layout_boxed">
         <div class="header">
             <div class="o_boxed_header">
                 <div class="row mb4">
@@ -23,10 +25,9 @@
         </div>
     </template>
 
-    <!-- fms: layout to t-call from reports -->
-    <template id="report_layout">
+    <!-- layout to t-call from Expeditions -->
+    <template id="expedition_report_layout">
         <t t-if="not o" t-set="o" t-value="doc"/>
-
         <t t-if="not company">
             <!-- Multicompany -->
             <t t-if="company_id">
@@ -39,9 +40,56 @@
                 <t t-set="company" t-value="res_company"/>
             </t>
         </t>
+        <t t-call="fms.expedition_report_layout_boxed"><t t-raw="0"/></t>
+    </template>
 
-        <t t-call="fms.report_layout_standard"><t t-raw="0"/></t>
+    <!--
+        ESTANDARD LAYOUT
+    -->
 
+    <template id="fms_report_layout_header">
+        <div class="header">
+            <div class="o_boxed_header">
+                <div class="row">
+                    <div class="col-6">
+                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 90px;" alt="Company Logo"/>
+                    </div>
+                    <div class="col-6 text-right">
+                        <p t-field="company.name"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- layout to t-call from reports -->
+    <template id="fms_report_layout_standard">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+        <t t-call="fms.fms_report_layout_header"/>
+        <div class="article" style="margin-top:0px;" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0"/>
+        </div>
+        <t t-call="fms.fms_report_layout_footer" />
+    </template>
+
+    <template id="fms_report_layout_footer">
+        <div t-if="report_type == 'pdf'" class="footer">
+            <div class="text-center" style="border-top: 1px solid black;font-size:0.8em;">
+                Page: <span class="page"/> / <span class="topage"/>
+            </div>
+        </div>
     </template>
 
 </odoo>

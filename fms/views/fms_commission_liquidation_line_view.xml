@@ -26,7 +26,8 @@
         <field name="name">fms.commission.liquidation.line tree view</field>
         <field name="model">fms.commission.liquidation.line</field>
         <field name="arch" type="xml">
-            <tree string="Commission Liquidation Lines" default_order="c_date" create="false">
+            <tree string="Commission Liquidation Lines" default_order="c_date" create="false"
+                  decoration-success="c_state=='done'" decoration-muted="c_state=='cancel'">
                 <field name="c_date"/>
                 <field name="c_freight_id"/>
                 <field name="c_partner_id"/>

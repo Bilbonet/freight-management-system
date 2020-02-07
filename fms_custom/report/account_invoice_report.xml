@@ -11,7 +11,6 @@
             report_type="qweb-pdf"
             name="fms_custom.report_expedition_invoice"
             file="fms_custom.report_expedition_invoice"
-            attachment="(object.state in ('open','in_payment','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
             print_report_name="(object._get_report_base_filename())"
             groups="account.group_account_invoice"
         />
@@ -69,10 +68,10 @@
                             <tr>
                                 <!-- TODO: remove in master -->
                                 <t t-set="colspan" t-value="6"/>
-                                <th class="text-left"><span>Nuestra Ref.</span></th>
+                                <th><span>Nuestra Ref.</span></th>
                                 <th><span>Fecha Exp.</span></th>
                                 <th t-if="display_centro" class="text-right"><span>Centro</span></th>
-                                <th t-if="display_centro" class="text-right"><span>Dpto.</span></th>
+                                <th t-if="display_department" class="text-right"><span>Dpto.</span></th>
                                 <th t-if="display_order" class="text-right"><span>Pedido</span></th>
                                 <th t-if="display_delivery_note" class="text-right"><span>Albarán</span></th>
                                 <th t-if="display_f_value" class="text-right"><span>Valor Mercancía</span></th>
@@ -131,7 +130,7 @@
 
                     <div class="clearfix">
                         <div id="total" class="row">
-                            <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
+                            <div t-attf-class="#{'col-5' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
                                 <table class="table table-sm">
                                     <tr class="border-black o_subtotal" style="">
                                         <td><strong>Subtotal</strong></td>
@@ -242,6 +241,248 @@
             </t>
         </template>
 
+        <!--============================
+            FACTURA EXPEDICIONES TIENDAS
+        =============================-->
+        <report
+            id="account_expedition_shops_invoices"
+            model="account.invoice"
+            string="Factura Expediciones Tiendas"
+            report_type="qweb-pdf"
+            name="fms_custom.report_expedition_shops_invoice"
+            file="fms_custom.report_expedition_shops_invoice"
+            print_report_name="(object._get_report_base_filename())"
+            groups="account.group_account_invoice"
+        />
+
+        <template id="report_expedition_shops_invoice_document">
+            <t t-call="fms_custom.custom_docu_boxed_layout">
+            <!--<t t-call="web.external_layout">-->
+                <t t-set="o" t-value="o.with_context(lang=lang)" />
+                <div class="page">
+                    <div class="row mb32" id="informations">
+                        <div class="col-6">
+                            <div class="jumbotron text-center">
+                                <h3 class="text-center">
+                                    <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">FACTURA:</span>
+                                    <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA:</span>
+                                    <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Factura Borrador:</span>
+                                    <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Factura Cancelada:</span>
+                                    <span t-if="o.type == 'out_refund'" style="color:red;">FACTURA Rectificativa:</span>
+                                    <span t-if="o.type == 'in_refund'">FACTURA Rectificativa:</span>
+                                    <span t-if="o.type == 'in_invoice'">FACTURA:</span>
+                                    <span t-field="o.number"/>
+                                </h3>
+                                <div t-if="o.date_invoice">
+                                    <strong>Fecha Factura: </strong><span t-field="o.date_invoice" t-options="{'widget': 'date'}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1"/>
+                        <div class="col-5">
+                            <div style="font:15px lucida-console,sans-serif !important;" >
+                                <span style="color:#3498DB !important;" t-field="o.partner_id.name" /><br/>
+                                <span style="color:gray !important;" t-field="o.partner_id.street" /><br/>
+                                <t t-if="o.partner_id.street2">
+                                    <span style="color:gray !important;" t-field="o.partner_id.street2" /><br/>
+                                </t>
+                                <span style="color:gray !important;" t-field="o.partner_id.zip" />
+                                <span style="color:gray !important;" t-field="o.partner_id.city" /> -
+                                <span style="color:gray !important;" t-field="o.partner_id.state_id" /><br/>
+                                <span style="color:gray !important;" t-field="o.partner_id.vat" /><br/>
+                                <div style="color:gray !important;" t-if="o.partner_id.ref" name="customer_code" class="mt16">
+                                    Nº Proveedor: <strong><span class="m-0" t-field="o.partner_id.ref"/></strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <t t-set="display_centro" t-value="any([l.fms_freight_id.partner_center for l in o.invoice_line_ids])"/>
+                    <t t-set="display_department" t-value="any([l.fms_freight_id.partner_department for l in o.invoice_line_ids])"/>
+                    <t t-set="display_order" t-value="any([l.fms_freight_id.partner_order_doc for l in o.invoice_line_ids])"/>
+                    <t t-set="display_delivery_note" t-value="any([l.fms_freight_id.partner_delivery_note for l in o.invoice_line_ids])"/>
+                    <t t-set="display_f_value" t-value="any([l.fms_freight_id.fr_commission_percent != 0 for l in o.invoice_line_ids])"/>
+
+                    <table class="table table-sm o_main_table" name="invoice_line_table">
+                        <thead>
+                            <tr>
+                                <!-- TODO: remove in master -->
+                                <t t-set="colspan" t-value="6"/>
+                                <th><span>Nuestra Ref.</span></th>
+                                <th><span>Fecha Exp.</span></th>
+                                <th><span>Nombre Contacto</span></th>
+                                <th t-if="display_centro" class="text-right"><span>Centro</span></th>
+                                <th t-if="display_department" class="text-right"><span>Dpto.</span></th>
+                                <th t-if="display_order" class="text-right"><span>Pedido</span></th>
+                                <th t-if="display_delivery_note" class="text-right"><span>Albarán</span></th>
+                                <th t-if="display_f_value" class="text-right"><span>Valor Mercancía</span></th>
+                                <th t-if="display_f_value" class="text-right"><span>(%)</span></th>
+                                <th class="text-right"><span>Total Neto</span></th>
+                            </tr>
+                        </thead>
+                        <tbody class="invoice_tbody">
+                            <t t-set="current_subtotal" t-value="0"/>
+
+                            <t t-foreach="o.invoice_line_ids" t-as="line">
+
+                                <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+
+                                <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                    <t t-if="not line.display_type" name="account_invoice_line_accountable">
+                                        <td name="account_invoice_line_name"><span t-field="line.fms_freight_id"/></td>
+                                        <td><span t-field="line.fms_freight_id.date_planned" t-options="{'widget': 'date'}"/></td>
+                                        <td><span t-field="line.fms_freight_id.delivery_name"/></td>
+                                        <td t-if="display_centro" class="text-right"><span t-field="line.fms_freight_id.partner_center"/></td>
+                                        <td t-if="display_department" class="text-right"><span t-field="line.fms_freight_id.partner_department"/></td>
+                                        <td t-if="display_order" class="text-right"><span t-field="line.fms_freight_id.partner_order_doc"/></td>
+                                        <td t-if="display_delivery_note" class="text-right"><span t-field="line.fms_freight_id.partner_delivery_note"/></td>
+                                        <td t-if="display_f_value" class="text-right"><span t-field="line.fms_freight_id.fr_value"/></td>
+                                        <td t-if="display_f_value" class="text-right"><span t-field="line.fms_freight_id.fr_commission_percent"/></td>
+                                        <td class="text-right o_price_total"><span t-field="line.price_subtotal"/></td>
+                                    </t>
+                                    <t t-if="line.display_type == 'line_section'">
+                                        <td colspan="99">
+                                            <span t-field="line.name"/>
+                                        </td>
+                                        <t t-set="current_section" t-value="line"/>
+                                        <t t-set="current_subtotal" t-value="0"/>
+                                    </t>
+                                    <t t-if="line.display_type == 'line_note'">
+                                        <td colspan="99">
+                                            <span t-field="line.name"/>
+                                        </td>
+                                    </t>
+                                </tr>
+
+                                <t t-if="current_section and (line_last or o.invoice_line_ids[line_index+1].display_type == 'line_section')">
+                                    <tr class="is-subtotal text-right">
+                                        <td colspan="99">
+                                            <strong class="mr16">Subtotal</strong>
+                                            <span
+                                                t-esc="current_subtotal"
+                                                t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                            />
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <div class="clearfix">
+                        <div id="total" class="row">
+                            <div t-attf-class="#{'col-5' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
+                                <table class="table table-sm">
+                                    <tr class="border-black o_subtotal" style="">
+                                        <td><strong>Subtotal</strong></td>
+                                        <td class="text-right">
+                                            <span t-field="o.amount_untaxed"/>
+                                        </td>
+                                    </tr>
+                                    <t t-foreach="o.amount_by_group" t-as="amount_by_group">
+                                        <tr style="">
+                                            <t t-if="len(o.tax_line_ids) == 1 and o.amount_untaxed == amount_by_group[2]">
+                                                <td><span t-esc="amount_by_group[0]"/></td>
+                                                <td class="text-right o_price_total">
+                                                    <span t-esc="amount_by_group[3]" />
+                                                </td>
+                                            </t>
+                                            <t t-else="">
+                                                <td>
+                                                    <span t-esc="amount_by_group[0]"/>
+                                                    <span>&amp;nbsp;<span>en</span>
+                                                        <t t-esc="amount_by_group[4]"/>
+                                                    </span>
+                                                </td>
+                                                <td class="text-right o_price_total">
+                                                    <span t-esc="amount_by_group[3]"/>
+                                                </td>
+                                            </t>
+                                        </tr>
+                                    </t>
+                                    <tr class="border-black o_total">
+                                        <td><strong>Total</strong></td>
+                                        <td class="text-right">
+                                            <span t-field="o.amount_total"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Información de Pagos -->
+                    <div class="clearfix">
+                        <div t-if="len(o.move_id.line_ids) > 0">
+                            <div class="col-5">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Vencimiento(s)</th>
+                                            <th class="text-right">Importe</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="o.move_id.line_ids.sorted(key=lambda p: p.date_maturity)" t-as="p" t-if="p.payment_mode_id">
+                                            <td>
+                                                <span t-field="p.date_maturity" />
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-field="p.debit" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="col-10">
+                                <div t-if="o.payment_term_id">
+                                    <strong>Forma Pago: </strong><span t-field="o.payment_mode_id"/>
+                                </div>
+                                <!-- Cuenta Bancaria-->
+                                <div>
+                                    <t t-if="o.payment_mode_id and o.payment_mode_id.show_bank_account != 'no'">
+                                        <p t-foreach="o.partner_banks_to_show()" t-as="partner_bank">
+                                            <strong>Cuenta Bancaria:</strong>
+                                            <t t-if="partner_bank.bank_id">
+                                                <t t-esc="partner_bank.bank_id.name + ('' if not partner_bank.bank_id.bic else ' (' + partner_bank.bank_id.bic + ')')" />
+                                            </t>
+                                            <t t-if="o.payment_mode_id.show_bank_account == 'full'">
+                                                <span t-field="partner_bank.acc_number"/>
+                                            </t>
+                                            <t t-elif="o.payment_mode_id.show_bank_account == 'first'">
+                                                <span t-esc="partner_bank.acc_number[:o.payment_mode_id.show_bank_account_chars] + '*' * (len(partner_bank.acc_number) - o.payment_mode_id.show_bank_account_chars)"/>
+                                            </t>
+                                            <t t-elif="o.payment_mode_id.show_bank_account == 'last'">
+                                                <span t-esc="'*' * (len(partner_bank.acc_number) - o.payment_mode_id.show_bank_account_chars) + partner_bank.acc_number[-o.payment_mode_id.show_bank_account_chars:]"/>
+                                            </t>
+                                        </p>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <p t-if="o.comment">
+                        <strong>Commentario:</strong>
+                        <span t-field="o.comment"/>
+                    </p>
+
+                </div>
+            </t>
+        </template>
+
+        <template id="report_expedition_shops_invoice">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.user_id.lang if o.type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                    <t t-call="fms_custom.report_expedition_shops_invoice_document" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+
         <!--===============
             FACTURA DIRECTA
         ================-->
@@ -252,7 +493,6 @@
             report_type="qweb-pdf"
             name="fms_custom.report_direct_invoice"
             file="fms_custom.report_direct_invoice"
-            attachment="(object.state in ('open','in_payment','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
             print_report_name="(object._get_report_base_filename())"
             groups="account.group_account_invoice"
         />

@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <report
+        id="fms_commission_liquidation_report_action"
+        string="Print Commission Liquidation"
+        model="fms.commission.liquidation"
+        name="fms.fms_commission_liquidation_report"
+        file="fms.fms_commission_liquidation_report"
+        print_report_name="'Commission_Liquidation - %s' % (object.name)"
+        report_type="qweb-pdf"
+        paperformat="fms.fms_paperformat_standard"/>
+
+<template id="fms_commission_liquidation_report_document">
+    <t t-call="fms.fms_report_layout_standard">
+        <!--<t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)" />-->
+        <div class="page">
+            <div class="oe_structure"/>
+            <!-- Head -->
+            <div class="row mb32" id="informations">
+                <div class="col-12">
+                    <div class="jumbotron text-center">
+                        <h4 class="text-center">
+                            <span>Commissions Liquidation:</span>
+                            <span t-field="doc.name"/>
+                        </h4>
+                        <div class="text-left ml32">
+                            <strong>Date: </strong><span t-field="doc.date" t-options="{'widget': 'date'}"/><br/>
+                            <strong>Employee: </strong><span t-field="doc.employee_id.name"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Commission Lines -->
+            <div t-if="len(doc.cl_line_ids) &gt; 0">
+                <div class="row">
+                    <table class="table table-sm">
+                        <thead style="background-color: #E8EDF0;font-size:0.9em;">
+                            <tr>
+                                <th>Date</th>
+                                <th>Expedition</th>
+                                <th>Client</th>
+                                <th>Contact Name</th>
+                                <th class="text-right">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="doc.cl_line_ids.sorted(key=lambda l: l.c_date)" t-as="l" style="font-size:0.7em;">
+                                <td><span t-field="l.c_date" t-options="{'widget': 'date'}"/></td>
+                                <td><span t-field="l.c_freight_id"/></td>
+                                <td><span t-field="l.c_partner_id.name"/></td>
+                                <td><span t-field="l.c_delivery_name"/></td>
+                                <td class="text-right"><span t-field="l.c_amount"/></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <th colspan="5" class="text-right" style="background-color: #E8EDF0;">
+                                <span t-field="doc.amount_total"/>
+                            </th>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <!-- /Lines -->
+        </div>
+    </t>
+</template>
+
+
+    <template id="fms_commission_liquidation_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="fms.fms_commission_liquidation_report_document" t-lang="doc.employee_id.user_id.lang or lang"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>
