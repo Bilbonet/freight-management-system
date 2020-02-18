@@ -24,7 +24,7 @@
                             <span>Expedition:</span>
                             <span t-field="doc.name"/>
                         </h3>
-                        <div class="text-left">
+                        <div class="text-left" style="font-size:1.4em;">
                             <strong>Date Order: </strong><span t-field="doc.date_order" t-options="{'widget': 'date'}"/><br/>
                             <strong>Date Planned: </strong><span t-field="doc.date_planned" t-options="{'widget': 'date'}"/>
                         </div>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="col-1"/>
                 <div class="col-5">
-                    <div style="font:15px lucida-console,sans-serif !important;" >
+                    <div style="font-size:1.4em;">
                         <strong>Center: </strong><span class="m-0" t-field="doc.partner_center"/><br/>
                         <strong>Department: </strong><span class="m-0" t-field="doc.partner_department"/><br/>
                         <strong>Delivery Note: </strong><span class="m-0" t-field="doc.partner_delivery_note"/><br/>
@@ -48,9 +48,9 @@
                     <h5>DELIVERY DATA</h5>
                 </div>
             </div>
-            <div class="row mt16 mb16">
+            <div class="row mt16 mb16" style="font-size:1.4em;">
                 <div class="col-6">
-                    <div style="font:15px lucida-console,sans-serif !important;" >
+                    <div>
                         <span class="text-secondary" t-field="doc.delivery_name" /><br/>
                         <span style="color:gray !important;" t-field="doc.street" /><br/>
                         <t t-if="doc.street2">
@@ -76,7 +76,7 @@
                     <h5>FREIGHT DESCRIPTION</h5>
                 </div>
             </div>
-            <div class="row mt16 mb16">
+            <div class="row mt16 mb16" style="font-size:1.4em;">
                 <span t-field="doc.fr_desc"/>
             </div>
             <div class="clearfix">
@@ -132,7 +132,7 @@
                             <span>Expedition:</span>
                             <span t-field="doc.name"/>
                         </h3>
-                        <div class="text-left">
+                        <div class="text-left" style="font-size:1.4em;">
                             <strong>Date Order: </strong><span t-field="doc.date_order" t-options="{'widget': 'date'}"/><br/>
                             <strong>Date Planned: </strong><span t-field="doc.date_planned" t-options="{'widget': 'date'}"/>
                         </div>
@@ -140,7 +140,7 @@
                 </div>
                 <div class="col-1"/>
                 <div class="col-5">
-                    <div style="font:15px lucida-console,sans-serif !important;" >
+                    <div style="font-size:1.4em;">
                         <strong>Center: </strong><span class="m-0" t-field="doc.partner_center"/><br/>
                         <strong>Department: </strong><span class="m-0" t-field="doc.partner_department"/><br/>
                         <strong>Delivery Note: </strong><span class="m-0" t-field="doc.partner_delivery_note"/><br/>
@@ -157,9 +157,9 @@
                     <h5>DELIVERY DATA</h5>
                 </div>
             </div>
-            <div class="row mt16 mb16">
+            <div class="row mt16 mb16" style="font-size:1.4em;">
                 <div class="col-6">
-                    <div style="font:15px lucida-console,sans-serif !important;" >
+                    <div>
                         <span class="text-secondary" t-field="doc.delivery_name" /><br/>
                         <span style="color:gray !important;" t-field="doc.street" /><br/>
                         <t t-if="doc.street2">
@@ -185,7 +185,7 @@
                     <h5>FREIGHT DESCRIPTION</h5>
                 </div>
             </div>
-            <div class="row mt16 mb16" name="exp_name">
+            <div class="row mt16 mb16" name="exp_name" style="font-size:1.4em;">
                 <span t-field="doc.fr_desc"/>
             </div>
             <div class="oe_structure"/>
