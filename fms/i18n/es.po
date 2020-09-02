@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-07 20:21+0000\n"
-"PO-Revision-Date: 2020-02-07 20:21+0000\n"
+"POT-Creation-Date: 2020-09-02 10:20+0000\n"
+"PO-Revision-Date: 2020-09-02 10:20+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -121,6 +121,14 @@ msgid "\n"
 "            </td>\n"
 "        </tr>\n"
 "    </table>\n"
+"    <br/>\n"
+"\n"
+"    To access the expedition, you can use the following link:\n"
+"    <div style=\"margin: 16px 0px 16px 0px;\">\n"
+"      <a href=\"${object.get_portal_url()}\" style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
+"       Show Expedition\n"
+"      </a>\n"
+"    </div>\n"
 "\n"
 "    <br/>\n"
 "    <p>If you have any question, do not hesitate to contact us.</p>\n"
@@ -233,7 +241,7 @@ msgstr "\n"
 "                        </tr>\n"
 "\n"
 "                        <tr style=\"color:#875A7B;\">\n"
-"                            <td style=\"width:140px;padding:5px\">Dcumento Vneta:</td>\n"
+"                            <td style=\"width:140px;padding:5px\">Documento Venta:</td>\n"
 "                            <td>\n"
 "                                % if object.partner_sale_doc:\n"
 "                                <strong>${(object.partner_sale_doc)}</strong>\n"
@@ -246,6 +254,14 @@ msgstr "\n"
 "            </td>\n"
 "        </tr>\n"
 "    </table>\n"
+"    <br/>\n"
+"\n"
+"    Para acceder a la expedición, pinche en el siguiente enlace:\n"
+"    <div style=\"margin: 16px 0px 16px 0px;\">\n"
+"      <a href=\"${object.get_portal_url()}\" style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
+"       Ver Expedición\n"
+"      </a>\n"
+"    </div>\n"
 "\n"
 "    <br/>\n"
 "    <p>Si tiene alguna pregunta, no dude en contactarnos.</p>\n"
@@ -294,6 +310,61 @@ msgstr "${object.company_id.name} Expedición (${object.name})"
 #: model_terms:ir.ui.view,arch_db:fms.fms_view_partner_form
 msgid "% commission"
 msgstr "% comisión"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+msgid "<b>Center: </b>"
+msgstr "<b>Centro: </b>"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+msgid "<b>Delivery Note: </b>"
+msgstr "<b>Albarán: </b>"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+msgid "<b>Nº Packages:  </b>"
+msgstr "<b>Nº Bultos:  </b>"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+msgid "<b>Phone: </b>"
+msgstr "<b>Teléfono: </b>"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+msgid "<br/>\n"
+"                                            <b>Email: </b>"
+msgstr "<br/>\n"
+"                                            <b>Email: </b>"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+msgid "<br/>\n"
+"                                            <b>Mobile: </b>"
+msgstr "<br/>\n"
+"                                            <b>Movil: </b>"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+msgid "<br/>\n"
+"                                        <b>Department: </b>"
+msgstr "<br/>\n"
+"                                        <b>Departamento: </b>"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+msgid "<br/>\n"
+"                                        <b>Order: </b>"
+msgstr "<br/>\n"
+"                                        <b>Pedido: </b>"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+msgid "<br/>\n"
+"                                        <b>Sale Doc.: </b>"
+msgstr "<br/>\n"
+"                                        <b>Documento Venta: </b>"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
@@ -350,46 +421,103 @@ msgstr "<br/>\n"
 "                        <strong>Venta Doc.: </strong>"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:256
+#: code:addons/fms/models/fms_freight.py:267
 #, python-format
 msgid "<h5><strong>Cancel to Draft</strong></h5>"
 msgstr "<h5><strong>Cancelado a Borrador</strong></h5>"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:242
+#: code:addons/fms/models/fms_freight.py:253
 #, python-format
 msgid "<h5><strong>Cancelled</strong></h5>"
 msgstr "<h5><strong>Cancelado</strong></h5>"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:212
+#: code:addons/fms/models/fms_freight.py:223
 #, python-format
 msgid "<h5><strong>Closed</strong></h5>"
 msgstr "<h5><strong>Cerrado</strong></h5>"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:202
+#: code:addons/fms/models/fms_freight.py:213
 #, python-format
 msgid "<h5><strong>Confirmed</strong></h5>And all expedition tags has been removed too."
 msgstr "<h5><strong>Confirmado</strong></h5>Y todas las etiquetas de la expedición se han eliminado."
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:180
+#: code:addons/fms/models/fms_freight.py:191
 #, python-format
 msgid "<h5><strong>Receive Partial</strong></h5>"
 msgstr "<h5><strong>Recibido Parcial</strong></h5>"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:193
+#: code:addons/fms/models/fms_freight.py:204
 #, python-format
 msgid "<h5><strong>Received</strong></h5>"
 msgstr "<h5><strong>Recibido</strong></h5>"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:236
+#: code:addons/fms/models/fms_freight.py:247
 #, python-format
 msgid "<h5><strong>Reopen: Closed to confirmed</strong></h5>"
 msgstr "<h5><strong>Reabierto: Cerrado a Confirmado</strong></h5>"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+msgid "<i class=\"fa fa-comment\"/> Send message"
+msgstr "<i class=\"fa fa-comment\"/> Enviar mensaje"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+msgid "<i class=\"fa fa-download\"/> Download"
+msgstr "<i class=\"fa fa-download\"/> Descargar"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+#: model_terms:ir.ui.view,arch_db:fms.portal_my_expeditions
+msgid "<i class=\"fa fa-fw fa-calendar\" aria-label=\"Confirmed\" title=\"Confirmed\" role=\"img\"/>"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+#: model_terms:ir.ui.view,arch_db:fms.portal_my_expeditions
+msgid "<i class=\"fa fa-fw fa-check\" aria-label=\"Closed\" title=\"Closed\" role=\"img\"/>"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+#: model_terms:ir.ui.view,arch_db:fms.portal_my_expeditions
+msgid "<i class=\"fa fa-fw fa-clock-o\" aria-label=\"Draft\" title=\"Draft\" role=\"img\"/>"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+#: model_terms:ir.ui.view,arch_db:fms.portal_my_expeditions
+msgid "<i class=\"fa fa-fw fa-clock-o\" aria-label=\"Partial\" title=\"Partial\" role=\"img\"/>"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+#: model_terms:ir.ui.view,arch_db:fms.portal_my_expeditions
+msgid "<i class=\"fa fa-fw fa-edit\" aria-label=\"Invoiced\" title=\"Invoiced\" role=\"img\"/>"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+#: model_terms:ir.ui.view,arch_db:fms.portal_my_expeditions
+msgid "<i class=\"fa fa-fw fa-remove\" aria-label=\"Cancelled\" title=\"Cancelled\" role=\"img\"/>"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+#: model_terms:ir.ui.view,arch_db:fms.portal_my_expeditions
+msgid "<i class=\"fa fa-fw fa-truck\" aria-label=\"Received\" title=\"Received\" role=\"img\"/>"
+msgstr ""
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+msgid "<i class=\"fa fa-print\"/> Print"
+msgstr "<i class=\"fa fa-print\"/> Imprimir"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.res_config_settings_view_form
@@ -411,6 +539,11 @@ msgstr "<span>Liquidación Comisiones:</span>"
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "<span>Expedition:</span>"
 msgstr "<span>Expedición:</span>"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+msgid "<strong class=\"text-muted\">Your Contact</strong>"
+msgstr "<strong class=\"text-muted\">Su Contacto</strong>"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
@@ -458,11 +591,16 @@ msgid "A commission line already exists with this reference in the same company!
 msgstr "Ya existe una linea de comisión con esta referencia en la conpañia"
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__access_warning
+msgid "Access warning"
+msgstr "Alerta de acceso"
+
+#. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__message_needaction
 #: model:ir.model.fields,field_description:fms.field_fms_freight__message_needaction
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__message_needaction
 msgid "Action Needed"
-msgstr "Acción requerida"
+msgstr "Acción Necesaria"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__active
@@ -508,6 +646,12 @@ msgstr "Dirección"
 #: model:ir.model.fields,field_description:fms.field_fms_freight__user_id
 msgid "Administrator"
 msgstr "Administrador"
+
+#. module: fms
+#: code:addons/fms/controllers/portal.py:41
+#, python-format
+msgid "All"
+msgstr ""
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_report_document
@@ -557,7 +701,12 @@ msgstr "Conteo de archivos adjuntos"
 #: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_form_view
 #: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_form_view
 msgid "Back to Draft"
-msgstr "Devolver a Borrador"
+msgstr "Devolver a borrador"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+msgid "CUSTOMER DATA"
+msgstr "DATOS CLIENTE"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_add_follower_multi_form
@@ -583,9 +732,11 @@ msgid "Canceled"
 msgstr "Cancelado"
 
 #. module: fms
+#: code:addons/fms/controllers/portal.py:47
 #: selection:fms.freight,state:0
 #: selection:fms.freight.commission.line,state:0
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+#, python-format
 msgid "Cancelled"
 msgstr "Cancelado"
 
@@ -641,8 +792,10 @@ msgid "Close"
 msgstr "Cerrar"
 
 #. module: fms
+#: code:addons/fms/controllers/portal.py:46
 #: selection:fms.freight,state:0
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+#, python-format
 msgid "Closed"
 msgstr "Cerrado"
 
@@ -723,6 +876,11 @@ msgid "Commissions"
 msgstr "Comisiones"
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+msgid "Communication"
+msgstr "Comunicación"
+
+#. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__company_id
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__company_id
 #: model:ir.model.fields,field_description:fms.field_fms_freight__company_id
@@ -765,13 +923,16 @@ msgid "Confirm"
 msgstr "Confirmar"
 
 #. module: fms
+#: code:addons/fms/controllers/portal.py:45
 #: selection:fms.freight,state:0
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+#, python-format
 msgid "Confirmed"
 msgstr "Confirmado"
 
 #. module: fms
 #: model:ir.model,name:fms.model_res_partner
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
 msgid "Contact"
 msgstr "Contacto"
 
@@ -867,8 +1028,14 @@ msgid "Customer Data"
 msgstr "Datos de cliente"
 
 #. module: fms
+#: model:ir.model.fields,help:fms.field_fms_freight__access_url
+msgid "Customer Portal URL"
+msgstr "URL para portal"
+
+#. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
 msgid "DELIVERY DATA"
 msgstr "DATOS ENTREGA"
 
@@ -878,9 +1045,29 @@ msgid "Date"
 msgstr "Fecha"
 
 #. module: fms
+#: code:addons/fms/controllers/portal.py:35
 #: model:ir.model.fields,field_description:fms.field_fms_freight__date_order
+#: model_terms:ir.ui.view,arch_db:fms.portal_my_expeditions
+#, python-format
 msgid "Date Order"
 msgstr "Fecha pedido"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+msgid "Date Order:"
+msgstr "Fecha Pedido:"
+
+#. module: fms
+#: code:addons/fms/controllers/portal.py:36
+#: model_terms:ir.ui.view,arch_db:fms.portal_my_expeditions
+#, python-format
+msgid "Date Planned"
+msgstr "Fecha Planificada"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+msgid "Date Planned:"
+msgstr "Fecha Planificada:"
 
 #. module: fms
 #: model:ir.model.fields,help:fms.field_fms_freight__date_planned
@@ -907,6 +1094,11 @@ msgstr "Pais Entrega"
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
 msgid "Delivery Data"
 msgstr "Datos Entrega"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_my_expeditions
+msgid "Delivery Name"
+msgstr "Nombre Entrega"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__city
@@ -980,11 +1172,30 @@ msgid "Done"
 msgstr "Facturada"
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+msgid "Download"
+msgstr "Descargar"
+
+#. module: fms
+#: code:addons/fms/controllers/portal.py:42
 #: selection:fms.commission.liquidation,state:0
 #: selection:fms.freight,state:0
 #: selection:fms.invoicing.order,state:0
+#, python-format
 msgid "Draft"
 msgstr "Borrador"
+
+#. module: fms
+#: code:addons/fms/models/fms_freight.py:172
+#, python-format
+msgid "Draft Expedition"
+msgstr "Expedición Borrador"
+
+#. module: fms
+#: code:addons/fms/models/fms_freight.py:173
+#, python-format
+msgid "Draft Expedition - %s"
+msgstr "Expedición Borrador - %s"
 
 #. module: fms
 #: model:ir.model,name:fms.model_hr_employee
@@ -1016,13 +1227,26 @@ msgid "Employee which is responsible to do the expedition."
 msgstr "Empleado responsable de la expedición"
 
 #. module: fms
+#: code:addons/fms/controllers/portal.py:37
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__c_freight_id
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__freight_id
 #: model:ir.ui.menu,name:fms.fms_freight_menu
 #: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+#, python-format
 msgid "Expedition"
 msgstr "Expedición"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_my_expeditions
+msgid "Expedition #"
+msgstr ""
+
+#. module: fms
+#: code:addons/fms/models/fms_freight.py:174
+#, python-format
+msgid "Expedition - %s"
+msgstr "Expedición - %s"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
@@ -1062,7 +1286,7 @@ msgid "Expedition Tags"
 msgstr "Expedición Etiquetas"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:391
+#: code:addons/fms/models/fms_freight.py:402
 #, python-format
 msgid "Expedition Tags:\n"
 " <ul>%s</ul>"
@@ -1089,6 +1313,9 @@ msgstr "Expedicion_${object.name}"
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order_line_create__freight_ids
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_tree_view
 #: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_form_view
+#: model_terms:ir.ui.view,arch_db:fms.portal_my_expeditions
+#: model_terms:ir.ui.view,arch_db:fms.portal_my_home_expedition
+#: model_terms:ir.ui.view,arch_db:fms.portal_my_home_menu_expedition
 msgid "Expeditions"
 msgstr "Expediciones"
 
@@ -1134,6 +1361,7 @@ msgstr "FMS % de comisión por defecto"
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
 msgid "FREIGHT DESCRIPTION"
 msgstr "DESCRIPCIÓN MERCANCIA"
 
@@ -1197,7 +1425,7 @@ msgstr "Descripción expedición"
 #. module: fms
 #: model:ir.model,name:fms.model_fms_freight
 msgid "Freight Expedition Management"
-msgstr ""
+msgstr "Gestión Expdiciones Mercancia"
 
 #. module: fms
 #: model_terms:ir.actions.act_window,help:fms.fms_freight_action_from_menu
@@ -1283,7 +1511,7 @@ msgstr "Si está marcado, hay nuevos mensajes que requieren su atención"
 #: model:ir.model.fields,help:fms.field_fms_freight__message_needaction
 #: model:ir.model.fields,help:fms.field_fms_invoicing_order__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr "Si está marcado hay nuevos mensajes que requieren su atención."
+msgstr "Si está marcado, hay nuevos mensajes que requieren su atención."
 
 #. module: fms
 #: model:ir.model.fields,help:fms.field_fms_commission_liquidation__message_has_error
@@ -1363,15 +1591,17 @@ msgid "Invoice State"
 msgstr "Estado de la factura"
 
 #. module: fms
+#: code:addons/fms/controllers/portal.py:48
 #: selection:fms.freight,state:0
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+#, python-format
 msgid "Invoiced"
-msgstr "Facturada"
+msgstr "Facturado"
 
 #. module: fms
 #: model:ir.ui.menu,name:fms.fms_invoicing_main_menu
 msgid "Invoicing"
-msgstr "Facturación"
+msgstr "Facturación / Contabilidad"
 
 #. module: fms
 #: model:ir.model,name:fms.model_fms_invoicing_order_line
@@ -1512,6 +1742,12 @@ msgid "Name"
 msgstr "Nombre"
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+#: model_terms:ir.ui.view,arch_db:fms.portal_my_expeditions
+msgid "New Draft"
+msgstr "Nuevo Borrador"
+
+#. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__activity_date_deadline
 msgid "Next Activity Deadline"
 msgstr "Siguiente plazo de actividad"
@@ -1620,9 +1856,11 @@ msgid "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
 msgstr "Página: <span class=\"page\"/>/<span class=\"topage\"/>"
 
 #. module: fms
+#: code:addons/fms/controllers/portal.py:43
 #: selection:fms.freight,state:0
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
+#, python-format
 msgid "Partial"
 msgstr "Parcial"
 
@@ -1668,6 +1906,16 @@ msgid "Please define a journal for the company '%s'."
 msgstr "Por favor defina un diario para la compañia '%s'."
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__access_url
+msgid "Portal Access URL"
+msgstr "URL de acceso al portal"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+msgid "Print"
+msgstr "Imprimir"
+
+#. module: fms
 #: model:ir.actions.report,name:fms.fms_commission_liquidation_report_action
 msgid "Print Commission Liquidation"
 msgstr "Imprimir Liquidación Comisiones"
@@ -1710,8 +1958,10 @@ msgid "Receive"
 msgstr "Recibir"
 
 #. module: fms
+#: code:addons/fms/controllers/portal.py:44
 #: selection:fms.freight,state:0
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+#, python-format
 msgid "Received"
 msgstr "Recibido"
 
@@ -1749,6 +1999,29 @@ msgid "Search Expeditions"
 msgstr "Buscar Expediciones"
 
 #. module: fms
+#: code:addons/fms/controllers/portal.py:53
+#, python-format
+msgid "Search in All"
+msgstr "Buscar en Todo"
+
+#. module: fms
+#: code:addons/fms/controllers/portal.py:52
+#, python-format
+msgid "Search in Delivery Name"
+msgstr "Buscr en Nombre Entrega"
+
+#. module: fms
+#: code:addons/fms/controllers/portal.py:51
+#, python-format
+msgid "Search in Expedition"
+msgstr "Buscar en Expecición"
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__access_token
+msgid "Security Token"
+msgstr "Token de seguridad"
+
+#. module: fms
 #: code:addons/fms/wizard/fms_invoicing_line_create.py:67
 #, python-format
 msgid "Select Expeditions to Create Transactions"
@@ -1782,7 +2055,7 @@ msgstr "Selecione el producto por defecto para la facturación de expediciones."
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
 msgid "Set to Draft"
-msgstr "Cambiar a Borrador"
+msgstr "Cambiar a borrador"
 
 #. module: fms
 #: model:ir.actions.act_window,name:fms.fms_config_settings_action
@@ -1799,8 +2072,10 @@ msgid "State"
 msgstr "Estado"
 
 #. module: fms
+#: code:addons/fms/controllers/portal.py:38
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__state
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__state
+#, python-format
 msgid "Status"
 msgstr "Estado"
 
@@ -1841,7 +2116,7 @@ msgid "Tags in freight expeditions"
 msgstr "Etiquetas en la expedición de mercancía"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:328
+#: code:addons/fms/models/fms_freight.py:339
 #, python-format
 msgid "The country of the delivery %s differs from that in location %s"
 msgstr "El pais de la entrega %s difiere de este an la localización"
@@ -1860,13 +2135,13 @@ msgid "The reference that will be used on freight expeditions"
 msgstr "La referencia que se usará en las expediciones de mercancía"
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:376
+#: code:addons/fms/models/fms_freight.py:387
 #, python-format
 msgid "The state has been changed automatically to <strong>Confirmed</strong> because the <strong>date</strong> has been changed in received state.<br>And all expedition tags has been removed too."
 msgstr "El estado ha cambiado automaticamente a <strong>Confirmado</strong> porque la <strong>fecha</strong> ha cambiado en el estado recibido.<br>Y todas las etiquetas de la expedicion has sido eliminadas."
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:324
+#: code:addons/fms/models/fms_freight.py:335
 #, python-format
 msgid "The state of the delivery %s differs from that in location %s"
 msgstr "La provincia de la entrega %s difiere de esta en la localización "
@@ -1886,6 +2161,11 @@ msgid "There are commission lines.\n"
 " Before you change the employee you have to delete all lines."
 msgstr "Existen lineas de comisiones.\n"
 " Antes de modificar el empleado debe eliminar todas las lineas."
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_my_expeditions
+msgid "There are currently no expeditions for your account."
+msgstr "Actualmente no hay expediciones para su cuenta."
 
 #. module: fms
 #: code:addons/fms/models/fms_commission_liquidation.py:112
@@ -1990,7 +2270,7 @@ msgid "You can only delete Liquidation Orders in state draft."
 msgstr "Usted solo puede eliminar ordenes de liquidación en estado borrador."
 
 #. module: fms
-#: code:addons/fms/models/fms_freight.py:359
+#: code:addons/fms/models/fms_freight.py:370
 #, python-format
 msgid "You can only delete expeditions in state draft or canceled."
 msgstr "Usted solo puede eliminar expediciones en estado Borrador o Cancelada."

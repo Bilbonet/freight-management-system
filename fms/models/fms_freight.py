@@ -9,7 +9,7 @@ from datetime import datetime
 class FmsFreight(models.Model):
     _name = 'fms.freight'
     _description = 'Freight Expedition Management'
-    _inherit = ['mail.thread', 'mail.activity.mixin']
+    _inherit = ['mail.thread', 'mail.activity.mixin', 'portal.mixin']
     _order = 'name desc'
 
     name = fields.Char(string='Reference', index=True,
@@ -161,6 +161,17 @@ class FmsFreight(models.Model):
             'target': 'new',
             'context': ctx,
         }
+
+    def _compute_access_url(self):
+        super(FmsFreight, self)._compute_access_url()
+        for expedition in self:
+            expedition.access_url = '/my/expeditions/%s' % (expedition.id)
+
+    def _get_report_base_filename(self):
+        self.ensure_one()
+        return  self.state == 'draft' and self.name == False and _('Draft Expedition') or \
+                self.state == 'draft' and self.name != False and _('Draft Expedition - %s') % (self.name) or \
+                self.state != 'draft' and _('Expedition - %s') % (self.name)
 
     # ---------------------------
     # Buttons Actions

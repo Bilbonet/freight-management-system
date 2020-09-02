@@ -114,6 +114,14 @@
             </td>
         </tr>
     </table>
+    <br/>
+
+    To access the expedition, you can use the following link:
+    <div style="margin: 16px 0px 16px 0px;">
+      <a href="${object.get_portal_url()}" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+       Show Expedition
+      </a>
+    </div>
 
     <br/>
     <p>If you have any question, do not hesitate to contact us.</p>
@@ -252,6 +260,14 @@
             </td>
         </tr>
     </table>
+    <br/>
+
+    To access the expedition, you can use the following link:
+    <div style="margin: 16px 0px 16px 0px;">
+      <a href="${object.get_portal_url()}" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+       Show Expedition
+      </a>
+    </div>
 
     <br/>
     <p>If you have any question, do not hesitate to contact us.</p>

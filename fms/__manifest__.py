@@ -11,6 +11,7 @@
     'depends': [
         'base',
         'mail',
+        'portal',
         'base_address_city',
         'contacts',
         'hr',
@@ -38,6 +39,7 @@
         'views/fms_commission_liquidation_view.xml',
         'views/fms_commission_liquidation_line_view.xml',
         'views/res_partner_views.xml',
+        'views/fms_portal_templates.xml',
         'data/fms_freight_email_template.xml',
     ],
     'installable': True,

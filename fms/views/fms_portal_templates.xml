@@ -1,0 +1,264 @@
+<?xml version="1.0"?>
+
+<odoo>
+    <data>
+        <template id="portal_my_home_menu_expedition" name="Portal layout : expedition menu entries" inherit_id="portal.portal_breadcrumbs" priority="50">
+            <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+                <li t-if="page_name == 'expedition' or expedition" t-attf-class="breadcrumb-item #{'active ' if not expedition else ''}">
+                    <a t-if="expedition" t-attf-href="/my/expeditions?{{ keep_query() }}">Expeditions</a>
+                    <t t-else="">Expeditions</t>
+                </li>
+                <li t-if="expedition" class="breadcrumb-item active">
+                    <t t-esc="expedition.name" />
+                </li>
+            </xpath>
+        </template>
+
+        <template id="portal_my_home_expedition" name="Portal My Home : expedition entries" inherit_id="portal.portal_my_home" priority="50">
+            <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+                <t t-if="expedition_count" t-call="portal.portal_docs_entry">
+                    <t t-set="title">Expeditions</t>
+                    <t t-set="url" t-value="'/my/expeditions'"/>
+                    <t t-set="count" t-value="expedition_count"/>
+                </t>
+            </xpath>
+        </template>
+
+        <template id="portal_my_expeditions" name="My Expeditions">
+          <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Expeditions</t>
+            </t>
+            <t t-if="not expeditions">
+                <p>There are currently no expeditions for your account.</p>
+            </t>
+            <t t-if="expeditions" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Expedition #</th>
+                        <th>Date Order</th>
+                        <th class='d-none d-md-table-cell'>Date Planned</th>
+                        <th/>
+                        <th class="text-right">Delivery Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="expeditions" t-as="expedition">
+                        <tr>
+                            <td>
+                                <a t-att-href="expedition.get_portal_url()" t-att-title="expedition.name">
+                                    <t t-esc="expedition.name" t-if="expedition.name"/>
+                                    <em t-else="">New Draft</em>
+                                </a>
+                            </td>
+                            <td><span t-field="expedition.date_order"/></td>
+                            <td class='d-none d-md-table-cell'><span t-field="expedition.date_planned"/></td>
+                            <td class="tx_status">
+                                <t t-if="expedition.state == 'draft'">
+                                    <span class="badge badge-pill badge-dark">
+                                        <i class="fa fa-fw fa-clock-o" aria-label="Draft" title="Draft" role="img"></i> <span class="d-none d-md-inline" t-field="expedition.state"/>
+                                    </span>
+                                </t>
+                                <t t-if="expedition.state == 'partial'">
+                                    <span class="badge badge-pill badge-warning">
+                                        <i class="fa fa-fw fa-clock-o" aria-label="Partial" title="Partial" role="img"></i> <span class="d-none d-md-inline" t-field="expedition.state"/>
+                                    </span>
+                                </t>
+                                <t t-if="expedition.state == 'received'">
+                                    <span class="badge badge-pill badge-info">
+                                        <i class="fa fa-fw fa-truck" aria-label="Received" title="Received" role="img"></i> <span class="d-none d-md-inline" t-field="expedition.state"/>
+                                    </span>
+                                </t>
+                                <t t-if="expedition.state == 'confirmed'">
+                                    <span class="badge badge-pill badge-success">
+                                        <i class="fa fa-fw fa-calendar" aria-label="Confirmed" title="Confirmed" role="img"></i> <span class="d-none d-md-inline" t-field="expedition.state"/>
+                                    </span>
+                                </t>
+                                <t t-if="expedition.state == 'closed'">
+                                    <span class="badge badge-pill badge-secondary">
+                                        <i class="fa fa-fw fa-check" aria-label="Closed" title="Closed" role="img"></i> <span class="d-none d-md-inline" t-field="expedition.state"/>
+                                    </span>
+                                </t>
+                                <t t-if="expedition.state == 'cancel'">
+                                    <span class="badge badge-pill badge-light">
+                                        <i class="fa fa-fw fa-remove" aria-label="Cancelled" title="Cancelled" role="img"></i> <span class="d-none d-md-inline" t-field="expedition.state"/>
+                                    </span>
+                                </t>
+                                <t t-if="expedition.state == 'invoiced'">
+                                    <span class="badge badge-pill badge-danger">
+                                        <i class="fa fa-fw fa-edit" aria-label="Invoiced" title="Invoiced" role="img"></i> <span class="d-none d-md-inline" t-field="expedition.state"/>
+                                    </span>
+                                </t>
+                            </td>
+                            <td class="text-right"><span t-field="expedition.delivery_name"/></td>
+                        </tr>
+                    </t>
+                </tbody>
+            </t>
+          </t>
+        </template>
+
+        <template id="portal_expedition_page" name="Expedition Portal Template" inherit_id="portal.portal_sidebar" primary="True">
+            <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+                <t t-set="o_portal_fullwidth_alert" groups="fms.group_fms_user">
+                    <t t-call="portal.portal_back_in_edit_mode">
+                        <t t-set="backend_url" t-value="'/web#return_label=Website&amp;model=%s&amp;id=%s&amp;action=%s&amp;view_type=form' % (expedition._name, expedition.id, expedition.env.ref('fms.fms_freight_action_from_menu').id)"/>
+                    </t>
+                </t>
+
+                <div class="row mt16">
+                    <!-- Sidebar -->
+                    <t t-call="portal.portal_record_sidebar">
+                        <t t-set="classes" t-value="'col-lg-auto d-print-none'"/>
+                        <t t-set="title">
+                            <h2 class="mb-0">
+                                <t t-esc="expedition.name" t-if="expedition.name"/>
+                                <em t-else="">New Draft</em>
+                            </h2>
+                            <h2>
+                                <t t-if="expedition.state == 'draft'">
+                                    <span class="badge badge-pill badge-dark">
+                                        <i class="fa fa-fw fa-clock-o" aria-label="Draft" title="Draft" role="img"></i> <span class="d-none d-md-inline" t-field="expedition.state"/>
+                                    </span>
+                                </t>
+                                <t t-if="expedition.state == 'partial'">
+                                    <span class="badge badge-pill badge-warning">
+                                        <i class="fa fa-fw fa-clock-o" aria-label="Partial" title="Partial" role="img"></i> <span class="d-none d-md-inline" t-field="expedition.state"/>
+                                    </span>
+                                </t>
+                                <t t-if="expedition.state == 'received'">
+                                    <span class="badge badge-pill badge-info">
+                                        <i class="fa fa-fw fa-truck" aria-label="Received" title="Received" role="img"></i> <span class="d-none d-md-inline" t-field="expedition.state"/>
+                                    </span>
+                                </t>
+                                <t t-if="expedition.state == 'confirmed'">
+                                    <span class="badge badge-pill badge-success">
+                                        <i class="fa fa-fw fa-calendar" aria-label="Confirmed" title="Confirmed" role="img"></i> <span class="d-none d-md-inline" t-field="expedition.state"/>
+                                    </span>
+                                </t>
+                                <t t-if="expedition.state == 'closed'">
+                                    <span class="badge badge-pill badge-secondary">
+                                        <i class="fa fa-fw fa-check" aria-label="Closed" title="Closed" role="img"></i> <span class="d-none d-md-inline" t-field="expedition.state"/>
+                                    </span>
+                                </t>
+                                <t t-if="expedition.state == 'cancel'">
+                                    <span class="badge badge-pill badge-light">
+                                        <i class="fa fa-fw fa-remove" aria-label="Cancelled" title="Cancelled" role="img"></i> <span class="d-none d-md-inline" t-field="expedition.state"/>
+                                    </span>
+                                </t>
+                                <t t-if="expedition.state == 'invoiced'">
+                                    <span class="badge badge-pill badge-danger">
+                                        <i class="fa fa-fw fa-edit" aria-label="Invoiced" title="Invoiced" role="img"></i> <span class="d-none d-md-inline" t-field="expedition.state"/>
+                                    </span>
+                                </t>
+                            </h2>
+                            <div class="text-left">
+                                <div>Date Order: <b t-field="expedition.date_order"/></div>
+                                <div t-if="expedition.date_planned">
+                                    Date Planned: <b t-field="expedition.date_planned"/>
+                                </div>
+                            </div>
+                        </t>
+
+                        <t t-set="entries">
+                            <ul class="list-group list-group-flush flex-wrap flex-row flex-lg-column">
+                                <li class="list-group-item flex-grow-1">
+                                    <div class="o_download_pdf btn-toolbar flex-sm-nowrap">
+                                        <div class="btn-group  flex-grow-1 mr-1 mb-1">
+                                            <a class="btn btn-secondary btn-block o_download_btn" t-att-href="expedition.get_portal_url(report_type='pdf', download=True)" title="Download"><i class="fa fa-download"/> Download</a>
+                                        </div>
+                                        <div class="btn-group flex-grow-1 mb-1">
+                                            <a class="btn btn-secondary btn-block o_print_btn o_portal_invoice_print" t-att-href="expedition.get_portal_url(report_type='pdf')" id="print_expedition_report" title="Print" target="_blank"><i class="fa fa-print"/> Print</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li t-if="expedition.user_id" class="list-group-item flex-grow-1">
+                                    <div class="small mb-1"><strong class="text-muted">Your Contact</strong></div>
+                                    <div class="row">
+                                        <div class="col flex-grow-0 pr-2">
+                                            <img t-if="expedition.user_id.image" class="rounded-circle mt-1 o_portal_contact_img" t-att-src="image_data_uri(expedition.user_id.image)" alt="Contact"/>
+                                            <img t-else="" class="rounded-circle mt-1 o_portal_contact_img" src="/web/static/src/img/user_menu_avatar.png" alt="Contact"/>
+                                        </div>
+                                        <div class="col pl-0" style="min-width: 150px">
+                                            <span t-field="expedition.user_id" t-options='{"widget": "contact", "fields": ["name", "phone"], "no_marker": True}'/>
+                                            <a href="#discussion" class="small"><i class="fa fa-comment"></i> Send message</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </t>
+                    </t>
+
+                    <!-- Informations -->
+                    <div id="expedition_content" class="o_portal_page_content col-12 col-lg d-flex flex-column align-items-end">
+                        <div style="width: 100%; height:100%;">
+                            <div class="o_portal_html_view shadow">
+
+                                <div class="row m-4">
+                                    <div class="col-12 pt-1 pb-1 mb8 bg-light text-center">
+                                        <h5>CUSTOMER DATA</h5>
+                                    </div>
+                                    <div class="col-6">
+                                        <b>Center: </b><span t-field="expedition.partner_center"/><br/>
+                                        <b>Department: </b><span t-field="expedition.partner_department"/><br/>
+                                    </div>
+                                    <div class="col-6">
+                                        <b>Delivery Note: </b><span t-field="expedition.partner_delivery_note"/><br/>
+                                        <b>Order: </b><span t-field="expedition.partner_order_doc"/><br/>
+                                        <b>Sale Doc.: </b><span t-field="expedition.partner_sale_doc"/>
+                                    </div>
+
+                                    <div class="col-12 pt-1 pb-1 mt16 mb8 bg-light text-center">
+                                        <h5>DELIVERY DATA</h5>
+                                    </div>
+                                    <div class="col-6">
+                                        <div>
+                                            <b class="text-secondary" t-field="expedition.delivery_name" /><br/>
+                                            <span style="color:gray !important;" t-field="expedition.street" /><br/>
+                                            <t t-if="expedition.street2">
+                                                <span style="color:gray !important;" t-field="expedition.street2" /><br/>
+                                            </t>
+                                            <span style="color:gray !important;" t-field="expedition.zip" />
+                                            <span style="color:gray !important;" t-field="expedition.city" /> -
+                                            <span style="color:gray !important;" t-field="expedition.state_id" />
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="text-left">
+                                            <b>Phone: </b><span t-field="expedition.phone"/><br/>
+                                            <b>Mobile: </b><span t-field="expedition.mobile"/><br/>
+                                            <b>Email: </b><span t-field="expedition.email"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 pt-1 pb-1 mt16 bg-light text-center">
+                                        <h5>FREIGHT DESCRIPTION</h5>
+                                    </div>
+                                    <div class="col-12 mt4 mb8" t-if="expedition.fr_packages">
+                                        <b>Nº Packages:  </b><span t-field="expedition.fr_packages"/>
+                                    </div>
+                                    <div class="col-12">
+                                        <span t-field="expedition.fr_desc"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- chatter -->
+                            <div id="expedition_communication" class="mt-4">
+                                <h2>Communication</h2>
+                                <t t-call="portal.message_thread">
+                                    <t t-set="object" t-value="expedition"/>
+                                </t>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>
