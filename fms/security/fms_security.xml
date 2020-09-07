@@ -91,19 +91,19 @@
             <field name="perm_unlink" eval="False"/>
         </record>
 
-         <!-- ================ -->
+        <!-- ================= -->
         <!-- Portal Expedition -->
         <!-- ================= -->
-          <record id="fms_expedition_portal" model="ir.rule">
-                <field name="name">FMS Expedition User Portal</field>
-                <field name="model_id" ref="fms.model_fms_freight"/>
-                <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
-                <field name="domain_force">[('partner_id', 'child_of', user.commercial_partner_id.id)]</field>
-                <field name="perm_read" eval="True"/>
-                <field name="perm_write" eval="False"/>
-                <field name="perm_create" eval="False"/>
-                <field name="perm_unlink" eval="False"/>
-          </record>
+        <record id="fms_expedition_portal" model="ir.rule">
+            <field name="name">FMS Expedition User Portal</field>
+            <field name="model_id" ref="fms.model_fms_freight"/>
+            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="domain_force">[('partner_id', 'child_of', user.commercial_partner_id.id)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
 
     </data>
 </odoo>
