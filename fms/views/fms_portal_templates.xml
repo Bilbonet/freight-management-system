@@ -38,9 +38,10 @@
                 <thead>
                     <tr class="active">
                         <th>Expedition #</th>
-                        <th>Date Order</th>
-                        <th class='d-none d-md-table-cell'>Date Planned</th>
                         <th/>
+                        <th>Delibery Note</th>
+                        <th>Order</th>
+                        <th>Sale Doc.</th>
                         <th class="text-right">Delivery Name</th>
                     </tr>
                 </thead>
@@ -53,8 +54,6 @@
                                     <em t-else="">New Draft</em>
                                 </a>
                             </td>
-                            <td><span t-field="expedition.date_order"/></td>
-                            <td class='d-none d-md-table-cell'><span t-field="expedition.date_planned"/></td>
                             <td class="tx_status">
                                 <t t-if="expedition.state == 'draft'">
                                     <span class="badge badge-pill badge-dark">
@@ -92,6 +91,9 @@
                                     </span>
                                 </t>
                             </td>
+                            <td><span t-field="expedition.partner_delivery_note"/></td>
+                            <td><span t-field="expedition.partner_order_doc"/></td>
+                            <td><span t-field="expedition.partner_sale_doc"/></td>
                             <td class="text-right"><span t-field="expedition.delivery_name"/></td>
                         </tr>
                     </t>
@@ -197,7 +199,14 @@
                             <div class="o_portal_html_view shadow">
 
                                 <div class="row m-4">
-                                    <div class="col-12 pt-1 pb-1 mb8 bg-light text-center">
+                                    <div class="col-4">
+                                        <img t-if="expedition.partner_id.image" t-att-src="image_data_uri(expedition.partner_id.image)" style="max-height: 60px;" alt="Contact Logo"/>
+                                    </div>
+                                    <div class="col-8 text-right">
+                                        <h4 t-field="expedition.partner_id.name" />
+                                    </div>
+
+                                    <div class="col-12 pt-1 pb-1 mt8 mb8 bg-light text-center">
                                         <h5>CUSTOMER DATA</h5>
                                     </div>
                                     <div class="col-6">

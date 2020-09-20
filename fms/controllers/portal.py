@@ -27,15 +27,19 @@ class CustomerPortal(CustomerPortal):
         return self._get_page_view_values(expedition, access_token, values, 'my_expeditions_history', False, **kwargs)
 
     @http.route(['/my/expeditions', '/my/expeditions/page/<int:page>'], type='http', auth="user", website=True)
-    def portal_my_expeditions(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, search=None, search_in='name', **kw):
+    def portal_my_expeditions(self, page=1, date_begin=None, date_end=None, sortby=None, filterby=None, search=None, search_in='all', **kw):
         values = self._prepare_portal_layout_values()
         AccountExpedition = request.env['fms.freight']
 
         searchbar_sortings = {
-            'date_order': {'label': _('Date Order'), 'order': 'date_order desc'},
-            'date_planned': {'label': _('Date Planned'), 'order': 'date_planned desc'},
             'name': {'label': _('Expedition'), 'order': 'name desc'},
             'state': {'label': _('Status'), 'order': 'state'},
+            'partner_delivery_note': {'label': _('Delivery Note'),
+                                      'order': 'partner_delivery_note desc'},
+            'partner_order_doc': {'label': _('Order'),
+                                  'order': 'partner_order_doc desc'},
+            'partner_sale_doc': {'label': _('Sale Doc.'),
+                                  'order': 'partner_sale_doc desc'},
         }
         searchbar_filters = {
             'all': {'label': _('All'), 'domain': []},
@@ -48,14 +52,21 @@ class CustomerPortal(CustomerPortal):
             'invoiced': {'label': _('Invoiced'), 'domain': [('state', '=', 'invoiced')]},
         }
         searchbar_inputs = {
-            'name': {'input': 'name', 'label': _('Search in Expedition')},
-            'delivery_name': {'input': 'delivery_name', 'label': _('Search in Delivery Name')},
             'all': {'input': 'all', 'label': _('Search in All')},
+            'name': {'input': 'name', 'label': _('Search in Expedition')},
+            'delivery_name': {'input': 'delivery_name',
+                              'label': _('Search in Delivery Name')},
+            'partner_delivery_note': {'input': 'partner_delivery_note',
+                                      'label': _('Search in Delivery Note')},
+            'partner_order_doc': {'input': 'partner_order_doc',
+                                  'label': _('Search in Order')},
+            'partner_sale_doc': {'input': 'partner_sale_doc',
+                                  'label': _('Search in Sale Doc.')},
         }
 
         # default sort by order
         if not sortby:
-            sortby = 'date_order'
+            sortby = 'name'
         order = searchbar_sortings[sortby]['order']
         # default filter by value
         if not filterby:
@@ -74,6 +85,12 @@ class CustomerPortal(CustomerPortal):
                 search_domain = OR([search_domain, [('name', 'ilike', search)]])
             if search_in in ('delivery_name', 'all'):
                 search_domain = OR([search_domain, [('delivery_name', 'ilike', search)]])
+            if search_in in ('partner_delivery_note', 'all'):
+                search_domain = OR([search_domain, [('partner_delivery_note', 'ilike', search)]])
+            if search_in in ('partner_order_doc', 'all'):
+                search_domain = OR([search_domain, [('partner_order_doc', 'ilike', search)]])
+            if search_in in ('partner_sale_doc', 'all'):
+                search_domain = OR([search_domain, [('partner_sale_doc', 'ilike', search)]])
             domain += search_domain
 
 
