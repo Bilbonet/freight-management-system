@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-02 10:20+0000\n"
-"PO-Revision-Date: 2020-09-02 10:20+0000\n"
+"POT-Creation-Date: 2020-09-20 10:26+0000\n"
+"PO-Revision-Date: 2020-09-20 10:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -500,7 +500,7 @@ msgid "Administrator"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/controllers/portal.py:41
+#: code:addons/fms/controllers/portal.py:45
 #, python-format
 msgid "All"
 msgstr ""
@@ -584,7 +584,7 @@ msgid "Canceled"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/controllers/portal.py:47
+#: code:addons/fms/controllers/portal.py:51
 #: selection:fms.freight,state:0
 #: selection:fms.freight.commission.line,state:0
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
@@ -644,7 +644,7 @@ msgid "Close"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/controllers/portal.py:46
+#: code:addons/fms/controllers/portal.py:50
 #: selection:fms.freight,state:0
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
 #, python-format
@@ -775,7 +775,7 @@ msgid "Confirm"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/controllers/portal.py:45
+#: code:addons/fms/controllers/portal.py:49
 #: selection:fms.freight,state:0
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
 #, python-format
@@ -790,6 +790,7 @@ msgstr ""
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.expedition_report_layout_boxed
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
 msgid "Contact Logo"
 msgstr ""
 
@@ -897,23 +898,13 @@ msgid "Date"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/controllers/portal.py:35
 #: model:ir.model.fields,field_description:fms.field_fms_freight__date_order
-#: model_terms:ir.ui.view,arch_db:fms.portal_my_expeditions
-#, python-format
 msgid "Date Order"
 msgstr ""
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
 msgid "Date Order:"
-msgstr ""
-
-#. module: fms
-#: code:addons/fms/controllers/portal.py:36
-#: model_terms:ir.ui.view,arch_db:fms.portal_my_expeditions
-#, python-format
-msgid "Date Planned"
 msgstr ""
 
 #. module: fms
@@ -938,6 +929,11 @@ msgid "Default product commission"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_my_expeditions
+msgid "Delibery Note"
+msgstr ""
+
+#. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__country_id
 msgid "Delivery Country"
 msgstr ""
@@ -950,6 +946,12 @@ msgstr ""
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.portal_my_expeditions
 msgid "Delivery Name"
+msgstr ""
+
+#. module: fms
+#: code:addons/fms/controllers/portal.py:37
+#, python-format
+msgid "Delivery Note"
 msgstr ""
 
 #. module: fms
@@ -1029,7 +1031,7 @@ msgid "Download"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/controllers/portal.py:42
+#: code:addons/fms/controllers/portal.py:46
 #: selection:fms.commission.liquidation,state:0
 #: selection:fms.freight,state:0
 #: selection:fms.invoicing.order,state:0
@@ -1079,7 +1081,7 @@ msgid "Employee which is responsible to do the expedition."
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/controllers/portal.py:37
+#: code:addons/fms/controllers/portal.py:35
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__c_freight_id
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_line__freight_id
 #: model:ir.ui.menu,name:fms.fms_freight_menu
@@ -1439,7 +1441,7 @@ msgid "Invoice State"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/controllers/portal.py:48
+#: code:addons/fms/controllers/portal.py:52
 #: selection:fms.freight,state:0
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
 #, python-format
@@ -1662,6 +1664,13 @@ msgid "On invitation only"
 msgstr ""
 
 #. module: fms
+#: code:addons/fms/controllers/portal.py:39
+#: model_terms:ir.ui.view,arch_db:fms.portal_my_expeditions
+#, python-format
+msgid "Order"
+msgstr ""
+
+#. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
 msgid "Order Date"
 msgstr ""
@@ -1704,7 +1713,7 @@ msgid "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/controllers/portal.py:43
+#: code:addons/fms/controllers/portal.py:47
 #: selection:fms.freight,state:0
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
@@ -1806,7 +1815,7 @@ msgid "Receive"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/controllers/portal.py:44
+#: code:addons/fms/controllers/portal.py:48
 #: selection:fms.freight,state:0
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
 #, python-format
@@ -1830,6 +1839,13 @@ msgid "Responsible User"
 msgstr ""
 
 #. module: fms
+#: code:addons/fms/controllers/portal.py:41
+#: model_terms:ir.ui.view,arch_db:fms.portal_my_expeditions
+#, python-format
+msgid "Sale Doc."
+msgstr ""
+
+#. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__partner_sale_doc
 msgid "Sale doc."
 msgstr ""
@@ -1847,21 +1863,39 @@ msgid "Search Expeditions"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/controllers/portal.py:53
+#: code:addons/fms/controllers/portal.py:55
 #, python-format
 msgid "Search in All"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/controllers/portal.py:52
+#: code:addons/fms/controllers/portal.py:58
 #, python-format
 msgid "Search in Delivery Name"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/controllers/portal.py:51
+#: code:addons/fms/controllers/portal.py:60
+#, python-format
+msgid "Search in Delivery Note"
+msgstr ""
+
+#. module: fms
+#: code:addons/fms/controllers/portal.py:56
 #, python-format
 msgid "Search in Expedition"
+msgstr ""
+
+#. module: fms
+#: code:addons/fms/controllers/portal.py:62
+#, python-format
+msgid "Search in Order"
+msgstr ""
+
+#. module: fms
+#: code:addons/fms/controllers/portal.py:64
+#, python-format
+msgid "Search in Sale Doc."
 msgstr ""
 
 #. module: fms
@@ -1920,7 +1954,7 @@ msgid "State"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/controllers/portal.py:38
+#: code:addons/fms/controllers/portal.py:36
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__state
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__state
 #, python-format
