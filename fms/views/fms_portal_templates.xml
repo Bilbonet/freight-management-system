@@ -157,6 +157,9 @@
                                 </t>
                             </h2>
                             <div class="text-left">
+                                <div t-if="expedition.invoice_id">
+                                    Invoice: <b t-field="expedition.invoice_id"/>
+                                </div>
                                 <div>Date Order: <b t-field="expedition.date_order"/></div>
                                 <div t-if="expedition.date_planned">
                                     Date Planned: <b t-field="expedition.date_planned"/>
@@ -245,8 +248,12 @@
                                     <div class="col-12 pt-1 pb-1 mt16 bg-light text-center">
                                         <h5>FREIGHT DESCRIPTION</h5>
                                     </div>
-                                    <div class="col-12 mt4 mb8" t-if="expedition.fr_packages">
-                                        <b>Nº Packages:  </b><span t-field="expedition.fr_packages"/>
+                                    <div class="col-12 mt4 mb8">
+                                        <b>Commission value:  </b><span t-field="expedition.fr_commission"
+                                                                        t-options='{"widget": "monetary", "display_currency": expedition.currency_id}'/>
+                                        <t t-if="expedition.fr_packages">
+                                            <b> / Nº Packages:  </b><span t-field="expedition.fr_packages"/>
+                                        </t>
                                     </div>
                                     <div class="col-12">
                                         <span t-field="expedition.fr_desc"/>

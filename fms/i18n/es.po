@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-20 10:27+0000\n"
-"PO-Revision-Date: 2020-09-20 10:27+0000\n"
+"POT-Creation-Date: 2020-09-22 10:38+0000\n"
+"PO-Revision-Date: 2020-09-22 10:38+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -313,18 +313,23 @@ msgstr "% comisión"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+msgid "<b> / Nº Packages:  </b>"
+msgstr "<b> / Nº Bultos:  </b>"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
 msgid "<b>Center: </b>"
 msgstr "<b>Centro: </b>"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
-msgid "<b>Delivery Note: </b>"
-msgstr "<b>Albarán: </b>"
+msgid "<b>Commission value:  </b>"
+msgstr "<b>Valor Comisión:  </b>"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
-msgid "<b>Nº Packages:  </b>"
-msgstr "<b>Nº Bultos:  </b>"
+msgid "<b>Delivery Note: </b>"
+msgstr "<b>Albarán: </b>"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
@@ -521,7 +526,7 @@ msgstr "<i class=\"fa fa-print\"/> Imprimir"
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.res_config_settings_view_form
 msgid "<span class=\"o_form_label\">Commission Default Product</span>"
-msgstr "Comisiones producot por defecto"
+msgstr "Comisiones producto por defecto"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.res_config_settings_view_form
@@ -864,10 +869,21 @@ msgid "Commission State"
 msgstr "Estado Comisión"
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__fr_commission_percent
+msgid "Commission percent"
+msgstr "Porcentaje Comisión"
+
+#. module: fms
 #: code:addons/fms/models/fms_freight.py:112
 #, python-format
 msgid "Commission percent should be less or equal to 100!"
 msgstr "El % de la comisión debe ser menor o igual a 100"
+
+#. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_freight__fr_commission
+#: model:ir.model.fields,field_description:fms.field_fms_invoicing_order_line__amount
+msgid "Commission value"
+msgstr "Valor Comisión"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
@@ -903,7 +919,7 @@ msgstr "Nombre completo"
 #: code:addons/fms/models/fms_freight.py:154
 #, python-format
 msgid "Compose Email"
-msgstr ""
+msgstr "Componer Email"
 
 #. module: fms
 #: model:ir.model,name:fms.model_res_config_settings
@@ -1426,7 +1442,7 @@ msgstr "Descripción expedición"
 #. module: fms
 #: model:ir.model,name:fms.model_fms_freight
 msgid "Freight Expedition Management"
-msgstr "Manejo Expdición Mercancia"
+msgstr ""
 
 #. module: fms
 #: model_terms:ir.actions.act_window,help:fms.fms_freight_action_from_menu
@@ -1512,7 +1528,7 @@ msgstr "Si está marcado, hay nuevos mensajes que requieren su atención"
 #: model:ir.model.fields,help:fms.field_fms_freight__message_needaction
 #: model:ir.model.fields,help:fms.field_fms_invoicing_order__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr "Si está marcado, hay nuevos mensajes que requieren su atención."
+msgstr "Si está marcado hay nuevos mensajes que requieren su atención."
 
 #. module: fms
 #: model:ir.model.fields,help:fms.field_fms_commission_liquidation__message_has_error
@@ -1590,6 +1606,11 @@ msgstr "Ordenes Facturación"
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__invoice_state
 msgid "Invoice State"
 msgstr "Estado de la factura"
+
+#. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
+msgid "Invoice:"
+msgstr "Factura:"
 
 #. module: fms
 #: code:addons/fms/controllers/portal.py:52
@@ -1890,7 +1911,6 @@ msgid "Pending"
 msgstr "Borrador"
 
 #. module: fms
-#: model:ir.model.fields,field_description:fms.field_fms_freight__fr_commission_percent
 #: model:ir.model.fields,field_description:fms.field_hr_employee__fms_commission
 #: model:ir.model.fields,field_description:fms.field_res_partner__fms_commission
 #: model:ir.model.fields,field_description:fms.field_res_users__fms_commission
@@ -2254,12 +2274,6 @@ msgstr "Contador de mensajes sin leer"
 #: model:res.groups,name:fms.group_fms_user
 msgid "User"
 msgstr "Usuario"
-
-#. module: fms
-#: model:ir.model.fields,field_description:fms.field_fms_freight__fr_commission
-#: model:ir.model.fields,field_description:fms.field_fms_invoicing_order_line__amount
-msgid "Value of commission"
-msgstr "Valor comisión"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view

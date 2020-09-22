@@ -83,9 +83,9 @@ class FmsFreight(models.Model):
     fr_packages = fields.Integer(string='Nº Packages')
     fr_value = fields.Monetary(string='Freight value',
         currency_field='currency_id')
-    fr_commission = fields.Monetary(string='Value of commission',
+    fr_commission = fields.Monetary(string='Commission value',
         currency_field='currency_id')
-    fr_commission_percent = fields.Float(string='Percent of commission')
+    fr_commission_percent = fields.Float(string='Commission percent')
     # Freight Delivery
     date_planned = fields.Datetime('Scheduled Date',
         track_visibility="onchange", copy=False,
