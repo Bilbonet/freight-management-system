@@ -9,14 +9,12 @@ class AccountInvoice(models.Model):
 
     @api.multi
     def action_invoice_sent(self):
-        """ Open a window to compose an email, with the edi invoice template
-            message loaded by default
-        """
         self.ensure_one()
         template = self.env.ref(
             'fms_custom.expedition_invoice_email_template', False)
         compose_form = self.env.ref(
-            'account.account_invoice_send_wizard_form', False)
+            'mail.email_compose_message_wizard_form', False)
+
         # have model_description in template language
         lang = self.env.context.get('lang')
         if template and template.lang:
@@ -45,9 +43,9 @@ class AccountInvoice(models.Model):
             'type': 'ir.actions.act_window',
             'view_type': 'form',
             'view_mode': 'form',
-            'res_model': 'account.invoice.send',
+            'res_model': 'mail.compose.message',
             'views': [(compose_form.id, 'form')],
             'view_id': compose_form.id,
             'target': 'new',
-            'context': ctx,
+            'context': ctx
         }

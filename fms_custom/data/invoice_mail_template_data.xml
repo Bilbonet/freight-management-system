@@ -1,17 +1,19 @@
 <?xml version="1.0" ?>
 <odoo>
-
     <!-- Mail template are declared in a NOUPDATE block
          so users can freely customize/delete them -->
     <data noupdate="1">
-        <!--Email template -->
+        <!-- ===================
+            FACTURA EXPEDICIONES
+        ==================== -->
         <record id="expedition_invoice_email_template" model="mail.template">
-            <field name="name">Facturación Expediciones: Envío por Email</field>
+            <field name="name">Factura EXPEDICIONES</field>
             <field name="model_id" ref="account.model_account_invoice"/>
             <field name="email_from">${object.user_id.email_formatted |safe}</field>
             <field name="partner_to">${object.partner_id.id}</field>
             <field name="subject">${object.company_id.name} Factura (Ref: ${object.number or 'n/a'})</field>
             <field name="body_html" type="html">
+
 <div style="margin: 0px; padding: 0px;">
     <p style="margin: 0px; padding: 0px; font-size: 13px;">
         Estimado ${object.partner_id.name}
@@ -57,6 +59,7 @@
     % endif
     <br/>
 </div>
+
             </field>
             <field name="report_template" ref="account_expedition_invoices"/>
             <field name="report_name">Factura_${(object.number or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}</field>
@@ -64,5 +67,136 @@
             <field name="user_signature" eval="False"/>
             <field name="auto_delete" eval="True"/>
         </record>
+
+        <!-- ==========================
+            FACTURA EXPEDICIONES TIENDA
+        =========================== -->
+        <record id="expedition_shop_invoice_email_template" model="mail.template">
+            <field name="name">Factura EXPEDICIONES TIENDA</field>
+            <field name="model_id" ref="account.model_account_invoice"/>
+            <field name="email_from">${object.user_id.email_formatted |safe}</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="subject">${object.company_id.name} Factura (Ref: ${object.number or 'n/a'})</field>
+            <field name="body_html" type="html">
+
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Estimado ${object.partner_id.name}
+        % if object.partner_id.parent_id:
+            (${object.partner_id.parent_id.name})
+        % endif
+        <br /><br />
+        Aquí esta su
+        % if object.number:
+            factura <strong>${object.number}</strong>
+        % else:
+            factura pro-forma
+        %endif
+        % if object.origin:
+            (con motivo origén: ${object.origin})
+        % endif
+        por un valor de <strong>${format_amount(object.amount_total, object.currency_id)}.</strong>
+    </p>
+    <p>
+        % if object.state=='paid':
+            Esta factura ya está pagada.
+        % else:
+            En el adjunto se detalla la modalidad de pago y los vencimientos.
+        % endif
+    </p>
+    <br /><br />
+    <p>Si tiene alguna pregunta, no dude en contactarnos.</p>
+    <p>Gracias por su confianza en ${object.company_id.name or 'us'}!</p>
+    % if object.user_id.signature:
+       ${object.user_id.signature | safe}
+    % else
+        <div style="padding:0px;margin:auto;">
+            <table cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <td style="padding:10px 10px 10px 0px;font-size: 12px" width="200">
+                            <img src="/logo.png" style="padding: 0px; margin: 0px; height: auto; width: 100px;" alt="${user.company_id.name}"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    % endif
+    <br/>
+</div>
+
+            </field>
+            <field name="report_template" ref="account_expedition_shops_invoices"/>
+            <field name="report_name">Factura_${(object.number or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}</field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="user_signature" eval="False"/>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <!-- ==============
+            FACTURA DIRECTA
+        =============== -->
+        <record id="direct_invoice_email_template" model="mail.template">
+            <field name="name">Factura DIRECTA</field>
+            <field name="model_id" ref="account.model_account_invoice"/>
+            <field name="email_from">${object.user_id.email_formatted |safe}</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="subject">${object.company_id.name} Factura (Ref: ${object.number or 'n/a'})</field>
+            <field name="body_html" type="html">
+
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Estimado ${object.partner_id.name}
+        % if object.partner_id.parent_id:
+            (${object.partner_id.parent_id.name})
+        % endif
+        <br /><br />
+        Aquí esta su
+        % if object.number:
+            factura <strong>${object.number}</strong>
+        % else:
+            factura pro-forma
+        %endif
+        % if object.origin:
+            (con motivo origén: ${object.origin})
+        % endif
+        por un valor de <strong>${format_amount(object.amount_total, object.currency_id)}.</strong>
+    </p>
+    <p>
+        % if object.state=='paid':
+            Esta factura ya está pagada.
+        % else:
+            En el adjunto se detalla la modalidad de pago y los vencimientos.
+        % endif
+    </p>
+    <br /><br />
+    <p>Si tiene alguna pregunta, no dude en contactarnos.</p>
+    <p>Gracias por su confianza en ${object.company_id.name or 'us'}!</p>
+    % if object.user_id.signature:
+       ${object.user_id.signature | safe}
+    % else
+        <div style="padding:0px;margin:auto;">
+            <table cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <td style="padding:10px 10px 10px 0px;font-size: 12px" width="200">
+                            <img src="/logo.png" style="padding: 0px; margin: 0px; height: auto; width: 100px;" alt="${user.company_id.name}"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    % endif
+    <br/>
+</div>
+
+            </field>
+            <field name="report_template" ref="account_direct_invoices"/>
+            <field name="report_name">Factura_${(object.number or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}</field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="user_signature" eval="False"/>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
     </data>
 </odoo>
