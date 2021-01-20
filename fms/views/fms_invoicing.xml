@@ -36,20 +36,14 @@
                             <field name="invoice_state" string="View Invoice"  widget="statinfo"
                                    attrs="{'invisible': [('invoice_state', '!=', 'draft')]}"/>
                         </button>
-                        <!--<button class="oe_stat_button" type="object"-->
-                                <!--name="toggle_active" icon="fa-archive">-->
-                            <!--<field name="active" widget="boolean_button"-->
-                                   <!--options="{&quot;terminology&quot;: &quot;archive&quot;}"/>-->
-                        <!--</button>-->
                     </div>
-
                     <h1>
                         <label for="name" string="Order Name: " attrs="{'invisible':[('name','=', False)]}" class="oe_inline"/>
                         <field name="name" class="oe_inline" readonly="1"/>
                     </h1>
                     <group name="main">
                         <group>
-                            <field name="partner_id"/>
+                            <field name="partner_id" domain="[('customer','=',True)]" options="{'no_create': True}"/>
                         </group>
                         <group>
                             <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>

@@ -8,17 +8,17 @@ class FmsInvoicingOrderLineCreate(models.TransientModel):
     _name = 'fms.invoicing.order.line.create'
     _description = 'Wizard to create order lines'
 
-    order_id = fields.Many2one(
-        'fms.invoicing.order', string='Invoicing Order')
+    order_id = fields.Many2one(comodel_name="fms.invoicing.order",
+        string="Invoicing Order")
+    partner_id = fields.Many2one(comodel_name="fms.invoicing.order",
+        string="Customer")
     date_planned = fields.Date(string="Scheduled Date")
-    partner_center = fields.Char(
-        'Center code', size=32)
-    partner_department = fields.Char(
-        'Department code', size=32)
-    product_id = fields.Many2one(
-        'product.product', 'Product')
-    freight_ids = fields.Many2many(
-        'fms.freight', string='Expeditions')
+    partner_center = fields.Char(string="Center code", size=32)
+    partner_department = fields.Char(string="Department code", size=32)
+    product_id = fields.Many2one(comodel_name="product.product", string="Product")
+    freight_ids = fields.Many2many(comodel_name="fms.freight", string="Expeditions",
+        domain="[('state', '=', 'closed'),('date_planned', '<=', date_planned),"
+               "('partner_id', '=', partner_id)]")
 
     @api.model
     def default_get(self, field_list):
@@ -30,6 +30,7 @@ class FmsInvoicingOrderLineCreate(models.TransientModel):
         order = self.env['fms.invoicing.order'].browse(context['active_id'])
         res.update({
             'order_id': order.id,
+            'partner_id': order.partner_id.id,
             'date_planned': order.date_invoice,
             })
         return res
@@ -39,7 +40,7 @@ class FmsInvoicingOrderLineCreate(models.TransientModel):
         self.ensure_one()
         domain = [('state', '=', 'closed'),
                   ('invoicing_order_id', '=', False),
-                  ('partner_id', '=', self.order_id.partner_id.id),
+                  ('partner_id', '=', self.partner_id.id),
                   ('company_id', '=', self.order_id.company_id.id),
                   ('date_planned', '<=', self.date_planned),]
         if self.partner_center:
@@ -49,13 +50,6 @@ class FmsInvoicingOrderLineCreate(models.TransientModel):
         if self.product_id:
             domain += [('product_id', '=', self.product_id.id)]
 
-        # orderlines = self.env['fms.invoicing.order.line'].search([
-        #     ('state', 'in', ('draft','done')),
-        #     ('freight_id', '!=', False)])
-        # if orderlines:
-        #     expeditions_ids = [
-        #         orderline.freight_id.id for orderline in orderlines]
-        #     domain += [('id', 'not in', expeditions_ids)]
         return domain
 
     @api.multi
@@ -63,6 +57,12 @@ class FmsInvoicingOrderLineCreate(models.TransientModel):
         domain = self._prepare_expedition_domain()
         lines = self.env['fms.freight'].search(domain)
         self.freight_ids = lines
+
+        """
+         1. We call this action to avoid close de wizard.
+         2. This action removes de domain in the field 'freight_ids'.
+            We set de domain in the declaration of the field for this reason.  
+        """
         action = {
             'name': _('Select Expeditions to Create Transactions'),
             'type': 'ir.actions.act_window',
@@ -74,8 +74,7 @@ class FmsInvoicingOrderLineCreate(models.TransientModel):
         }
         return action
 
-    @api.onchange(
-        'date_planned','partner_center','partner_department','product_id')
+    @api.onchange('date_planned','partner_center','partner_department','product_id')
     def expedition_filters_change(self):
         domain = self._prepare_expedition_domain()
         res = {'domain': {'freight_ids': domain}}
