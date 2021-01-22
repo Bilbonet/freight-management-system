@@ -151,10 +151,10 @@
                                                'required':[('state','in',('closed',))]}"/>
                             </group>
                             <group groups="fms.group_fms_manager">
-                                <field name="fr_value" attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
+                                <field name="fr_value" attrs="{'readonly':[('state','in',('invoiced','cancel'))]}"/>
                                 <label string="% commission" for="fr_commission_percent"/>
-                                <field name="fr_commission_percent" nolabel="1" attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
-                                <field name="fr_commission" attrs="{'readonly':[('state','in',('closed','invoiced','cancel'))]}"/>
+                                <field name="fr_commission_percent" nolabel="1" attrs="{'readonly':[('state','in',('invoiced','cancel'))]}"/>
+                                <field name="fr_commission" attrs="{'readonly':[('state','in',('invoiced','cancel'))]}"/>
                             </group>
                         </group>
                     </group>

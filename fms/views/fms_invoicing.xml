@@ -36,9 +36,14 @@
                             <field name="invoice_state" string="View Invoice"  widget="statinfo"
                                    attrs="{'invisible': [('invoice_state', '!=', 'draft')]}"/>
                         </button>
+                        <button name="toggle_active" type="object" groups="fms.group_fms_manager"
+                                class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button"
+                                   options='{"terminology": "archive"}'/>
+                        </button>
                     </div>
                     <h1>
-                        <label for="name" string="Order Name: " attrs="{'invisible':[('name','=', False)]}" class="oe_inline"/>
+                        <label for="name" string="Order Reference: " attrs="{'invisible':[('name','=', False)]}" class="oe_inline"/>
                         <field name="name" class="oe_inline" readonly="1"/>
                     </h1>
                     <group name="main">
@@ -73,7 +78,7 @@
             <tree string="Expeditions Invoice Orders" decoration-success="state == 'done'" decoration-muted="state=='cancel'"
                   decoration-danger="state == 'done' and invoice_id==False">
                 <field name="invoice_id" invisible="1"/>
-                <field name="name" string="Name"/>
+                <field name="name" string="Reference"/>
                 <field name="partner_id"/>
                 <field name="date_invoice"/>
                 <field name="journal_id" groups="account.group_account_user"/>
@@ -90,12 +95,15 @@
         <field name="model">fms.invoicing.order</field>
         <field name="arch" type="xml">
             <search>
-                <field name="name"/>
                 <field name="partner_id"/>
-                <separator/>
+                <field name="name" string="Reference"/>
                 <field name="journal_id"/>
+                <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                <filter string="Cancelled" name="cancel" domain="[('state','=','cancel')]"/>
+                <separator/>
+                <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
                 <group expand="0" string="Group By...">
-                    <filter string="Associated Partner"
+                    <filter string="Customer"
                             name="group_by_partner"
                             domain="[]"
                             context="{'group_by':'partner_id'}"/>
@@ -110,11 +118,6 @@
         <field name="res_model">fms.invoicing.order</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
-        <!--<field name="domain">[('contract_type', '=', 'sale')]</field>-->
-        <!--<field name="context">{'is_contract':1,-->
-                               <!--'search_default_not_finished':1,-->
-                               <!--'default_contract_type': 'sale'}-->
-        <!--</field>-->
         <field name="search_view_id" ref="fms_invoicing_search_view"/>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">

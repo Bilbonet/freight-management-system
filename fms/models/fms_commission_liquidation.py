@@ -11,21 +11,20 @@ class FmsCommissionLiquidation(models.Model):
     _inherit = ['mail.thread']
     _order = 'id desc'
 
-    name = fields.Char(string='Name',
-        readonly=True, copy=False)
+    name = fields.Char(string='Reference', readonly=True, copy=False)
     company_id = fields.Many2one('res.company',
         string='Company', required=True,
         default=lambda self: self.env.user.company_id)
     currency_id = fields.Many2one(related='company_id.currency_id',
         store=True, readonly=True)
-    active = fields.Boolean(default=True,
+    active = fields.Boolean(string='Active', default=True,
         help="If the active field is set to False, it will allow you to hide"
              " the liquidation without removing it.")
     state = fields.Selection(
         [
             ('draft', 'Draft'),
             ('done', 'Done'),
-            ('cancel', 'Canceled'),
+            ('cancel', 'Cancelled'),
         ], string='Status', readonly=True, copy=False, default='draft',
         track_visibility='onchange')
     employee_id = fields.Many2one('hr.employee',

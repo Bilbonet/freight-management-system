@@ -26,12 +26,12 @@
                         <button class="oe_stat_button" type="object"
                                 name="toggle_active" icon="fa-archive">
                             <field name="active" widget="boolean_button"
-                                   options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                                   options='{"terminology": "archive"}'/>
                         </button>
                     </div>
 
                     <h1>
-                        <label for="name" string="Liquidation Name: " attrs="{'invisible':[('name','=', False)]}" class="oe_inline"/>
+                        <label for="name" string="Liquidation Reference: " attrs="{'invisible':[('name','=', False)]}" class="oe_inline"/>
                         <field name="name" class="oe_inline" readonly="1"/>
                     </h1>
                     <group name="main">
@@ -64,7 +64,7 @@
         <field name="arch" type="xml">
             <tree string="Commission Liquidation Orders" decoration-success="state == 'done'" decoration-danger="state=='cancel'"
                   decoration-muted="state == 'done'">
-                <field name="name" string="Name"/>
+                <field name="name" string="Reference"/>
                 <field name="employee_id"/>
                 <field name="date"/>
                 <field name="amount_total"/>
@@ -80,9 +80,12 @@
         <field name="model">fms.commission.liquidation</field>
         <field name="arch" type="xml">
             <search>
-                <field name="name"/>
                 <field name="employee_id"/>
+                <field name="name" string="Reference"/>
+                <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                <filter string="Cancelled" name="cancel" domain="[('state','=','cancel')]"/>
                 <separator/>
+                <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
                 <group expand="0" string="Group By...">
                     <filter string="Associated Employee"
                             name="group_by_employee"

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-22 10:38+0000\n"
-"PO-Revision-Date: 2020-09-22 10:38+0000\n"
+"POT-Creation-Date: 2021-01-22 12:16+0000\n"
+"PO-Revision-Date: 2021-01-22 12:16+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -153,14 +153,14 @@ msgid "\n"
 "        "
 msgstr "\n"
 "<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
-"    <p>Le informamos acerca de la siguiente expedición: </p>\n"
+"    <p>Le informamos sobre la siguiente expedición: </p>\n"
 "\n"
 "    <p style=\"border-left: 1px solid #8e0000; margin-left: 30px;\">\n"
 "       &nbsp;&nbsp;Expedición: <strong>${object.name}</strong><br />\n"
-"       &nbsp;&nbsp;Fecha: <strong>${object.format_date(object.date_order)}</strong><br />\n"
+"       &nbsp;&nbsp;Fache: <strong>${object.format_date(object.date_order)}</strong><br />\n"
 "\n"
 "       % if object.user_id:\n"
-"       &nbsp;&nbsp;Su Contacto: <a href=\"mailto:${object.user_id.email or ''}?subject=Freight%20${object.name}\"><strong>${object.user_id.name}</strong></a>\n"
+"       &nbsp;&nbsp;Su contacto: <a href=\"mailto:${object.user_id.email or ''}?subject=Freight%20${object.name}\"><strong>${object.user_id.name}</strong></a>\n"
 "       % endif\n"
 "    </p>\n"
 "\n"
@@ -169,7 +169,7 @@ msgstr "\n"
 "\n"
 "    <table style=\"padding:0px;width:800px;background-color:#f9f9f9;border:solid 1px #f0f0f0;\">\n"
 "        <tr>\n"
-"            <td colspan=\"2\" style=\"text-align:center;\"><h2>RESUMEN EXPEDICIÓN</h2></td>\n"
+"            <td colspan=\"2\" style=\"text-align:center;\"><h2>RESUMEN EXPEDICION</h2></td>\n"
 "        </tr>\n"
 "        <tr>\n"
 "            <td style=\"width:50%\">\n"
@@ -232,7 +232,7 @@ msgstr "\n"
 "                        </tr>\n"
 "\n"
 "                        <tr style=\"color:#875A7B;\">\n"
-"                            <td style=\"width:140px;padding:5px\">Pedido:</td>\n"
+"                            <td style=\"width:140px;padding:5px\">Orden:</td>\n"
 "                            <td>\n"
 "                                % if object.partner_order_doc:\n"
 "                                <strong>${(object.partner_order_doc)}</strong>\n"
@@ -241,7 +241,7 @@ msgstr "\n"
 "                        </tr>\n"
 "\n"
 "                        <tr style=\"color:#875A7B;\">\n"
-"                            <td style=\"width:140px;padding:5px\">Documento Venta:</td>\n"
+"                            <td style=\"width:140px;padding:5px\">Venta Doc.:</td>\n"
 "                            <td>\n"
 "                                % if object.partner_sale_doc:\n"
 "                                <strong>${(object.partner_sale_doc)}</strong>\n"
@@ -256,7 +256,7 @@ msgstr "\n"
 "    </table>\n"
 "    <br/>\n"
 "\n"
-"    Para acceder a la expedición, pinche en el siguiente enlace:\n"
+"    Para acceder a la expedición, puede usar el siguiente enlace:\n"
 "    <div style=\"margin: 16px 0px 16px 0px;\">\n"
 "      <a href=\"${object.get_portal_url()}\" style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
 "       Ver Expedición\n"
@@ -264,8 +264,8 @@ msgstr "\n"
 "    </div>\n"
 "\n"
 "    <br/>\n"
-"    <p>Si tiene alguna pregunta, no dude en contactarnos.</p>\n"
-"    <p>Gracias por confiar en  ${object.company_id.name or 'us'}!</p>\n"
+"    <p>Si tiene alguna duda, no dude en contactarnos.</p>\n"
+"    <p>Gracias por confiar en ${object.company_id.name or 'us'}!</p>\n"
 "    % if object.user_id.signature:\n"
 "       ${object.user_id.signature | safe}\n"
 "    % else\n"
@@ -680,7 +680,9 @@ msgid "An invoice order already exists with this reference in the same company!"
 msgstr "Ya existe una orden de facturación con esta referencia para la compañia!"
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_search_view
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+#: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_search_view
 msgid "Archived"
 msgstr "Archivado"
 
@@ -688,11 +690,6 @@ msgstr "Archivado"
 #: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_search_view
 msgid "Associated Employee"
 msgstr "Empleado Asociado"
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_search_view
-msgid "Associated Partner"
-msgstr "Empresa asociada"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__message_attachment_count
@@ -730,16 +727,14 @@ msgid "Cancel Order"
 msgstr "Cancelar Orden"
 
 #. module: fms
-#: selection:fms.commission.liquidation,state:0
-#: selection:fms.invoicing.order,state:0
-msgid "Canceled"
-msgstr "Cancelado"
-
-#. module: fms
 #: code:addons/fms/controllers/portal.py:51
+#: selection:fms.commission.liquidation,state:0
 #: selection:fms.freight,state:0
 #: selection:fms.freight.commission.line,state:0
+#: selection:fms.invoicing.order,state:0
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_search_view
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+#: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_search_view
 #, python-format
 msgid "Cancelled"
 msgstr "Cancelado"
@@ -767,7 +762,7 @@ msgstr "Direcciones de la ciudad"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_line_create_form
-msgid "Click on Add All Expeditions to auto-select the expeditions matching the above criteria                 or click on Add an item to manually select the expeditions filtered by the above criteria."
+msgid "Click on Add All Expeditions to auto-select the expeditions matching the above criteria                     or click on Add an item to manually select the expeditions filtered by the above criteria."
 msgstr "Pinche en añadir Todas las Expediciones para auto-selecionar las expdiciones que casen con los criterios de arriba o pulse Agregar registro para seleccionar manuelmente las líneas filtradas por los criterios de arriba."
 
 #. module: fms
@@ -1034,7 +1029,9 @@ msgstr "Moneda"
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__c_partner_id
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__partner_id
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order_line__partner_id
+#: model:ir.model.fields,field_description:fms.field_fms_invoicing_order_line_create__partner_id
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+#: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_search_view
 msgid "Customer"
 msgstr "Cliente"
 
@@ -1198,6 +1195,8 @@ msgstr "Descargar"
 #: selection:fms.commission.liquidation,state:0
 #: selection:fms.freight,state:0
 #: selection:fms.invoicing.order,state:0
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_search_view
+#: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_search_view
 #, python-format
 msgid "Draft"
 msgstr "Borrador"
@@ -1442,7 +1441,7 @@ msgstr "Descripción expedición"
 #. module: fms
 #: model:ir.model,name:fms.model_fms_freight
 msgid "Freight Expedition Management"
-msgstr ""
+msgstr "Administración Expeiciones de Mercancía"
 
 #. module: fms
 #: model_terms:ir.actions.act_window,help:fms.fms_freight_action_from_menu
@@ -1755,11 +1754,7 @@ msgid "My Expeditions"
 msgstr "Mis Expediciones"
 
 #. module: fms
-#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__name
 #: model:ir.model.fields,field_description:fms.field_fms_freight_tags__name
-#: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__name
-#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_tree_view
-#: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_tree_view
 msgid "Name"
 msgstr "Nombre"
 
@@ -1785,7 +1780,7 @@ msgid "Next Activity Type"
 msgstr "Siguiente tipo de actividad"
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:161
+#: code:addons/fms/models/fms_invoicing.py:160
 #, python-format
 msgid "No valid lines found for invoicing.Please review the order lines."
 msgstr "No se han encontrado lineas validas para la fcturación. Por favor revisa las lineas de la orden."
@@ -1928,7 +1923,7 @@ msgid "Planned Date"
 msgstr "Fecha Planificada"
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:134
+#: code:addons/fms/models/fms_invoicing.py:133
 #, python-format
 msgid "Please define a journal for the company '%s'."
 msgstr "Por favor defina un diario para la compañia '%s'."
@@ -1994,7 +1989,13 @@ msgid "Received"
 msgstr "Recibido"
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__name
 #: model:ir.model.fields,field_description:fms.field_fms_freight__name
+#: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__name
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_search_view
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_tree_view
+#: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_search_view
+#: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_tree_view
 msgid "Reference"
 msgstr "Referencia"
 
@@ -2122,7 +2123,7 @@ msgstr "Ajustes"
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_form_view
 msgid "State"
-msgstr "Provincia"
+msgstr "Estado"
 
 #. module: fms
 #: code:addons/fms/controllers/portal.py:36
@@ -2175,7 +2176,7 @@ msgid "The country of the delivery %s differs from that in location %s"
 msgstr "El pais de la entrega %s difiere de este an la localización"
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:168
+#: code:addons/fms/models/fms_invoicing.py:167
 #, python-format
 msgid "The line '%s' has not a product for invoicing:\n"
 "All expeditions must have a product before invoicing."
@@ -2200,7 +2201,7 @@ msgid "The state of the delivery %s differs from that in location %s"
 msgstr "La provincia de la entrega %s difiere de esta en la localización "
 
 #. module: fms
-#: code:addons/fms/models/fms_commission_liquidation.py:70
+#: code:addons/fms/models/fms_commission_liquidation.py:69
 #, python-format
 msgid "There are commission lines with date higher than selected date.\n"
 "Please delete those lines or select a higher date."
@@ -2208,7 +2209,7 @@ msgstr "Hay lineas de comisiones con fecha mayor que la fecha selecionada.\n"
 "Por favor elimine dichas lineas o seleccione una fecha mayor."
 
 #. module: fms
-#: code:addons/fms/models/fms_commission_liquidation.py:61
+#: code:addons/fms/models/fms_commission_liquidation.py:60
 #, python-format
 msgid "There are commission lines.\n"
 " Before you change the employee you have to delete all lines."
@@ -2221,13 +2222,13 @@ msgid "There are currently no expeditions for your account."
 msgstr "Actualmente no hay expediciones para su cuenta."
 
 #. module: fms
-#: code:addons/fms/models/fms_commission_liquidation.py:112
+#: code:addons/fms/models/fms_commission_liquidation.py:111
 #, python-format
 msgid "There aren't any commission line."
 msgstr "No hay ninguna linea de comisión"
 
 #. module: fms
-#: code:addons/fms/models/fms_commission_liquidation.py:99
+#: code:addons/fms/models/fms_commission_liquidation.py:98
 #, python-format
 msgid "There aren't any commission pending for this employee and date."
 msgstr "No hay ninguna comisión pendiente para este empleado fecha"
@@ -2311,7 +2312,7 @@ msgid "Wizard to create order lines"
 msgstr "Asistente para la creación de lineas"
 
 #. module: fms
-#: code:addons/fms/models/fms_commission_liquidation.py:147
+#: code:addons/fms/models/fms_commission_liquidation.py:146
 #, python-format
 msgid "You can only delete Liquidation Orders in state draft."
 msgstr "Usted solo puede eliminar ordenes de liquidación en estado borrador."
@@ -2323,7 +2324,7 @@ msgid "You can only delete expeditions in state draft or canceled."
 msgstr "Usted solo puede eliminar expediciones en estado Borrador o Cancelada."
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:114
+#: code:addons/fms/models/fms_invoicing.py:113
 #, python-format
 msgid "You cannot cancel an order with invoice. You can delete the invoice and then cancel it."
 msgstr "Usted no puede cancelar una orden si existe la factura. Usted puede borrar la factura y despues cancelarla."
@@ -2337,7 +2338,7 @@ msgstr "No puede eliminar una expedición facturada.\n"
 "Primero tienes que eliminar la linea en la factura."
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:87
+#: code:addons/fms/models/fms_invoicing.py:86
 #, python-format
 msgid "You cannot delete an order invoiced. You can delete de invoice and then cancel it in order to do so."
 msgstr "Usted no puede borrar una orden facturada. Usted puede borrar la factura y despues cancelarla."

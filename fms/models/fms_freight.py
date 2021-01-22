@@ -15,7 +15,7 @@ class FmsFreight(models.Model):
     name = fields.Char(string='Reference', index=True,
         readonly=True, copy=False,
         help='The reference that will be used on freight expeditions')
-    active = fields.Boolean(default=True,
+    active = fields.Boolean(string='Active', default=True,
         help="If the active field is set to False, it will allow you to hide"
              " the expedition without removing it.")
     state = fields.Selection([

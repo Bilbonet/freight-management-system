@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-22 10:37+0000\n"
-"PO-Revision-Date: 2020-09-22 10:37+0000\n"
+"POT-Creation-Date: 2021-01-22 12:16+0000\n"
+"PO-Revision-Date: 2021-01-22 12:16+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -533,18 +533,15 @@ msgid "An invoice order already exists with this reference in the same company!"
 msgstr ""
 
 #. module: fms
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_search_view
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+#: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_search_view
 msgid "Archived"
 msgstr ""
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_search_view
 msgid "Associated Employee"
-msgstr ""
-
-#. module: fms
-#: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_search_view
-msgid "Associated Partner"
 msgstr ""
 
 #. module: fms
@@ -583,16 +580,14 @@ msgid "Cancel Order"
 msgstr ""
 
 #. module: fms
-#: selection:fms.commission.liquidation,state:0
-#: selection:fms.invoicing.order,state:0
-msgid "Canceled"
-msgstr ""
-
-#. module: fms
 #: code:addons/fms/controllers/portal.py:51
+#: selection:fms.commission.liquidation,state:0
 #: selection:fms.freight,state:0
 #: selection:fms.freight.commission.line,state:0
+#: selection:fms.invoicing.order,state:0
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_search_view
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+#: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_search_view
 #, python-format
 msgid "Cancelled"
 msgstr ""
@@ -620,7 +615,7 @@ msgstr ""
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_line_create_form
-msgid "Click on Add All Expeditions to auto-select the expeditions matching the above criteria                 or click on Add an item to manually select the expeditions filtered by the above criteria."
+msgid "Click on Add All Expeditions to auto-select the expeditions matching the above criteria                     or click on Add an item to manually select the expeditions filtered by the above criteria."
 msgstr ""
 
 #. module: fms
@@ -887,7 +882,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__c_partner_id
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__partner_id
 #: model:ir.model.fields,field_description:fms.field_fms_invoicing_order_line__partner_id
+#: model:ir.model.fields,field_description:fms.field_fms_invoicing_order_line_create__partner_id
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_filter_view
+#: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_search_view
 msgid "Customer"
 msgstr ""
 
@@ -1051,6 +1048,8 @@ msgstr ""
 #: selection:fms.commission.liquidation,state:0
 #: selection:fms.freight,state:0
 #: selection:fms.invoicing.order,state:0
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_search_view
+#: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_search_view
 #, python-format
 msgid "Draft"
 msgstr ""
@@ -1604,11 +1603,7 @@ msgid "My Expeditions"
 msgstr ""
 
 #. module: fms
-#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__name
 #: model:ir.model.fields,field_description:fms.field_fms_freight_tags__name
-#: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__name
-#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_tree_view
-#: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_tree_view
 msgid "Name"
 msgstr ""
 
@@ -1634,7 +1629,7 @@ msgid "Next Activity Type"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:161
+#: code:addons/fms/models/fms_invoicing.py:160
 #, python-format
 msgid "No valid lines found for invoicing.Please review the order lines."
 msgstr ""
@@ -1777,7 +1772,7 @@ msgid "Planned Date"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:134
+#: code:addons/fms/models/fms_invoicing.py:133
 #, python-format
 msgid "Please define a journal for the company '%s'."
 msgstr ""
@@ -1843,7 +1838,13 @@ msgid "Received"
 msgstr ""
 
 #. module: fms
+#: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation__name
 #: model:ir.model.fields,field_description:fms.field_fms_freight__name
+#: model:ir.model.fields,field_description:fms.field_fms_invoicing_order__name
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_search_view
+#: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_tree_view
+#: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_search_view
+#: model_terms:ir.ui.view,arch_db:fms.fms_invoicing_tree_view
 msgid "Reference"
 msgstr ""
 
@@ -2021,7 +2022,7 @@ msgid "The country of the delivery %s differs from that in location %s"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:168
+#: code:addons/fms/models/fms_invoicing.py:167
 #, python-format
 msgid "The line '%s' has not a product for invoicing:\n"
 "All expeditions must have a product before invoicing."
@@ -2045,14 +2046,14 @@ msgid "The state of the delivery %s differs from that in location %s"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_commission_liquidation.py:70
+#: code:addons/fms/models/fms_commission_liquidation.py:69
 #, python-format
 msgid "There are commission lines with date higher than selected date.\n"
 "Please delete those lines or select a higher date."
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_commission_liquidation.py:61
+#: code:addons/fms/models/fms_commission_liquidation.py:60
 #, python-format
 msgid "There are commission lines.\n"
 " Before you change the employee you have to delete all lines."
@@ -2064,13 +2065,13 @@ msgid "There are currently no expeditions for your account."
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_commission_liquidation.py:112
+#: code:addons/fms/models/fms_commission_liquidation.py:111
 #, python-format
 msgid "There aren't any commission line."
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_commission_liquidation.py:99
+#: code:addons/fms/models/fms_commission_liquidation.py:98
 #, python-format
 msgid "There aren't any commission pending for this employee and date."
 msgstr ""
@@ -2154,7 +2155,7 @@ msgid "Wizard to create order lines"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_commission_liquidation.py:147
+#: code:addons/fms/models/fms_commission_liquidation.py:146
 #, python-format
 msgid "You can only delete Liquidation Orders in state draft."
 msgstr ""
@@ -2166,7 +2167,7 @@ msgid "You can only delete expeditions in state draft or canceled."
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:114
+#: code:addons/fms/models/fms_invoicing.py:113
 #, python-format
 msgid "You cannot cancel an order with invoice. You can delete the invoice and then cancel it."
 msgstr ""
@@ -2179,7 +2180,7 @@ msgid "You cannot delete an expedition invoiced.\n"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:87
+#: code:addons/fms/models/fms_invoicing.py:86
 #, python-format
 msgid "You cannot delete an order invoiced. You can delete de invoice and then cancel it in order to do so."
 msgstr ""
