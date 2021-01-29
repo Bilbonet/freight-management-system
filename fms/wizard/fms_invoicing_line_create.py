@@ -10,7 +10,7 @@ class FmsInvoicingOrderLineCreate(models.TransientModel):
 
     order_id = fields.Many2one(comodel_name="fms.invoicing.order",
         string="Invoicing Order")
-    partner_id = fields.Many2one(comodel_name="fms.invoicing.order",
+    partner_id = fields.Many2one(comodel_name="res.partner",
         string="Customer")
     date_planned = fields.Date(string="Scheduled Date")
     partner_center = fields.Char(string="Center code", size=32)
