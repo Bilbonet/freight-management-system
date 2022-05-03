@@ -6,8 +6,16 @@
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='job_title']" position="after">
-                <label string="% commission" for="fms_commission"/>
-                <field name="fms_commission" nolabel="1"/>
+                <label string="FMS Commission" for="fms_type"/>
+                <div class="row">
+                    <div class="col-4">
+                        <field name="fms_type"/>
+                    </div>
+                    <div class="col-4 oe_inline" attrs="{'invisible': [('fms_type', '!=', 'percent')]}">
+                        <label style="font-weight:bold;" string="%" for="fms_commission"/>
+                        <field name="fms_commission"/>
+                    </div>
+                </div>
             </xpath>
         </field>
     </record>
