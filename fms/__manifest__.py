@@ -3,7 +3,7 @@
 
 {
     'name': 'Freight Management System',
-    'version': '12.0.1.2.1',
+    'version': '12.0.1.2.2',
     'category': 'Transport',
     'license': 'AGPL-3',
     'author': 'Jesus Ramiro (Bilbonet.NET)',

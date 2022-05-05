@@ -28,6 +28,7 @@ class FmsFreightCommissionLine(models.Model):
     date = fields.Date(string='Commission Date', required=True)
     employee_id = fields.Many2one('hr.employee',
         string='Employee', required=True)
+    # emp_commission: Deprecated
     emp_commission = fields.Float(string='Employee % commission',
         related='employee_id.fms_commission', store=False, readonly=True,
         compute_sudo=True)
@@ -67,11 +68,24 @@ class FmsFreightCommissionLine(models.Model):
 
     @api.onchange('employee_id')
     def _onchange_employee_id(self):
+        """
+        Commission calculation
+        """
+        if self.freight_id.fr_commission == 0:
+            # Nothing to calc if the commission in freight is 0
+            return None
+
         vals = {}
+        amount = 0.0
+        if self.employee_id.fms_type == 'percent':
+            if self.employee_id.fms_commission != 0:
+                amount = self.freight_id.fr_commission * (self.employee_id.fms_commission / 100)
+                vals.update({'amount': amount})
+                self.update(vals)
+            return None
 
+        if self.employee_id.fms_type == 'distribution':
+            return None
+        
 
-        if self.freight_id.fr_commission != 0 and self.emp_commission != 0:
-            amount = self.freight_id.fr_commission * (self.emp_commission / 100)
-            vals.update({'amount': amount})
-        self.update(vals)
     

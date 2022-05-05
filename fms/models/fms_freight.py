@@ -3,6 +3,7 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 from datetime import datetime
+from pytz import timezone
 
 
 class FmsFreight(models.Model):
@@ -214,9 +215,7 @@ class FmsFreight(models.Model):
                 "And all expedition tags has been removed too."
             ))
 
-    @api.multi
     def action_close(self):
-        self.ensure_one()
         for freight in self:
             freight.update({'state': 'closed'})
             freight.message_post(body=_("<h5><strong>Closed</strong></h5>"))
@@ -225,11 +224,11 @@ class FmsFreight(models.Model):
                 lambda l: l.employee_id.id == freight.responsible_id.id
             )
             if not lines:
+
                 vals = {
                     'freight_id': self.id,
                     'employee_id': freight.responsible_id.id,
-                    'emp_commission': freight.responsible_id.fms_commission,
-                    'date': freight.date_planned.date(),
+                    'date': freight.date_planned.astimezone(timezone(self._context.get('tz'))).date(),
                     'currency_id':  self.currency_id.id,
                 }
                 new_commission = self.env['fms.freight.commission.line'].new(vals)
