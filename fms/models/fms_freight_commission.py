@@ -62,9 +62,9 @@ class FmsFreightCommissionLine(models.Model):
 
     @api.depends('freight_id.partner_id')
     def _compute_complete_name(self):
-        for name in self:
-            name.complete_name = '(%s) %s / %s' % (
-                name.id, name.freight_id.name, name.freight_id.partner_id.name)
+        for rec in self:
+            rec.complete_name = '(%s) %s / %s' % (
+                rec.id, rec.freight_id.name, rec.freight_id.partner_id.name)
 
     @api.onchange('employee_id')
     def _onchange_employee_id(self):
