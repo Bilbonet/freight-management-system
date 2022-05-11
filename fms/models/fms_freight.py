@@ -94,8 +94,9 @@ class FmsFreight(models.Model):
         string='Responsible', track_visibility="onchange", copy=False,
         help="Employee which is responsible to do the expedition.")
     # Commission Lines
-    commission_line_ids = fields.One2many(
-        'fms.freight.commission.line', 'freight_id', string="Commission")
+    commission_line_ids = fields.One2many(string="Commission",
+        comodel_name='fms.freight.commission.line', 
+        inverse_name='freight_id')
     # Invoicing
     invoice_id = fields.Many2one(comodel_name='account.invoice',
         string='Invoice', copy=False)
