@@ -224,8 +224,7 @@ class FmsFreight(models.Model):
             lines = freight.commission_line_ids.filtered(
                 lambda l: l.employee_id.id == freight.responsible_id.id
             )
-            if not lines:
-
+            if not lines:                
                 vals = {
                     'freight_id': self.id,
                     'employee_id': freight.responsible_id.id,
@@ -236,7 +235,11 @@ class FmsFreight(models.Model):
                 # force compute commission
                 new_commission._onchange_employee_id()
                 vals = new_commission._convert_to_write(new_commission._cache)
-                self.env['fms.freight.commission.line'].sudo().create(vals)
+                
+                # We gave to pass a list of dictionaries
+                x=[]
+                x.append(vals)
+                self.env['fms.freight.commission.line'].sudo().create(x)
 
     @api.multi
     def action_reopen(self):
