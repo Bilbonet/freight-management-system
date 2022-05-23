@@ -24,9 +24,6 @@
         <!-- ============= -->
         <!-- Freight Rules -->
         <!-- ============= -->
-        <!--<record id="base.default_user" model="res.users">-->
-            <!--<field name="groups_id" eval="[(4,ref('fms.group_fms_manager'))]"/>-->
-        <!--</record>-->
         <!-- Group Managers: can do all -->
         <record id="fms_freight_manager_rule" model="ir.rule">
             <field name="name">FMS Freight: manager do all</field>
@@ -98,7 +95,6 @@
             <field name="name">FMS Expedition User Portal</field>
             <field name="model_id" ref="fms.model_fms_freight"/>
             <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
-            <!--<field name="domain_force">[('partner_id', 'child_of', user.commercial_partner_id.id)]</field>-->
             <field name="domain_force">['|',('partner_id','child_of',user.commercial_partner_id.id),
                                             ('message_partner_ids','child_of',[user.commercial_partner_id.id])]</field>
             <field name="perm_read" eval="True"/>

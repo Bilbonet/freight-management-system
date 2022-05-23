@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <record id="view_freight_commission_analysis_pivot" model="ir.ui.view">
+         <field name="name">freight.commission.analysis pivot</field>
+         <field name="model">fms.freight.commission.analysis.report</field>
+         <field name="arch" type="xml">
+             <pivot string="FMS Commission Analysis">
+                 <field name="employee_id" type="row"/>
+                 <field name="date_comm" interval="month" type="col"/>
+                 <field name="amount" type="measure"/>
+             </pivot>
+         </field>
+    </record>
+
+    <record id="view_freight_commission_analysis_graph" model="ir.ui.view">
+         <field name="name">freight.commission.analysis graph</field>
+         <field name="model">fms.freight.commission.analysis.report</field>
+         <field name="arch" type="xml">
+             <graph string="FMS Commission Analysis">
+                 <field name="employee_id"/>
+                 <field name="amount" type="measure"/>
+             </graph>
+         </field>
+    </record>
+
+    <record id="view_freight_commission_analysis_search" model="ir.ui.view">
+        <field name="name">freight.commission.analysis search</field>
+        <field name="model">fms.freight.commission.analysis.report</field>
+        <field name="arch" type="xml">
+            <search string="FMS Commission Analysis">
+                <field name="date_comm"/>
+                <field name="commission_type"/>
+                <filter string="This Year" name="this year" domain="[('date_comm','&lt;=', time.strftime('%%Y-12-31')),('date_comm','&gt;=',time.strftime('%%Y-01-01'))]"/>
+                <filter string="This Month" name="this_month" domain="[('date_comm','&gt;=', time.strftime('%Y-%m-01'))]"/>
+                <filter string="This Week" name="This Week"
+                        domain="[
+                                '&amp;',
+                                ('date_comm', '>=', (context_today() + relativedelta(weeks=-1,days=1,weekday=0)).strftime('%Y-%m-%d')),
+                                ('date_comm', '&lt;=', (context_today() + relativedelta(weekday=6)).strftime('%Y-%m-%d')),]"/>
+                <separator/>
+                <field name="employee_id"/>
+                <group expand="1" string="Group By">
+                    <filter string="Employee" name="Employee" context="{'group_by':'employee_id'}"/>
+                    <filter string="Commission Type" name="Commission Type" context="{'group_by':'commission_type'}"/>
+                    <separator/>
+                    <filter string="Commission Month" name="group_by_commission_month" context="{'group_by':'date_comm:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+   <record id="freight_commission_analysis_report_action" model="ir.actions.act_window">
+        <field name="name">Commission Analysis</field>
+        <field name="res_model">fms.freight.commission.analysis.report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">pivot,graph</field>
+        <field name="search_view_id" ref="view_freight_commission_analysis_search"/>
+        <field name="view_id" ref="view_freight_commission_analysis_graph"/>
+        <field name="help">This report performs analysis on your commissions added in expedition commission lines. 
+        You can check the amount and lines that will be settled by date, employee, etc. 
+        Use this report to perform analysis on order lines agents not being settled yet.</field>
+    </record>
+
+    <menuitem id="fms_freight_report_menu"
+        name="Reporting"
+        parent="fms_main_menu"
+        groups="fms.group_fms_manager" 
+        sequence="60"/>
+
+    <menuitem id="freight_commissions_analysis_menu" 
+        action="freight_commission_analysis_report_action" 
+        parent="fms_freight_report_menu"
+        sequence="15"/>
+
+</odoo>

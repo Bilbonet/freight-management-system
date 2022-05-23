@@ -3,7 +3,7 @@
 
 {
     'name': 'Freight Management System',
-    'version': '12.0.1.2.2',
+    'version': '12.0.2.0.0',
     'category': 'Transport',
     'license': 'AGPL-3',
     'author': 'Jesus Ramiro (Bilbonet.NET)',
@@ -31,6 +31,7 @@
         'report/report_templates.xml',
         'report/fms_freight_report.xml',
         'report/fms_commission_liquidation_report.xml',
+        'report/fms_freight_commission_analysis_report_view.xml',
         'views/fms_invoicing.xml',
         'views/fms_invoicing_line.xml',
         'views/account_invoice_view.xml',

@@ -8,7 +8,7 @@ class Employee(models.Model):
     _inherit = "hr.employee"
 
     fms_type = fields.Selection(
-        string="FMS type of commision",
+        string="FMS Commision Type",
         selection=[
             ('percent', 'Percent'),
             ('distribution', 'Distribution'),

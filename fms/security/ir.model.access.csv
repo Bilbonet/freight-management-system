@@ -10,3 +10,4 @@ fms_invoicing_manager,Fms invoicing manager,model_fms_invoicing_order,account.gr
 fms_invoicing_line_manager,Fms invoicing line manager,model_fms_invoicing_order_line,account.group_account_manager,1,1,1,1
 fms_commission_liquidation_manager,Fms commission liquidation manager,model_fms_commission_liquidation,account.group_account_manager,1,1,1,1
 fms_commission_liquidation_line_manager,Fms commission liquidation line manager,model_fms_commission_liquidation_line,account.group_account_manager,1,1,1,1
+access_commission_analysis_report,access_commission_analysis_report,model_fms_freight_commission_analysis_report,fms.group_fms_manager,1,0,0,0
