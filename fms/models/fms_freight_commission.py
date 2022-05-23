@@ -30,9 +30,9 @@ class FmsFreightCommissionLine(models.Model):
     employee_id = fields.Many2one(string='Employee', 
         comodel_name='hr.employee', required=True)
     # emp_commission: Deprecated
-    emp_commission = fields.Float(string='Employee % commission',
-        related='employee_id.fms_commission', store=False, readonly=True,
-        compute_sudo=True)
+    # emp_commission = fields.Float(string='Employee % commission',
+    #     related='employee_id.fms_commission', store=False, readonly=True,
+    #     compute_sudo=True)
     commission_product_id = fields.Many2one('product.product',
         string='Commission Product', required=True)
     currency_id = fields.Many2one('res.currency', 'Currency',
