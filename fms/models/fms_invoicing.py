@@ -106,23 +106,30 @@ class FmsInvoicingOrder(models.Model):
         result['views'] = [(form_view.id, 'form')]
         result['res_id'] = self.invoice_id.id
         return result
-    @api.multi
+
     def action_cancel(self):
         for order in self:
-            if order.invoice_id:
+            if order.invoice_id and order.invoice_state not in ('draft','cancel'):
                 raise UserError(_(
-                    "You cannot cancel an order with invoice. You can "
-                    "delete the invoice and then cancel it."))
+                    "You can only cancel an invoicing order with invoice "
+                    "if the invoice is in state 'Draft' or 'Canceled'"))
             order.write({'state': 'cancel'})
             # Update Expeditions
             for order_line in order.order_line_ids:
                 order_line._set_expedition_closed()
+        return True
 
-        return True
-    @api.multi
     def cancel2draft(self):
-        self.write({'state': 'draft'})
+        for order in self:
+            order.write({'state': 'draft'})
+            # Delete Invoice values
+            if order.invoice_id:
+                order.invoice_id.fms_invoicing_order_id = False
+                for il in order.invoice_id.invoice_line_ids:
+                    il.fms_freight_id = False
+                order.invoice_id = False    
         return True
+
     # ------------------------
     # Create Invoice
     # ------------------------
@@ -336,6 +343,7 @@ class FmsInvoicingOrderLine(models.Model):
             'invoice_id': invoice_id,
         }
         self.freight_id.update(vals)
+
     def _set_expedition_closed(self):
         self.ensure_one()
         vals = {

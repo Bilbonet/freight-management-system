@@ -19,7 +19,7 @@
                             groups="account.group_account_manager"/>
                     <button name="action_cancel" type="object"
                             string="Cancel Order"
-                            attrs="{'invisible': ['|',('state', '!=', 'done'),('invoice_id', '!=', False),('invoice_state', '!=', 'draft')]}"/>/>
+                            attrs="{'invisible': ['|','&amp;',('state', '!=', 'done'),('invoice_id', '!=', False),('invoice_state', 'not in', ('draft','cancel'))]}"/>/>
                     <button name="cancel2draft" type="object"
                             string="Back to Draft"
                             states="cancel"/>

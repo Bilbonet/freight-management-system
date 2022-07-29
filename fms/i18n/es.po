@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-23 15:45+0000\n"
-"PO-Revision-Date: 2022-05-23 18:02+0200\n"
+"POT-Creation-Date: 2022-07-28 11:17+0000\n"
+"PO-Revision-Date: 2022-07-29 08:53+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #. module: fms
 #: model:mail.template,body_html:fms.fms_freight_email_template
@@ -347,8 +347,6 @@ msgid ""
 "<br/>\n"
 "                                            <b>Email: </b>"
 msgstr ""
-"<br/>\n"
-"                                            <b>Email: </b>"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.portal_expedition_page
@@ -600,7 +598,7 @@ msgstr "<strong>Fecha: </strong>"
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "<strong>Email: </strong>"
-msgstr "<strong>Email: </strong>"
+msgstr ""
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_delivery_note_report_document
@@ -617,7 +615,7 @@ msgstr "<strong>Teléfono: </strong>"
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_freight_report_document
 msgid "<strong>Subtotal</strong>"
-msgstr "<strong>Subtotal</strong>"
+msgstr ""
 
 #. module: fms
 #: sql_constraint:fms.commission.liquidation:0
@@ -835,7 +833,7 @@ msgstr "Índice de Colores"
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_analysis_report__commission_type
 msgid "Commision Type"
-msgstr "Tipo de Comisión"
+msgstr "Tipo Comisión"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__commission_line_ids
@@ -846,7 +844,7 @@ msgstr "Comisión"
 #: model:ir.actions.act_window,name:fms.freight_commission_analysis_report_action
 #: model:ir.ui.menu,name:fms.freight_commissions_analysis_menu
 msgid "Commission Analysis"
-msgstr "Análisis de Comisiones"
+msgstr "Análisis Comisión"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__c_date
@@ -883,7 +881,7 @@ msgstr "Orden Liquidación de comisiones"
 #. module: fms
 #: model:ir.model,name:fms.model_fms_commission_liquidation_line
 msgid "Commission Liquidation Order Line"
-msgstr "Orden  de Liquidación Línea de Comisión"
+msgstr "Línea Orden Liquidación de Comisión"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_commission_liquidation_form_view
@@ -894,7 +892,7 @@ msgstr "Ordenes Liquidación Comisiones"
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.view_freight_commission_analysis_search
 msgid "Commission Month"
-msgstr "Mes de Comisión"
+msgstr "Mes Comisión"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_commission_liquidation_line__c_product_id
@@ -911,7 +909,7 @@ msgstr "Estado Comisión"
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.view_freight_commission_analysis_search
 msgid "Commission Type"
-msgstr "Tipo de Comisión"
+msgstr "Tipo Comisión"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight__fr_commission_percent
@@ -964,7 +962,7 @@ msgstr "Nombre completo"
 #: code:addons/fms/models/fms_freight.py:155
 #, python-format
 msgid "Compose Email"
-msgstr "Componer Email"
+msgstr "Redactar Email"
 
 #. module: fms
 #: model:ir.model,name:fms.model_res_config_settings
@@ -1371,7 +1369,7 @@ msgstr ""
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_fms_freight_commission_analysis_report__expedition_value
 msgid "Expedition Value"
-msgstr "Valor de la Expedición"
+msgstr "Valor Expedición"
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_product_product__fms_invoicing
@@ -1409,7 +1407,7 @@ msgstr "Expediciones Ordenes Facturación"
 #: model:ir.ui.menu,name:fms.fms_main_menu
 #: model_terms:ir.ui.view,arch_db:fms.res_config_settings_view_form
 msgid "F.M.S"
-msgstr "F.M.S"
+msgstr ""
 
 #. module: fms
 #: model:ir.model.fields,field_description:fms.field_hr_employee__fms_type
@@ -1426,7 +1424,7 @@ msgstr "FMS Comisión"
 #: model_terms:ir.ui.view,arch_db:fms.view_freight_commission_analysis_pivot
 #: model_terms:ir.ui.view,arch_db:fms.view_freight_commission_analysis_search
 msgid "FMS Commission Analysis"
-msgstr "FMS Análisis Comisiones"
+msgstr "FMS Análisis Comisión"
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.res_config_settings_view_form
@@ -1441,7 +1439,7 @@ msgstr "FMS Ajustes Expediciones"
 #. module: fms
 #: model:ir.model,name:fms.model_fms_freight_commission_analysis_report
 msgid "FMS Freight Commission Analysis Report"
-msgstr "FMS Informe Análisis Comisiones"
+msgstr "FMS Informe Análisis Comisión Mercancía"
 
 #. module: fms
 #: model:ir.actions.act_window,name:fms.fms_freight_tags_action
@@ -1527,7 +1525,7 @@ msgstr "Descripción expedición"
 #. module: fms
 #: model:ir.model,name:fms.model_fms_freight
 msgid "Freight Expedition Management"
-msgstr "Administración Expediciones Mercancía"
+msgstr "Administración Expediciones de Mercancía"
 
 #. module: fms
 #: model_terms:ir.actions.act_window,help:fms.fms_freight_action_from_menu
@@ -1887,7 +1885,7 @@ msgid "Next Activity Type"
 msgstr "Siguiente tipo de actividad"
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:160
+#: code:addons/fms/models/fms_invoicing.py:167
 #, python-format
 msgid "No valid lines found for invoicing.Please review the order lines."
 msgstr "No se han encontrado lineas validas para la fcturación. Por favor revisa las lineas de la orden."
@@ -2034,7 +2032,7 @@ msgid "Planned Date"
 msgstr "Fecha Planificada"
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:133
+#: code:addons/fms/models/fms_invoicing.py:140
 #, python-format
 msgid "Please define a journal for the company '%s'."
 msgstr "Por favor defina un diario para la compañia '%s'."
@@ -2293,7 +2291,7 @@ msgid "The country of the delivery %s differs from that in location %s"
 msgstr "El país de la entrega %s difiere de este en la localización %s"
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:167
+#: code:addons/fms/models/fms_invoicing.py:174
 #, python-format
 msgid ""
 "The line '%s' has not a product for invoicing:\n"
@@ -2378,9 +2376,9 @@ msgid ""
 "        You can check the amount and lines that will be settled by date, employee, etc. \n"
 "        Use this report to perform analysis on order lines agents not being settled yet."
 msgstr ""
-"Este informe realiza el análisis en las líneas de comisiones añadidas  a las expediciones de mercacía.\n"
-"        Puede comprobar las cantidades y líneas que serán establecidas por fecha, empleado etc. \n"
-"        Utilice este informe para realizar análisis."
+"Este informe realiza un análisis de las comisiones añadidas en las expediciones. \n"
+"        Puede comprobar la cantidad y las líneas que serán establecidas por fecha, empleado, etc. \n"
+"        Utilice este informe para realizar un análisis de las comisiones asignadas."
 
 #. module: fms
 #: model_terms:ir.ui.view,arch_db:fms.fms_add_follower_multi_form
@@ -2466,6 +2464,12 @@ msgid "Wizard to create order lines"
 msgstr "Asistente para la creación de lineas"
 
 #. module: fms
+#: code:addons/fms/models/fms_invoicing.py:113
+#, python-format
+msgid "You can only cancel an invoicing order with invoice if the invoice is in state 'Draft' or 'Canceled'"
+msgstr "Solo puede cancelar una orden de facturación con factura, si la factura está en estado 'Borrador' o 'Cancelada'"
+
+#. module: fms
 #: code:addons/fms/models/fms_commission_liquidation.py:145
 #, python-format
 msgid "You can only delete Liquidation Orders in state draft."
@@ -2478,20 +2482,14 @@ msgid "You can only delete expeditions in state draft or canceled."
 msgstr "Usted solo puede eliminar expediciones en estado Borrador o Cancelada."
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:113
-#, python-format
-msgid "You cannot cancel an order with invoice. You can delete the invoice and then cancel it."
-msgstr "Usted no puede cancelar una orden si existe la factura. Usted puede borrar la factura y despues cancelarla."
-
-#. module: fms
-#: code:addons/fms/models/fms_invoicing.py:366
+#: code:addons/fms/models/fms_invoicing.py:374
 #, python-format
 msgid ""
 "You cannot delete an expedition invoiced.\n"
 "You have to delete the line into the invoice first."
 msgstr ""
-"No puede borrar una expedición facturada.\n"
-"Debe borrar la línea de la factura primero."
+"No puede eliminar una expedición facturada.\n"
+"Primero tienen que eliminar la línea de la expedición en la factura."
 
 #. module: fms
 #: code:addons/fms/models/fms_invoicing.py:86

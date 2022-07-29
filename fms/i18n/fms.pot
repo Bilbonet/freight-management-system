@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-23 15:44+0000\n"
-"PO-Revision-Date: 2022-05-23 15:44+0000\n"
+"POT-Creation-Date: 2022-07-28 11:17+0000\n"
+"PO-Revision-Date: 2022-07-28 11:17+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -1700,7 +1700,7 @@ msgid "Next Activity Type"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:160
+#: code:addons/fms/models/fms_invoicing.py:167
 #, python-format
 msgid "No valid lines found for invoicing.Please review the order lines."
 msgstr ""
@@ -1848,7 +1848,7 @@ msgid "Planned Date"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:133
+#: code:addons/fms/models/fms_invoicing.py:140
 #, python-format
 msgid "Please define a journal for the company '%s'."
 msgstr ""
@@ -2103,7 +2103,7 @@ msgid "The country of the delivery %s differs from that in location %s"
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:167
+#: code:addons/fms/models/fms_invoicing.py:174
 #, python-format
 msgid "The line '%s' has not a product for invoicing:\n"
 "All expeditions must have a product before invoicing."
@@ -2263,6 +2263,12 @@ msgid "Wizard to create order lines"
 msgstr ""
 
 #. module: fms
+#: code:addons/fms/models/fms_invoicing.py:113
+#, python-format
+msgid "You can only cancel an invoicing order with invoice if the invoice is in state 'Draft' or 'Canceled'"
+msgstr ""
+
+#. module: fms
 #: code:addons/fms/models/fms_commission_liquidation.py:145
 #, python-format
 msgid "You can only delete Liquidation Orders in state draft."
@@ -2275,13 +2281,7 @@ msgid "You can only delete expeditions in state draft or canceled."
 msgstr ""
 
 #. module: fms
-#: code:addons/fms/models/fms_invoicing.py:113
-#, python-format
-msgid "You cannot cancel an order with invoice. You can delete the invoice and then cancel it."
-msgstr ""
-
-#. module: fms
-#: code:addons/fms/models/fms_invoicing.py:366
+#: code:addons/fms/models/fms_invoicing.py:374
 #, python-format
 msgid "You cannot delete an expedition invoiced.\n"
 "You have to delete the line into the invoice first."
