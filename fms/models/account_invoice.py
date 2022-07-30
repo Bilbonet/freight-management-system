@@ -8,11 +8,15 @@ class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
     fms_invoicing_order_id = fields.Many2one(
-        'fms.invoicing.order', string='FMS Invoicing Order')
+        comodel_name='fms.invoicing.order', 
+        string='FMS Invoicing Order',
+        copy=False)
 
 
 class AccountInvoiceLine(models.Model):
     _inherit = 'account.invoice.line'
 
     fms_freight_id = fields.Many2one(
-        'fms.freight', string='Expedition Ref.')
+        comodel_name='fms.freight', 
+        string='Expedition Ref.',
+        copy=False)
